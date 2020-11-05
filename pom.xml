@@ -6,10 +6,10 @@
 
     <groupId>org.noear</groupId>
     <artifactId>luffy-parent</artifactId>
-    <version>1.0.7</version>
+    <version>1.0</version>
     <packaging>pom</packaging>
 
-    <name>_root</name>
+    <name>luffy-parent</name>
     <description>Java project for luffy</description>
     <url>https://github.com/noear/luffy</url>
 
@@ -19,8 +19,6 @@
         <java.version>1.8</java.version>
 
         <solon.ver>1.1.8</solon.ver>
-
-        <luffy.ver>1.0.7</luffy.ver>
 
         <weed3.ver>3.2.27</weed3.ver>
         <snack3.ver>3.1.11</snack3.ver>
@@ -70,7 +68,7 @@
             <dependency>
                 <groupId>org.noear</groupId>
                 <artifactId>luffy.base</artifactId>
-                <version>${luffy.ver}</version>
+                <version>${project.version}</version>
             </dependency>
 
 
