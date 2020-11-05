@@ -5,7 +5,7 @@ import org.noear.snack.core.Constants;
 import org.noear.snack.core.Feature;
 import org.noear.solon.XApp;
 import org.noear.solon.core.XMap;
-import org.noear.luffy.SolonJT;
+import org.noear.luffy.LuffyJT;
 import org.noear.luffy.dso.JtUtilEx;
 import org.noear.luffy.dso.PluginUtil;
 import org.noear.luffy.utils.TextUtils;
@@ -29,7 +29,7 @@ public class LocalJtApp{
             err.printStackTrace();
         });
 
-        XApp app = SolonJT.start(LocalJtApp.class, args,()->{
+        XApp app = LuffyJT.start(LocalJtApp.class, args,()->{
             XMap argx = XApp.cfg().argx();
 
             if(argx.getInt("model") != 2) {

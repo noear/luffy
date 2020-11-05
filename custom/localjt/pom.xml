@@ -54,19 +54,19 @@
             <version>${solon.ver}</version>
         </dependency>
 
-        <!-- SolonJT 引擎 -->
+        <!-- luffy 引擎 -->
         <dependency>
             <groupId>org.noear</groupId>
             <artifactId>luffy</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <!-- SolonJT freemarker 模板引擎 -->
+        <!-- luffy freemarker 模板引擎 -->
         <dependency>
             <groupId>org.noear</groupId>
             <artifactId>luffy.executor.m.freemarker</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <!-- SolonJT javascript 脚本引擎 -->
+        <!-- luffy javascript 脚本引擎 -->
         <dependency>
             <groupId>org.noear</groupId>
             <artifactId>luffy.executor.s.javascript</artifactId>

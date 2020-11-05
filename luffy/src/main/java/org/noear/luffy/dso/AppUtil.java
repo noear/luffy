@@ -2,7 +2,7 @@ package org.noear.luffy.dso;
 
 import org.noear.snack.ONode;
 import org.noear.luffy.Config;
-import org.noear.luffy.SolonJT;
+import org.noear.luffy.LuffyJT;
 import org.noear.luffy.event.http.AppHandler;
 import org.noear.luffy.event.http.FrmInterceptor;
 import org.noear.luffy.event.http.ImgHandler;
@@ -128,7 +128,7 @@ public class AppUtil {
         //CallUtil.callLabel(null, "hook.start", false, null);
 
         //5.加载完成事件
-        SolonJT.onLoad();
+        LuffyJT.onLoad();
 
         //6.执行完后，运行勾子
         CallUtil.callLabel(null, "hook.start", false, null);
