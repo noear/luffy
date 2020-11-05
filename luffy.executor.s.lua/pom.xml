@@ -8,6 +8,7 @@
         <groupId>org.noear</groupId>
         <artifactId>luffy-parent</artifactId>
         <version>1.0</version>
+        <relativePath>../luffy-parent/pom.xml</relativePath>
     </parent>
 
     <artifactId>luffy.executor.s.lua</artifactId>

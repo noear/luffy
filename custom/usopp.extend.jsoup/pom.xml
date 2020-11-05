@@ -8,7 +8,7 @@
         <groupId>org.noear</groupId>
         <artifactId>luffy-parent</artifactId>
         <version>1.0</version>
-        <relativePath>../../pom.xml</relativePath>
+        <relativePath>../../luffy-parent/pom.xml</relativePath>
     </parent>
 
     <artifactId>usopp.extend.jsoup</artifactId>
