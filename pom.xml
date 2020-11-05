@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.noear</groupId>
+    <artifactId>luffy-parent</artifactId>
+    <version>1.0.7</version>
+    <packaging>pom</packaging>
+
+    <name>_root</name>
+    <description>Java project for luffy</description>
+    <url>https://github.com/noear/luffy</url>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+
+        <solon.ver>1.1.8</solon.ver>
+
+        <luffy.ver>1.0.7</luffy.ver>
+
+        <weed3.ver>3.2.27</weed3.ver>
+        <snack3.ver>3.1.11</snack3.ver>
+
+        <okhttp.ver>3.14.8</okhttp.ver>
+
+        <flexmark.version>0.34.48</flexmark.version>
+    </properties>
+
+
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>noear</name>
+            <email>noear@live.cn</email>
+            <organization>noear.org</organization>
+            <organizationUrl>http://www.noear.org</organizationUrl>
+        </developer>
+    </developers>
+    <scm>
+        <connection>scm:git:git@github.com:noear/luffy.git</connection>
+        <developerConnection>scm:git:git@github.com:noear/luffy.git</developerConnection>
+        <url>https://github.com/noear/luffy</url>
+    </scm>
+
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.noear</groupId>
+                <artifactId>solon</artifactId>
+                <version>${solon.ver}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.noear</groupId>
+                <artifactId>solon.extend.properties.yaml</artifactId>
+                <version>${solon.ver}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.noear</groupId>
+                <artifactId>luffy.base</artifactId>
+                <version>${luffy.ver}</version>
+            </dependency>
+
+
+            <!-- ORM 框架 -->
+            <dependency>
+                <groupId>org.noear</groupId>
+                <artifactId>weed3</artifactId>
+                <version>${weed3.ver}</version>
+            </dependency>
+
+            <!-- JSON 框架 -->
+            <dependency>
+                <groupId>org.noear</groupId>
+                <artifactId>snack3</artifactId>
+                <version>${snack3.ver}</version>
+            </dependency>
+
+            <!-- Http 框架 -->
+            <dependency>
+                <groupId>com.squareup.okhttp3</groupId>
+                <artifactId>okhttp</artifactId>
+                <version>${okhttp.ver}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>redis.clients</groupId>
+                <artifactId>jedis</artifactId>
+                <version>3.2.0</version>
+            </dependency>
+
+            <!-- 缩略图 框架 -->
+            <dependency>
+                <groupId>net.coobird</groupId>
+                <artifactId>thumbnailator</artifactId>
+                <version>0.4.8</version>
+            </dependency>
+            <!-- 线程池 框架 -->
+            <dependency>
+                <groupId>com.zaxxer</groupId>
+                <artifactId>HikariCP</artifactId>
+                <version>3.4.5</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <profiles>
+        <profile>
+            <id>release</id>
+            <build>
+                <plugins>
+                    <!-- Source -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <version>2.2.1</version>
+                        <executions>
+                            <execution>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>jar-no-fork</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <!-- Javadoc -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>2.10.3</version>
+                        <executions>
+                            <execution>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                                <configuration>
+                                    <additionalparam>-Xdoclint:none</additionalparam>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <!-- GPG -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>1.5</version>
+                        <executions>
+                            <execution>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+
+            <distributionManagement>
+                <snapshotRepository>
+                    <id>oss</id>
+                    <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+                </snapshotRepository>
+                <repository>
+                    <id>oss</id>
+                    <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+                </repository>
+            </distributionManagement>
+        </profile>
+    </profiles>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.7.0</version>
+                <configuration>
+                    <compilerArgument>-parameters</compilerArgument>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.6</version>
+                <configuration>
+                    <finalName>${project.artifactId}</finalName>
+                    <appendAssemblyId>false</appendAssemblyId>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <modules>
+
+        <module>luffy.base</module>
+        <module>luffy</module>
+
+        <module>luffy.executor.s.python</module>
+        <module>luffy.executor.s.ruby</module>
+        <module>luffy.executor.s.javascript</module>
+        <module>luffy.executor.s.groovy</module>
+        <module>luffy.executor.s.lua</module>
+        <module>luffy.executor.s.graaljs</module>
+
+        <module>luffy.executor.m.freemarker</module>
+        <module>luffy.executor.m.velocity</module>
+        <module>luffy.executor.m.thymeleaf</module>
+        <module>luffy.executor.m.beetl</module>
+        <module>luffy.executor.m.bsql</module>
+        <module>luffy.executor.m.enjoy</module>
+
+        <module>luffy.event.message</module>
+        <module>luffy.event.schedule</module>
+
+        <module>luffy.lock.redis</module>
+        <module>luffy.queue.redis</module>
+
+        <module>custom/usopp.extend.flexmark</module>
+        <module>custom/usopp.extend.jsoup</module>
+        <module>custom/usopp.extend.hanlp</module>
+        <module>custom/usopp.extend.diff</module>
+
+        <module>custom/usopp.extend.sited</module>
+        <module>custom/cloudjt</module>
+        <module>custom/localjt</module>
+    </modules>
+
+</project>
