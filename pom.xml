@@ -15,7 +15,8 @@
 
         <module>luffy-parent</module>
 
-        <module>custom/usopp.extend.sited</module>
+        <module>custom/luffy.trick.extend.sited</module>
+        <module>custom/luffy.trick.extend.mock</module>
         <module>custom/cloudjt</module>
         <module>custom/localjt</module>
     </modules>

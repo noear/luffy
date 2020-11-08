@@ -233,10 +233,10 @@
         <module>../luffy.lock.redis</module>
         <module>../luffy.queue.redis</module>
 
-        <module>../custom/usopp.extend.flexmark</module>
-        <module>../custom/usopp.extend.jsoup</module>
-        <module>../custom/usopp.extend.hanlp</module>
-        <module>../custom/usopp.extend.diff</module>
+        <module>../custom/luffy.trick.extend.flexmark</module>
+        <module>../custom/luffy.trick.extend.jsoup</module>
+        <module>../custom/luffy.trick.extend.hanlp</module>
+        <module>../custom/luffy.trick.extend.diff</module>
 
     </modules>
 
