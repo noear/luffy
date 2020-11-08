@@ -6,7 +6,6 @@ import org.noear.luffy.trick.extend.sited.dao.Utils;
 import org.noear.luffy.trick.extend.sited.dao.custom.DdApi;
 import org.noear.luffy.trick.extend.sited.dao.custom.DdSource;
 import org.noear.luffy.trick.extend.sited.utils.*;
-import org.noear.usopp.extend.sited.utils.*;
 import org.noear.solon.annotation.XNote;
 import org.noear.solon.core.XFile;
 import org.noear.weed.DbContext;
