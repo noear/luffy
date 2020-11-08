@@ -8,7 +8,7 @@ import org.noear.luffy.utils.TextUtils;
 import org.noear.weed.ext.Act0;
 import org.noear.weed.xml.XmlSqlLoader;
 
-public class LuffyJT {
+public class Luffy {
     private static Act0 _onLoadEvent;
 
     public static void onLoad(){
@@ -26,7 +26,7 @@ public class LuffyJT {
     }
 
     public static XApp start(Class<?> source, String[] args, Act0 onLoadEvent) {
-        LuffyJT._onLoadEvent = onLoadEvent;
+        Luffy._onLoadEvent = onLoadEvent;
 
         XmlSqlLoader.tryLoad();
 
@@ -71,7 +71,7 @@ public class LuffyJT {
         });
 
         //4.1.加载自己的bean
-        app.beanScan(LuffyJT.class);
+        app.beanScan(Luffy.class);
 
         //5.初始化功能
         if (app.prop().size() < 4) {

@@ -3,7 +3,7 @@ package org.noear.cloudjt;
 import org.noear.snack.core.Constants;
 import org.noear.snack.core.Feature;
 import org.noear.solon.XApp;
-import org.noear.luffy.LuffyJT;
+import org.noear.luffy.Luffy;
 import org.noear.luffy.dso.JtUtilEx;
 import org.noear.luffy.dso.PluginUtil;
 import org.noear.luffy.utils.TextUtils;
@@ -20,7 +20,7 @@ public class CloudJtApp {
 //            err.printStackTrace();
 //        });
 
-        LuffyJT.start(CloudJtApp.class, args, () -> {
+        Luffy.start(CloudJtApp.class, args, () -> {
             String add = XApp.cfg().argx().get("add");
             String home = XApp.cfg().argx().get("home");
             String title = XApp.cfg().argx().get("title");
