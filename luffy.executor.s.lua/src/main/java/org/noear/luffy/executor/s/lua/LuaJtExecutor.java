@@ -68,7 +68,7 @@ public class LuaJtExecutor implements IJtExecutor {
 
             sb.append("require 'org.luaj.vm2.lib.DebugLib'\n\n");
 
-//            sb.append("Context = luajava.bindClass('org.noear.solon.core.handle.Context;')\n");
+//            sb.append("Context = luajava.bindClass('org.noear.solon.core.handle.Context')\n");
 //            sb.append("ONode = luajava.bindClass('org.noear.snack.ONode')\n");
 
             sb.append("\n");

@@ -73,7 +73,7 @@ public class GraaljsJtExecutor implements IJtExecutor {
 
             sb.append("Date.prototype.toJSON =function(){ return this.getTime()};\n");
 
-            sb.append("const Context = Java.type('org.noear.solon.core.handle.Context;');\n");
+            sb.append("const Context = Java.type('org.noear.solon.core.handle.Context');\n");
             sb.append("const ONode = Java.type('org.noear.snack.ONode');\n");
 
             sb.append("const Datetime  = Java.type('org.noear.luffy.utils.Datetime');\n");

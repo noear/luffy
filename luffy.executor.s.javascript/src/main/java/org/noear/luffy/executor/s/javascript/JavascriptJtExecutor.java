@@ -64,7 +64,7 @@ public class JavascriptJtExecutor implements IJtExecutor {
 
             sb.append("Date.prototype.toJSON =function(){ return this.getTime()};\n");
 
-            sb.append("var Context = Java.type('org.noear.solon.core.handle.Context;');\n");
+            sb.append("var Context = Java.type('org.noear.solon.core.handle.Context');\n");
             sb.append("var ONode = Java.type('org.noear.snack.ONode');\n");
 
             sb.append("var Datetime = Java.type('org.noear.luffy.utils.Datetime');\n");

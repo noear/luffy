@@ -60,7 +60,7 @@ public class RubyJtExecutor implements IJtExecutor {
             StringBuilder sb = new StringBuilder();
 
             sb.append("require 'java'\n\n");
-            sb.append("java_import org.noear.solon.core.handle.Context;\n");
+            sb.append("java_import org.noear.solon.core.handle.Context\n");
             sb.append("java_import org.noear.snack.ONode\n");
 
             sb.append("java_import org.noear.luffy.utils.Datetime\n");
