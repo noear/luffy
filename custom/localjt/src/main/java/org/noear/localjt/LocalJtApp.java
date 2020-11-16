@@ -8,6 +8,7 @@ import org.noear.luffy.Luffy;
 import org.noear.luffy.dso.JtUtilEx;
 import org.noear.luffy.dso.PluginUtil;
 import org.noear.luffy.utils.TextUtils;
+import org.noear.solon.SolonApp;
 import org.noear.solon.core.NvMap;
 import org.noear.weed.WeedConfig;
 
@@ -29,7 +30,7 @@ public class LocalJtApp{
             err.printStackTrace();
         });
 
-        Solon app = Luffy.start(LocalJtApp.class, args,()->{
+        SolonApp app = Luffy.start(LocalJtApp.class, args,()->{
             NvMap argx = Solon.cfg().argx();
 
             if(argx.getInt("model") != 2) {
@@ -58,7 +59,7 @@ public class LocalJtApp{
             err.printStackTrace();
         });
 
-        NvMap argx = app.props().argx();
+        NvMap argx = app.cfg().argx();
 
 
         //主页

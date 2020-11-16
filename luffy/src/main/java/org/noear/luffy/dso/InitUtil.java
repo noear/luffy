@@ -1,5 +1,6 @@
 package org.noear.luffy.dso;
 
+import org.noear.solon.SolonApp;
 import org.noear.solon.Utils;
 import org.noear.solon.Solon;;
 import org.noear.luffy.Config;
@@ -217,15 +218,15 @@ public class InitUtil {
         System.out.println("Complete table structure");
     }
 
-    public static void tryInitNode(Solon app){
-        String node = app.props().get(Config.code_node);
+    public static void tryInitNode(SolonApp app){
+        String node = app.cfg().get(Config.code_node);
         if (TextUtils.isEmpty(node)) {
-            node = app.props().argx().get("node");
+            node = app.cfg().argx().get("node");
         }
 
         if(TextUtils.isEmpty(node)==false){
-            app.props().argx().put("node", node);
-            app.props().put(Config.code_node, node);
+            app.cfg().argx().put("node", node);
+            app.cfg().put(Config.code_node, node);
 
             try {
                 String addr = JtUtil.g.localAddr();
@@ -237,14 +238,14 @@ public class InitUtil {
         }
     }
 
-    public static void tryInitCore(Solon app){
+    public static void tryInitCore(SolonApp app){
         try{
              do_initCore(app);
         }catch (Throwable ex){
             ex.printStackTrace();
         }
     }
-    private static void do_initCore(Solon app) throws Exception {
+    private static void do_initCore(SolonApp app) throws Exception {
 
         if (PluginUtil.install("_core.noear")) {
             //

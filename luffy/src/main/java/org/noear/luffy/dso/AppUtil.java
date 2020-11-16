@@ -12,6 +12,7 @@ import org.noear.luffy.utils.ExceptionUtils;
 import org.noear.luffy.utils.IOUtils;
 import org.noear.luffy.utils.TextUtils;
 import org.noear.solon.Solon;
+import org.noear.solon.SolonApp;
 import org.noear.solon.Utils;
 import org.noear.solon.Solon;
 import org.noear.solon.core.handle.Handler;
@@ -26,9 +27,9 @@ public class AppUtil {
     /**
      * 初始化数据库和内核
      * */
-    public static void init(Solon app, boolean initDb){
+    public static void init(SolonApp app, boolean initDb){
         if(initDb) {
-            DbUtil.setDefDb(app.props().getXmap(Config.code_db));
+            DbUtil.setDefDb(app.cfg().getXmap(Config.code_db));
         }
 
         InitUtil.tryInitDb();
@@ -37,7 +38,7 @@ public class AppUtil {
     }
 
 
-    public static void runAsInit(Solon app, String extend) {
+    public static void runAsInit(SolonApp app, String extend) {
         URL temp = Utils.getResource("setup.htm");
         String html = null;
         try {
@@ -46,7 +47,7 @@ public class AppUtil {
             throw new RuntimeException(ex);
         }
 
-        final String node2 = app.props().argx().get("node");
+        final String node2 = app.cfg().argx().get("node");
         final String html2 = html.trim();
 
         app.post("/setup.jsx", (ctx) -> {
@@ -62,7 +63,7 @@ public class AppUtil {
 
                 InitUtil.trySaveConfig(extend, ctx.paramMap());
 
-                app.props().argx().putAll(ctx.paramMap());
+                app.cfg().argx().putAll(ctx.paramMap());
 
                 AppUtil.init(app, false);
 
@@ -102,8 +103,8 @@ public class AppUtil {
     /**
      * 运行应用
      * */
-    public static void runAsWork(Solon app) {
-        String sss = app.props().argx().get("sss");
+    public static void runAsWork(SolonApp app) {
+        String sss = app.cfg().argx().get("sss");
 
         /*
          * 注入共享对传（会传导到javascript 和 freemarker 引擎）
@@ -136,7 +137,7 @@ public class AppUtil {
         CallUtil.callLabel(null, "hook.start", false, null);
     }
 
-    private static void do_runWeb(Solon app) {
+    private static void do_runWeb(SolonApp app) {
         //拦截代理
         app.before("**", MethodType.HTTP, FrmInterceptor.g());
 
@@ -155,7 +156,7 @@ public class AppUtil {
         app.handlerSet(hx);
     }
 
-    private static void do_runSev(Solon app){
+    private static void do_runSev(SolonApp app){
         TaskFactory.run(TaskRunner.g);
     }
 

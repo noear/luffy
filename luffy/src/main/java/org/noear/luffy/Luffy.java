@@ -2,6 +2,7 @@ package org.noear.luffy;
 
 import org.noear.luffy.dso.*;
 import org.noear.solon.Solon;;
+import org.noear.solon.SolonApp;
 import org.noear.solon.core.*;
 import org.noear.luffy.utils.ExceptionUtils;
 import org.noear.luffy.utils.TextUtils;
@@ -21,11 +22,11 @@ public class Luffy {
         }
     }
 
-    public static Solon start(Class<?> source, String[] args){
+    public static SolonApp start(Class<?> source, String[] args){
         return start(source,args,null);
     }
 
-    public static Solon start(Class<?> source, String[] args, Act0 onLoadEvent) {
+    public static SolonApp start(Class<?> source, String[] args, Act0 onLoadEvent) {
         Luffy._onLoadEvent = onLoadEvent;
 
         XmlSqlLoader.tryLoad();
@@ -51,9 +52,9 @@ public class Luffy {
         JtBridge.configAdapterSet(JtAdapter.global);
 
         //4.启动服务
-        Solon app = Solon.start(source, xarg, (x) -> {
+        SolonApp app = Solon.start(source, xarg, (x) -> {
 
-            String def_exec = x.props().get("luffy.executor.default");
+            String def_exec = x.cfg().get("luffy.executor.default");
             if(TextUtils.isEmpty(def_exec) == false){
                 JtAdapter.global.defaultExecutorSet(def_exec);
             }
@@ -74,7 +75,7 @@ public class Luffy {
         app.beanScan(Luffy.class);
 
         //5.初始化功能
-        if (app.props().size() < 4) {
+        if (app.cfg().size() < 4) {
             //5.1.如果没有DB配置；则启动配置服务
             AppUtil.runAsInit(app, extend);
         } else {
