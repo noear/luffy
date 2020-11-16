@@ -53,7 +53,7 @@ public class Luffy {
         //4.启动服务
         Solon app = Solon.start(source, xarg, (x) -> {
 
-            String def_exec = x.prop().get("luffy.executor.default");
+            String def_exec = x.props().get("luffy.executor.default");
             if(TextUtils.isEmpty(def_exec) == false){
                 JtAdapter.global.defaultExecutorSet(def_exec);
             }
@@ -74,7 +74,7 @@ public class Luffy {
         app.beanScan(Luffy.class);
 
         //5.初始化功能
-        if (app.prop().size() < 4) {
+        if (app.props().size() < 4) {
             //5.1.如果没有DB配置；则启动配置服务
             AppUtil.runAsInit(app, extend);
         } else {

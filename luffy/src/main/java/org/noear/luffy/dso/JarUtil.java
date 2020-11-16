@@ -12,7 +12,7 @@ import java.io.FileOutputStream;
 
 public class JarUtil {
     public static boolean loadJar(String path, String data64 ,String data_md5 ,String xPlugin) throws Exception {
-        String extend = Solon.global().prop().argx().get("extend");
+        String extend = Solon.global().props().argx().get("extend");
 
         //构建文件名
         int idx = path.lastIndexOf('/');

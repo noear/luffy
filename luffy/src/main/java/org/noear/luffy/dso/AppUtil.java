@@ -28,7 +28,7 @@ public class AppUtil {
      * */
     public static void init(Solon app, boolean initDb){
         if(initDb) {
-            DbUtil.setDefDb(app.prop().getXmap(Config.code_db));
+            DbUtil.setDefDb(app.props().getXmap(Config.code_db));
         }
 
         InitUtil.tryInitDb();
@@ -62,7 +62,7 @@ public class AppUtil {
 
                 InitUtil.trySaveConfig(extend, ctx.paramMap());
 
-                app.prop().argx().putAll(ctx.paramMap());
+                app.props().argx().putAll(ctx.paramMap());
 
                 AppUtil.init(app, false);
 

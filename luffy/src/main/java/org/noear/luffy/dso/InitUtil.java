@@ -218,14 +218,14 @@ public class InitUtil {
     }
 
     public static void tryInitNode(Solon app){
-        String node = app.prop().get(Config.code_node);
+        String node = app.props().get(Config.code_node);
         if (TextUtils.isEmpty(node)) {
-            node = app.prop().argx().get("node");
+            node = app.props().argx().get("node");
         }
 
         if(TextUtils.isEmpty(node)==false){
-            app.prop().argx().put("node", node);
-            app.prop().put(Config.code_node, node);
+            app.props().argx().put("node", node);
+            app.props().put(Config.code_node, node);
 
             try {
                 String addr = JtUtil.g.localAddr();
