@@ -1,7 +1,7 @@
 package org.noear.luffy.executor.s.javascript;
 
-import org.noear.solon.XApp;
-import org.noear.solon.core.XContext;
+import org.noear.solon.Solon;;
+import org.noear.solon.core.handler.Context;
 import org.noear.luffy.executor.IJtExecutor;
 import org.noear.luffy.model.AFileModel;
 import org.noear.luffy.utils.ThreadData;
@@ -47,11 +47,11 @@ public class JavascriptJtExecutor implements IJtExecutor {
         _eng_call = (Invocable)_eng;
         _bindings = _eng.getBindings(ScriptContext.ENGINE_SCOPE);
 
-        XApp.global().shared().forEach((k, v)->{
+        Solon.global().shared().forEach((k, v)->{
             sharedSet(k, v);
         });
 
-        XApp.global().onSharedAdd((k,v)->{
+        Solon.global().onSharedAdd((k,v)->{
             sharedSet(k, v);
         });
 
@@ -64,7 +64,7 @@ public class JavascriptJtExecutor implements IJtExecutor {
 
             sb.append("Date.prototype.toJSON =function(){ return this.getTime()};\n");
 
-            sb.append("var XContext = Java.type('org.noear.solon.core.XContext');\n");
+            sb.append("var Context = Java.type('org.noear.solon.core.handler.Context;');\n");
             sb.append("var ONode = Java.type('org.noear.snack.ONode');\n");
 
             sb.append("var Datetime = Java.type('org.noear.luffy.utils.Datetime');\n");
@@ -90,8 +90,8 @@ public class JavascriptJtExecutor implements IJtExecutor {
 
             sb.append("function stringify_java(k,v){if(v){if(v.getTicks){return v.getTicks()}if(v.getTime){return v.getTime()}if(v.putAll){var obj={};v.forEach(function(k2,v2){obj[k2]=v2});return obj}if(v.addAll){var ary=[];v.forEach(function(v2){ary.push(v2)});return ary}}return v};\n");
 
-            sb.append("function API_RUN(api){var rst=api(XContext.current());if(rst===null){return null}else{if(typeof(rst)=='object'){return JSON.stringify(rst,stringify_java)}else{return rst}}};\n");
-            //sb.append("function API_RUN(api){var rst=null;try{rst=api(XContext.current())}catch(err){throw err;}if(rst===null){return null}else{if(typeof(rst)=='object'){return JSON.stringify(rst,stringify_java)}else{return rst}}};");
+            sb.append("function API_RUN(api){var rst=api(Context.current());if(rst===null){return null}else{if(typeof(rst)=='object'){return JSON.stringify(rst,stringify_java)}else{return rst}}};\n");
+            //sb.append("function API_RUN(api){var rst=null;try{rst=api(Context.current())}catch(err){throw err;}if(rst===null){return null}else{if(typeof(rst)=='object'){return JSON.stringify(rst,stringify_java)}else{return rst}}};");
 
             _eng.eval(sb.toString());
 
@@ -148,7 +148,7 @@ public class JavascriptJtExecutor implements IJtExecutor {
     }
 
     @Override
-    public  Object exec(String name, AFileModel file, XContext ctx, Map<String,Object> model, boolean outString) throws Exception {
+    public  Object exec(String name, AFileModel file, Context ctx, Map<String,Object> model, boolean outString) throws Exception {
         String name2 = name.replace(".", "_").replace("*", "_");
 
         preLoad(name2, file);

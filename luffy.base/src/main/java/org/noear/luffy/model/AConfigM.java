@@ -2,7 +2,7 @@ package org.noear.luffy.model;
 
 import com.zaxxer.hikari.HikariDataSource;
 import org.noear.snack.ONode;
-import org.noear.solon.core.XMap;
+import org.noear.solon.core.NvMap;
 import org.noear.luffy.utils.ConfigUtils;
 import org.noear.luffy.utils.TextUtils;
 import org.noear.weed.DbContext;
@@ -48,8 +48,8 @@ public class AConfigM {
         }
     }
 
-    public XMap getXmap() {
-        XMap map = new XMap();
+    public NvMap getXmap() {
+        NvMap map = new NvMap();
         for (String s : value.split("\\n")) {
             String[] kv = s.split("=");
             if (kv.length == 2) {

@@ -7,9 +7,9 @@ import org.noear.luffy.event.http.SufHandler;
 import org.noear.luffy.executor.ExecutorFactory;
 import org.noear.luffy.model.AImageModel;
 import org.noear.luffy.utils.*;
-import org.noear.solon.annotation.XNote;
-import org.noear.solon.core.XContext;
-import org.noear.solon.core.XFile;
+import org.noear.solon.annotation.Note;
+import org.noear.solon.core.handler.Context;
+import org.noear.solon.core.handler.UploadedFile;
 
 import java.io.*;
 import java.net.URLEncoder;
@@ -21,17 +21,17 @@ import java.util.*;
 public class JtUtilEx extends JtUtil {
     public static final JtUtilEx g2 = new JtUtilEx();
 
-    @XNote("设置根路径链接")
+    @Note("设置根路径链接")
     public void rootSet(String path) {
         PluginUtil.initRoot(path);
     }
 
-    @XNote("获取菜单")
+    @Note("获取菜单")
     public List<Map<String, Object>> menuGet(String label, int pid) throws Exception {
         return DbApi.menuGet(label, pid);
     }
 
-    @XNote("获取菜单")
+    @Note("获取菜单")
     public List<Map<String, Object>> menuGet(String label) throws Exception {
         return DbApi.menuGet(label, -1);
     }
@@ -39,13 +39,13 @@ public class JtUtilEx extends JtUtil {
     /**
      * 保存图片
      */
-    @XNote("保存图片")
-    public String imgSet(XFile file) throws Exception {
+    @Note("保存图片")
+    public String imgSet(UploadedFile file) throws Exception {
         return imgSet(file, file.extension);
     }
 
-    @XNote("保存图片")
-    public String imgSet(XFile file, String tag, String dir, int name_mod) throws Exception {
+    @Note("保存图片")
+    public String imgSet(UploadedFile file, String tag, String dir, int name_mod) throws Exception {
         String extension = file.extension;
         byte[] data_byte = IOUtils.toBytes(file.content);
         String data = Base64Utils.encodeByte(data_byte);
@@ -83,8 +83,8 @@ public class JtUtilEx extends JtUtil {
     /**
      * 保存图片（后缀名可自定义）
      */
-    @XNote("保存图片（后缀名可自定义）")
-    public String imgSet(XFile file, String extension) throws Exception {
+    @Note("保存图片（后缀名可自定义）")
+    public String imgSet(UploadedFile file, String extension) throws Exception {
         byte[] data_byte = IOUtils.toBytes(file.content);
         String data = Base64Utils.encodeByte(data_byte);
         String path = "/img/" + guid() + "." + extension;
@@ -97,7 +97,7 @@ public class JtUtilEx extends JtUtil {
     /**
      * 保存图片（内容，类型，后缀名可自定义）
      */
-    @XNote("保存图片（内容，类型，后缀名可自定义）")
+    @Note("保存图片（内容，类型，后缀名可自定义）")
     public String imgSet(String content, String contentType, String extension) throws Exception {
         String data = Base64Utils.encode(content);
         String path = "/img/" + guid() + "." + extension;
@@ -107,7 +107,7 @@ public class JtUtilEx extends JtUtil {
         return path;
     }
 
-    @XNote("保存图片（内容，类型，名字，后缀名可自定义）")
+    @Note("保存图片（内容，类型，名字，后缀名可自定义）")
     public String imgSet(String content, String contentType, String extension, String name) throws Exception {
         String data = Base64Utils.encode(content);
         String path = "/img/" + name + "." + extension;
@@ -117,7 +117,7 @@ public class JtUtilEx extends JtUtil {
         return path;
     }
 
-    @XNote("保存图片（内容，类型，名字，后缀名，标签可自定义）")
+    @Note("保存图片（内容，类型，名字，后缀名，标签可自定义）")
     public String imgSet(String content, String contentType, String extension, String name, String label) throws Exception {
         String data = Base64Utils.encode(content);
         String path = "/img/" + name + "." + extension;
@@ -128,8 +128,8 @@ public class JtUtilEx extends JtUtil {
     }
 
 
-    @XNote("设定图片输出名称")
-    public String imgOutName(XContext ctx, String filename) throws Exception {
+    @Note("设定图片输出名称")
+    public String imgOutName(Context ctx, String filename) throws Exception {
         String filename2 = URLEncoder.encode(filename, "utf-8");
 
         ctx.headerSet("Content-Disposition", "attachment; filename=\"" + filename2 + "\"");
@@ -139,7 +139,7 @@ public class JtUtilEx extends JtUtil {
     /**
      * 修改图片
      */
-    @XNote("修改图片")
+    @Note("修改图片")
     public String imgUpd(String path, String content) throws Exception {
         String data = Base64Utils.encode(content);
 
@@ -151,13 +151,13 @@ public class JtUtilEx extends JtUtil {
     /**
      * 获取图片内容
      */
-    @XNote("获取图片内容(string)")
+    @Note("获取图片内容(string)")
     public String imgGet(String path) throws Exception {
         AImageModel img = DbApi.imgGet(path);
         return img2String(img.data);
     }
 
-    @XNote("获取图片内容(byte[])")
+    @Note("获取图片内容(byte[])")
     public byte[] imgGetBytes(String path) throws Exception {
         AImageModel img = DbApi.imgGet(path);
 
@@ -170,7 +170,7 @@ public class JtUtilEx extends JtUtil {
     }
 
 
-    @XNote("图片内容转为字符串")
+    @Note("图片内容转为字符串")
     public String img2String(String data) {
         if (TextUtils.isEmpty(data)) {
             return "";
@@ -179,7 +179,7 @@ public class JtUtilEx extends JtUtil {
         }
     }
 
-    @XNote("获取文件内容")
+    @Note("获取文件内容")
     public String fileGet(String path) throws Exception{
         return DbApi.fileGet(path).content;
     }
@@ -187,20 +187,20 @@ public class JtUtilEx extends JtUtil {
     /**
      * 新建文件
      */
-    @XNote("文件新建")
-    public boolean fileNew(int fid, XContext ctx) throws Exception {
+    @Note("文件新建")
+    public boolean fileNew(int fid, Context ctx) throws Exception {
         return DbApi.fileNew(fid, ctx);
     }
 
     /**
      * 文件设置内容
      */
-    @XNote("文件设置内容")
+    @Note("文件设置内容")
     public boolean fileSet(int fid, String fcontent) throws Exception {
         return DbApi.fileSet(fid, fcontent);
     }
 
-    @XNote("文件刷新缓存")
+    @Note("文件刷新缓存")
     public boolean fileFlush(String path, boolean is_del) {
         if (TextUtils.isEmpty(path)) {
             return false;
@@ -219,7 +219,7 @@ public class JtUtilEx extends JtUtil {
         return true;
     }
 
-    @XNote("文件刷新缓存")
+    @Note("文件刷新缓存")
     public boolean fileFlush(String path, boolean is_del, String label, String note) {
         if (TextUtils.isEmpty(path)) {
             return false;
@@ -259,7 +259,7 @@ public class JtUtilEx extends JtUtil {
         return true;
     }
 
-    @XNote("重启缓存")
+    @Note("重启缓存")
     public boolean restart() {
         AFileUtil.removeAll();
         AImageUtil.removeAll();
@@ -276,24 +276,24 @@ public class JtUtilEx extends JtUtil {
     }
 
 
-    @XNote("获取扩展目录下的文件")
+    @Note("获取扩展目录下的文件")
     public List<Map<String, Object>> extendList() {
         return ExtendUtil.scan();
     }
 
-    @XNote("删除扩展目录下的文件")
+    @Note("删除扩展目录下的文件")
     public boolean extendDel(String name) {
         return ExtendUtil.del(name);
     }
 
 
-    @XNote("创建缩略图工具")
+    @Note("创建缩略图工具")
     public Object thumbnailOf(InputStream stream) {
         return Thumbnails.of(stream);
     }
 
 
-    @XNote("加载插件里的jar包")
+    @Note("加载插件里的jar包")
     public boolean loadJar(String path, String data64, String data_md5, String plugin) throws Exception {
         return JarUtil.loadJar(path, data64, data_md5, plugin);
     }

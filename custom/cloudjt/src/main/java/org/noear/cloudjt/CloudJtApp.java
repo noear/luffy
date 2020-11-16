@@ -2,7 +2,7 @@ package org.noear.cloudjt;
 
 import org.noear.snack.core.Constants;
 import org.noear.snack.core.Feature;
-import org.noear.solon.XApp;
+import org.noear.solon.Solon;;
 import org.noear.luffy.Luffy;
 import org.noear.luffy.dso.JtUtilEx;
 import org.noear.luffy.dso.PluginUtil;
@@ -21,11 +21,11 @@ public class CloudJtApp {
 //        });
 
         Luffy.start(CloudJtApp.class, args, () -> {
-            String add = XApp.cfg().argx().get("add");
-            String home = XApp.cfg().argx().get("home");
-            String title = XApp.cfg().argx().get("title");
+            String add = Solon.cfg().argx().get("add");
+            String home = Solon.cfg().argx().get("home");
+            String title = Solon.cfg().argx().get("title");
 
-            String init = XApp.cfg().argx().get("init");
+            String init = Solon.cfg().argx().get("init");
 
             //::0.安装插件
             PluginUtil.add(add);

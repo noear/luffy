@@ -4,8 +4,8 @@ import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.runtime.resource.util.StringResource;
-import org.noear.solon.XApp;
-import org.noear.solon.core.XContext;
+import org.noear.solon.Solon;
+import org.noear.solon.core.handler.Context;
 import org.noear.luffy.executor.IJtExecutor;
 import org.noear.luffy.model.AFileModel;
 import org.noear.luffy.utils.TextUtils;
@@ -55,7 +55,7 @@ public class VelocityJtExecutor implements IJtExecutor {
         _loader = (StringResourceRepositoryEx)StringResourceLoaderEx.getRepository();
 
         try {
-            XApp.global().shared().forEach((k,v)->{
+            Solon.global().shared().forEach((k,v)->{
                 sharedSet(k,v);
             });
 
@@ -63,7 +63,7 @@ public class VelocityJtExecutor implements IJtExecutor {
             ex.printStackTrace();
         }
 
-        XApp.global().onSharedAdd((k,v)->{
+        Solon.global().onSharedAdd((k,v)->{
             sharedSet(k,v);
         });
     }
@@ -124,14 +124,14 @@ public class VelocityJtExecutor implements IJtExecutor {
     }
 
     @Override
-    public Object exec(String name, AFileModel file, XContext ctx, Map<String,Object> model, boolean outString) throws Exception {
+    public Object exec(String name, AFileModel file, Context ctx, Map<String,Object> model, boolean outString) throws Exception {
         if(preLoad(name,file)){
             if(model == null){
                 model = new HashMap<>();
             }
 
             if(ctx == null){
-                model.put("ctx", XContext.current());
+                model.put("ctx", Context.current());
             }else{
                 model.put("ctx", ctx);
             }

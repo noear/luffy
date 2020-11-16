@@ -11,10 +11,12 @@ import org.noear.luffy.task.TaskFactory;
 import org.noear.luffy.utils.ExceptionUtils;
 import org.noear.luffy.utils.IOUtils;
 import org.noear.luffy.utils.TextUtils;
-import org.noear.solon.XApp;
-import org.noear.solon.core.XHandler;
-import org.noear.solon.core.XHandlerLink;
-import org.noear.solon.core.XMethod;
+import org.noear.solon.Solon;
+import org.noear.solon.Utils;
+import org.noear.solon.Solon;
+import org.noear.solon.core.handler.Handler;
+import org.noear.solon.core.handler.HandlerLink;
+import org.noear.solon.core.handler.MethodType;
 import org.noear.weed.WeedConfig;
 
 import java.net.URL;
@@ -24,7 +26,7 @@ public class AppUtil {
     /**
      * 初始化数据库和内核
      * */
-    public static void init(XApp app, boolean initDb){
+    public static void init(Solon app, boolean initDb){
         if(initDb) {
             DbUtil.setDefDb(app.prop().getXmap(Config.code_db));
         }
@@ -35,8 +37,8 @@ public class AppUtil {
     }
 
 
-    public static void runAsInit(XApp app, String extend) {
-        URL temp = org.noear.solon.XUtil.getResource("setup.htm");
+    public static void runAsInit(Solon app, String extend) {
+        URL temp = Utils.getResource("setup.htm");
         String html = null;
         try {
             html = IOUtils.toString(temp.openStream(), "utf-8");
@@ -71,13 +73,13 @@ public class AppUtil {
                 ONode rst = new ONode();
                 rst.set("code",1);
                 rst.set("token",_token);
-                rst.set("home",XApp.cfg().argx().get("home"));
+                rst.set("home",Solon.cfg().argx().get("home"));
 
                 ctx.outputAsJson(rst.toJson());
 
                 //new Thread(() -> {
-                    XApp.global().router().clear();
-                    AppUtil.runAsWork(XApp.global());
+                    Solon.global().router().clear();
+                    AppUtil.runAsWork(Solon.global());
                 //}).start();
             } catch (Throwable ex) {
                 ctx.outputAsJson(new ONode()
@@ -100,7 +102,7 @@ public class AppUtil {
     /**
      * 运行应用
      * */
-    public static void runAsWork(XApp app) {
+    public static void runAsWork(Solon app) {
         String sss = app.prop().argx().get("sss");
 
         /*
@@ -134,9 +136,9 @@ public class AppUtil {
         CallUtil.callLabel(null, "hook.start", false, null);
     }
 
-    private static void do_runWeb(XApp app) {
+    private static void do_runWeb(Solon app) {
         //拦截代理
-        app.before("**", XMethod.HTTP, FrmInterceptor.g());
+        app.before("**", MethodType.HTTP, FrmInterceptor.g());
 
         //资源代理(/img/**)
         app.get(Config.frm_root_img + "**", new ImgHandler());
@@ -145,15 +147,15 @@ public class AppUtil {
         app.http("**", AppHandler.g());
 
         //后缀代理（置于所有代理的前面）
-        XHandler h1 = app.handlerGet();
-        XHandlerLink hx = new XHandlerLink();
+        Handler h1 = app.handlerGet();
+        HandlerLink hx = new HandlerLink();
         hx.node = SufHandler.g();
         hx.nextNode = h1;
 
         app.handlerSet(hx);
     }
 
-    private static void do_runSev(XApp app){
+    private static void do_runSev(Solon app){
         TaskFactory.run(TaskRunner.g);
     }
 

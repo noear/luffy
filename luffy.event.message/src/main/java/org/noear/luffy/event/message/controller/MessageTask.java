@@ -1,8 +1,8 @@
 package org.noear.luffy.event.message.controller;
 
-import org.noear.solon.core.XContext;
-import org.noear.solon.core.XContextEmpty;
-import org.noear.solon.core.XContextUtil;
+import org.noear.solon.core.handler.Context;
+import org.noear.solon.core.handler.ContextEmpty;
+import org.noear.solon.core.handler.ContextUtil;
 import org.noear.luffy.dso.JtLock;
 import org.noear.luffy.dso.LogLevel;
 import org.noear.luffy.dso.LogUtil;
@@ -145,8 +145,8 @@ public class MessageTask extends JtTaskBase {
 
     private void do_distributeMessage(AFileModel task, StateTag tag, AMessageModel msg, AMessageDistributionModel dist, Act3<StateTag, AMessageDistributionModel, Boolean> callback) throws Exception {
         try {
-            XContext ctx = XContextEmpty.create();
-            XContextUtil.currentSet(ctx);
+            Context ctx = ContextEmpty.create();
+            ContextUtil.currentSet(ctx);
 
             ctx.attrSet("topic", msg.topic);
             ctx.attrSet("content", msg.content);
@@ -171,7 +171,7 @@ public class MessageTask extends JtTaskBase {
                 callback.run(tag, dist, false);
             }
         } finally {
-            XContextUtil.currentRemove();
+            ContextUtil.currentRemove();
         }
 
         //

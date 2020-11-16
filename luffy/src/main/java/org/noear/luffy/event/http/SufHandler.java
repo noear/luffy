@@ -6,8 +6,8 @@ import org.noear.luffy.executor.ExecutorFactory;
 import org.noear.luffy.model.AFileModel;
 import org.noear.luffy.utils.ExceptionUtils;
 import org.noear.luffy.utils.TextUtils;
-import org.noear.solon.core.XContext;
-import org.noear.solon.core.XHandler;
+import org.noear.solon.core.handler.Context;
+import org.noear.solon.core.handler.Handler;
 
 import java.util.HashMap;
 import java.util.List;
@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * 文件后缀拦截器的代理（数据库安全）
  * */
-public class SufHandler implements XHandler {
+public class SufHandler implements Handler {
     private static final String _lock = "";
     private static  SufHandler _g = null;
     public static SufHandler g(){
@@ -36,7 +36,7 @@ public class SufHandler implements XHandler {
     }
 
     @Override
-    public void handle(XContext ctx) throws Exception {
+    public void handle(Context ctx) throws Exception {
         String path = ctx.path();
         for (String suf : _cacheMap.keySet()) {
             if (path.endsWith(suf)) {
@@ -48,7 +48,7 @@ public class SufHandler implements XHandler {
         }
     }
 
-    private void exec(XContext ctx, String path) throws Exception {
+    private void exec(Context ctx, String path) throws Exception {
         String path2 = path;//AFileUtil.path2(path);//不需要转为*
         String name = path2.replace("/", "__");
 

@@ -2,7 +2,7 @@ package org.noear.luffy.dso;
 
 import org.noear.luffy.model.AImageModel;
 import org.noear.luffy.utils.Base64Utils;
-import org.noear.solon.core.XContext;
+import org.noear.solon.core.handler.Context;
 
 import java.util.Date;
 
@@ -14,7 +14,7 @@ public class AImageHandler {
     private static final String LAST_MODIFIED = "Last-Modified";
 
 
-    public static void handle(XContext context, AImageModel file) throws Exception {
+    public static void handle(Context context, AImageModel file) throws Exception {
         String path = context.path();
 
         context.setHandled(true);

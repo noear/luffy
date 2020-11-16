@@ -1,14 +1,14 @@
 package org.noear.luffy.event.schedule;
 
-import org.noear.solon.XApp;
-import org.noear.solon.core.XPlugin;
+import org.noear.solon.Solon;;
+import org.noear.solon.core.Plugin;
 import org.noear.luffy.task.TaskFactory;
 import org.noear.luffy.event.schedule.controller.ScheduleTask;
 import org.noear.weed.DbContext;
 
-public class XPluginImp implements XPlugin {
+public class XPluginImp implements Plugin {
     @Override
-    public void start(XApp app) {
+    public void start(Solon app) {
         app.sharedGet("db", (DbContext db)->{
             Config.db = db;
         });

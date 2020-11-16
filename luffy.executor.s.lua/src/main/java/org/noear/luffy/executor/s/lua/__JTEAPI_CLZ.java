@@ -1,7 +1,7 @@
 package org.noear.luffy.executor.s.lua;
 
 import org.luaj.vm2.LuaTable;
-import org.noear.solon.core.XContext;
+import org.noear.solon.core.handler.Context;
 import org.noear.luffy.executor.ExecutorFactory;
 import org.noear.luffy.model.AFileModel;
 
@@ -27,7 +27,7 @@ public  class __JTEAPI_CLZ {
 
         if (file.file_id > 0) {
             Map<String, Object> model = (Map<String, Object>) LuaUtil.tableToObj(tb);
-            return ExecutorFactory.call(name, file, XContext.current(), model, true);
+            return ExecutorFactory.call(name, file, Context.current(), model, true);
         } else {
             return "";
         }

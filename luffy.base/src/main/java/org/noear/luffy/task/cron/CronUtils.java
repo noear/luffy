@@ -1,6 +1,6 @@
 package org.noear.luffy.task.cron;
 
-import org.noear.solon.XUtil;
+import org.noear.solon.Utils;
 
 import java.text.ParseException;
 import java.util.Date;
@@ -28,7 +28,7 @@ public class CronUtils {
                         expr = new CronExpression(cron);
                         cached.put(cron, expr);
                     } catch (ParseException ex) {
-                        throw XUtil.throwableWrap(ex);
+                        throw Utils.throwableWrap(ex);
                     }
                 }
             }

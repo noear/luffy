@@ -1,6 +1,6 @@
 package org.noear.luffy.dso;
 
-import org.noear.solon.annotation.XNote;
+import org.noear.solon.annotation.Note;
 import org.noear.luffy.utils.TextUtils;
 
 import java.util.ArrayList;
@@ -63,15 +63,15 @@ public class JtFun {
         list.add(v1);
     }
 
-    @XNote("函数设置")
+    @Note("函数设置")
     public void set(String name, JtFunHandler fun){
         set(name,null,0,fun);
     }
-    @XNote("函数设置（带注释）")
+    @Note("函数设置（带注释）")
     public void set(String name, String note, JtFunHandler fun){
         set(name,note,0,fun);
     }
-    @XNote("函数设置（带注释、优先级）")
+    @Note("函数设置（带注释、优先级）")
     public void set(String name, String note, int priority, JtFunHandler fun) {
         JtFunEntity ent = _xfunMap.get(name);
         if (ent != null && ent.priority > priority) {
@@ -87,17 +87,17 @@ public class JtFun {
         }
     }
 
-    @XNote("函数获取")
+    @Note("函数获取")
     public JtFunHandler find(String name) { //不能用get；不然，模板可以: XFun.xxx.call({}); //不用于统一
         return _xfunMap.get(name);
     }
 
-    @XNote("函数检查")
+    @Note("函数检查")
     public boolean contains(String name){
         return _xfunMap.containsKey(name);
     }
 
-    @XNote("函数调用")
+    @Note("函数调用")
     public Object tryCall(String name, Map<String,Object> args) {
         JtFunHandler fun = _xfunMap.get(name);
 
@@ -113,12 +113,12 @@ public class JtFun {
         return tmp;
     }
 
-    @XNote("函数调用")
+    @Note("函数调用")
     public Object call(String name, Map<String,Object> args) throws Exception{ //留着 Exception
         return callT(name,args);
     }
 
-    @XNote("函数调用")
+    @Note("函数调用")
     public <T> T callT(String name, Map<String,Object> args) throws Exception{ //留着 Exception
         JtFunHandler fun = _xfunMap.get(name);
 
@@ -130,22 +130,22 @@ public class JtFun {
         return (T)tmp;
     }
 
-    @XNote("调用一个文件")
+    @Note("调用一个文件")
     public Object callFile(String path) throws Exception {
         return CallUtil.callFile(path ,null);
     }
 
-    @XNote("调用一个文件")
+    @Note("调用一个文件")
     public Object callFile(String path, Map<String,Object> attrs) throws Exception {
         return CallUtil.callFile(path, attrs);
     }
 
-    @XNote("调用一组勾子")
+    @Note("调用一组勾子")
     public String callLabel(String tag, String label, boolean useCache) throws Exception{
         return CallUtil.callLabel(tag, label, useCache, null);
     }
 
-    @XNote("调用一组勾子")
+    @Note("调用一组勾子")
     public String callLabel(String tag,String label, boolean useCache, Map<String,Object> attrs) throws Exception{
         return CallUtil.callLabel(tag, label, useCache, attrs);
     }

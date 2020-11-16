@@ -1,23 +1,23 @@
 package org.noear.luffy.utils;
 
-import org.noear.solon.annotation.XNote;
+import org.noear.solon.annotation.Note;
 
 public class Timecount {
     private long start_time;
 
-    @XNote("开始计时")
+    @Note("开始计时")
     public Timecount start() {
         start_time = System.currentTimeMillis();
         return this;
     }
 
-    @XNote("结束计时，并返回间隔时间")
+    @Note("结束计时，并返回间隔时间")
     public Timespan stop() {
         return new Timespan(System.currentTimeMillis(), start_time);
     }
 
 
-    @XNote("结束计时，并返回间隔秒数")
+    @Note("结束计时，并返回间隔秒数")
     public String stop(long ref_second) {
         double temp = (stop().milliseconds() / 10) / 100.00d;
 

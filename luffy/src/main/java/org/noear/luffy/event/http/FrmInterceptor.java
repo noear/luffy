@@ -1,14 +1,14 @@
 package org.noear.luffy.event.http;
 
-import org.noear.solon.XApp;
+import org.noear.solon.Solon;;
 import org.noear.luffy.Config;
 import org.noear.luffy.dso.*;
-import org.noear.solon.core.XContext;
-import org.noear.solon.core.XHandler;
+import org.noear.solon.core.handler.Context;
 import org.noear.luffy.executor.ExecutorFactory;
 import org.noear.luffy.model.AFileModel;
 import org.noear.luffy.utils.ExceptionUtils;
 import org.noear.luffy.utils.TextUtils;
+import org.noear.solon.core.handler.Handler;
 
 import java.util.HashMap;
 import java.util.List;
@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * 文件路径拦截器的代理（数据库安全）
  * */
-public class FrmInterceptor implements XHandler {
+public class FrmInterceptor implements Handler {
     private static final String _lock = "";
     private static  FrmInterceptor _g = null;
     public static FrmInterceptor g(){
@@ -39,10 +39,10 @@ public class FrmInterceptor implements XHandler {
     private static final String _key = "__luffy_standalone_model";
 
     @Override
-    public void handle(XContext ctx) throws Exception {
+    public void handle(Context ctx) throws Exception {
         String path = ctx.path();
 
-        Object tmp = XApp.global().shared().get(_key);
+        Object tmp = Solon.global().shared().get(_key);
         ctx.attrSet(_key, tmp);
 
         _cacheMap.forEach((path2,suf)->{
@@ -52,7 +52,7 @@ public class FrmInterceptor implements XHandler {
         });
     }
 
-    private void exec(XContext ctx, String path2){
+    private void exec(Context ctx, String path2){
         try{
             do_exec(ctx,path2);
         }catch (Exception ex){
@@ -60,7 +60,7 @@ public class FrmInterceptor implements XHandler {
         }
     }
 
-    private void do_exec(XContext ctx, String path2) throws Exception {
+    private void do_exec(Context ctx, String path2) throws Exception {
         AFileModel file = AFileUtil.get(path2);
 
         if (file.file_id == 0) {

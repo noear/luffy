@@ -1,6 +1,6 @@
 package org.noear.luffy.utils;
 
-import org.noear.solon.annotation.XNote;
+import org.noear.solon.annotation.Note;
 import org.noear.weed.DbContext;
 import org.noear.weed.cache.ICacheServiceEx;
 
@@ -62,7 +62,7 @@ public class MethodUtils {
 
             Map<String, Object> m1 = new HashMap<>();
 
-            XNote tmp = m.getAnnotation(XNote.class);
+            Note tmp = m.getAnnotation(Note.class);
 
 
             if (tmp != null) {

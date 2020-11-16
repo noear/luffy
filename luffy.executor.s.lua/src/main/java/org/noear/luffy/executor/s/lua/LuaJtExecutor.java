@@ -1,8 +1,8 @@
 package org.noear.luffy.executor.s.lua;
 
 import org.noear.snack.ONode;
-import org.noear.solon.XApp;
-import org.noear.solon.core.XContext;
+import org.noear.solon.Solon;;
+import org.noear.solon.core.handler.Context;
 import org.noear.luffy.executor.IJtExecutor;
 import org.noear.luffy.model.AFileModel;
 import org.noear.luffy.utils.Datetime;
@@ -47,16 +47,16 @@ public class LuaJtExecutor implements IJtExecutor {
         _bindings = _eng.getBindings(ScriptContext.ENGINE_SCOPE);
 
 
-        XApp.global().shared().forEach((k, v) -> {
+        Solon.global().shared().forEach((k, v) -> {
             sharedSet(k, v);
         });
 
-        XApp.global().onSharedAdd((k, v) -> {
+        Solon.global().onSharedAdd((k, v) -> {
             sharedSet(k, v);
         });
 
         sharedSet("__JTEAPI", new __JTEAPI_CLZ());
-        sharedSet("XContext",XContext.class);
+        sharedSet("Context",Context.class);
         sharedSet("ONode", ONode.class);
 
         sharedSet("Datetime", Datetime.class);
@@ -68,7 +68,7 @@ public class LuaJtExecutor implements IJtExecutor {
 
             sb.append("require 'org.luaj.vm2.lib.DebugLib'\n\n");
 
-//            sb.append("XContext = luajava.bindClass('org.noear.solon.core.XContext')\n");
+//            sb.append("Context = luajava.bindClass('org.noear.solon.core.handler.Context;')\n");
 //            sb.append("ONode = luajava.bindClass('org.noear.snack.ONode')\n");
 
             sb.append("\n");
@@ -160,12 +160,12 @@ public class LuaJtExecutor implements IJtExecutor {
     }
 
     @Override
-    public Object exec(String name, AFileModel file, XContext ctx, Map<String, Object> model, boolean outString) throws Exception {
+    public Object exec(String name, AFileModel file, Context ctx, Map<String, Object> model, boolean outString) throws Exception {
         String name2 = name.replace(".", "_").replace("*","_");
 
         preLoad(name2, file);
 //
-        Object tmp = _eng.eval("return API_"+name2+"(XContext:current())");
+        Object tmp = _eng.eval("return API_"+name2+"(Context:current())");
 
         if (tmp == null) {
             return null;

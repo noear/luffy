@@ -1,9 +1,10 @@
 package org.noear.luffy.dso;
 
-import org.noear.solon.XApp;
+import org.noear.solon.Utils;
+import org.noear.solon.Solon;;
 import org.noear.luffy.Config;
 import org.noear.luffy.utils.*;
-import org.noear.solon.core.XMap;
+import org.noear.solon.core.NvMap;
 import org.noear.weed.DbContext;
 
 import java.io.File;
@@ -216,7 +217,7 @@ public class InitUtil {
         System.out.println("Complete table structure");
     }
 
-    public static void tryInitNode(XApp app){
+    public static void tryInitNode(Solon app){
         String node = app.prop().get(Config.code_node);
         if (TextUtils.isEmpty(node)) {
             node = app.prop().argx().get("node");
@@ -236,14 +237,14 @@ public class InitUtil {
         }
     }
 
-    public static void tryInitCore(XApp app){
+    public static void tryInitCore(Solon app){
         try{
              do_initCore(app);
         }catch (Throwable ex){
             ex.printStackTrace();
         }
     }
-    private static void do_initCore(XApp app) throws Exception {
+    private static void do_initCore(Solon app) throws Exception {
 
         if (PluginUtil.install("_core.noear")) {
             //
@@ -268,7 +269,7 @@ public class InitUtil {
         System.out.println("Complete _core loading");
     }
 
-    public static String tryInitExtend(XMap xarg) {
+    public static String tryInitExtend(NvMap xarg) {
         String extend = xarg.get("extend");
         if (extend == null) {
             extend = do_buildRoot();
@@ -280,7 +281,7 @@ public class InitUtil {
     private static String do_buildRoot() {
         //String fileName = "setup.htm";
 
-        URL temp = org.noear.solon.XUtil.getResource("");
+        URL temp = Utils.getResource("");
 
         if (temp == null) {
             return null;
@@ -306,7 +307,7 @@ public class InitUtil {
         }
     }
 
-    public static void trySaveConfig(String extend,XMap map) throws Exception {
+    public static void trySaveConfig(String extend,NvMap map) throws Exception {
         File file = new File(extend + "_db.properties");
         file.delete();
         file.createNewFile();

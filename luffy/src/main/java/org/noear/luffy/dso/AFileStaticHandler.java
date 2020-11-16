@@ -3,6 +3,7 @@ package org.noear.luffy.dso;
 import org.noear.solon.core.*;
 import org.noear.luffy.model.AFileModel;
 import org.noear.luffy.utils.TextUtils;
+import org.noear.solon.core.handler.Context;
 
 import java.util.Date;
 
@@ -14,7 +15,7 @@ public class AFileStaticHandler {
     private static final String LAST_MODIFIED = "Last-Modified";
 
 
-    public static void handle(XContext context, String path, AFileModel file) throws Exception {
+    public static void handle(Context context, String path, AFileModel file) throws Exception {
 
         context.charset("utf-8");
         context.setHandled(true);

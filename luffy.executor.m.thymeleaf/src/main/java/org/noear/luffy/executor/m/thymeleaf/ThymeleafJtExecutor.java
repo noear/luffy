@@ -1,12 +1,11 @@
 package org.noear.luffy.executor.m.thymeleaf;
 
-import org.noear.solon.XApp;
-import org.noear.solon.core.XContext;
+import org.noear.solon.Solon;
 import org.noear.luffy.executor.IJtExecutor;
 import org.noear.luffy.model.AFileModel;
 import org.noear.luffy.utils.TextUtils;
+import org.noear.solon.core.handler.Context;
 import org.thymeleaf.TemplateEngine;
-import org.thymeleaf.context.Context;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresource.ITemplateResource;
 
@@ -44,7 +43,7 @@ public class ThymeleafJtExecutor implements IJtExecutor {
         _engine.setTemplateResolver(_loader);
 
         try {
-            XApp.global().shared().forEach((k,v)->{
+            Solon.global().shared().forEach((k,v)->{
                 sharedSet(k,v);
             });
 
@@ -52,7 +51,7 @@ public class ThymeleafJtExecutor implements IJtExecutor {
             ex.printStackTrace();
         }
 
-        XApp.global().onSharedAdd((k,v)->{
+        Solon.global().onSharedAdd((k,v)->{
             sharedSet(k,v);
         });
     }
@@ -119,19 +118,19 @@ public class ThymeleafJtExecutor implements IJtExecutor {
     }
 
     @Override
-    public Object exec(String name, AFileModel file, XContext ctx, Map<String,Object> model, boolean outString) throws Exception {
+    public Object exec(String name, AFileModel file, Context ctx, Map<String,Object> model, boolean outString) throws Exception {
         if(preLoad(name,file)){
             if(model == null){
                 model = new HashMap<>();
             }
 
             if(ctx == null){
-                model.put("ctx", XContext.current());
+                model.put("ctx", Context.current());
             }else{
                 model.put("ctx", ctx);
             }
 
-            Context context = new Context();
+            org.thymeleaf.context.Context context = new org.thymeleaf.context.Context();
             context.setVariables(_sharedVariable);
             context.setVariables(model);
 

@@ -1,9 +1,10 @@
 package org.noear.luffy.utils;
 
-import org.noear.solon.core.XContext;
+
+import org.noear.solon.core.handler.Context;
 
 public class IPUtils {
-    public static String getIP(XContext context){
+    public static String getIP(Context context){
         String ip =  context.header("RemoteIp");
 
         if (TextUtils.isEmpty(ip) || "unknown".equalsIgnoreCase(ip)) {

@@ -1,7 +1,7 @@
 package org.noear.luffy.dso;
 
 import org.noear.snack.ONode;
-import org.noear.solon.XApp;
+import org.noear.solon.Solon;;
 import org.noear.luffy.Config;
 import org.noear.luffy.utils.Base64Utils;
 import org.noear.luffy.utils.HttpUtils;
@@ -198,9 +198,9 @@ public class PluginUtil {
     private static boolean _installDo(String packageTag) throws Exception{
 
 
-        String center = XApp.cfg().get(Config.code_center);
+        String center = Solon.cfg().get(Config.code_center);
         if (TextUtils.isEmpty(center)) {
-            center = XApp.cfg().argx().get("center");
+            center = Solon.cfg().argx().get("center");
         }
 
         if (TextUtils.isEmpty(center)) {

@@ -5,13 +5,13 @@ import org.noear.luffy.executor.ExecutorFactory;
 import org.noear.luffy.model.AFileModel;
 import org.noear.luffy.utils.ExceptionUtils;
 import org.noear.luffy.utils.TextUtils;
-import org.noear.solon.core.XContext;
-import org.noear.solon.core.XHandler;
+import org.noear.solon.core.handler.Context;
+import org.noear.solon.core.handler.Handler;
 
 /**
  * 应用文件的代理，静态文件或动态文件（数据库安全）
  * */
-public class AppHandler implements XHandler {
+public class AppHandler implements Handler {
 
     private static final String _lock = "";
     private static AppHandler _g = null;
@@ -29,11 +29,11 @@ public class AppHandler implements XHandler {
 
 
     @Override
-    public void handle(XContext ctx) throws Exception {
+    public void handle(Context ctx) throws Exception {
         do_handle(ctx.path(), ctx);
     }
 
-    private void do_handle(String path, XContext ctx) throws Exception {
+    private void do_handle(String path, Context ctx) throws Exception {
         String path2 = AFileUtil.path2(path);
         String name = null;
 

@@ -1,8 +1,8 @@
 package org.noear.luffy.event.schedule.controller;
 
-import org.noear.solon.core.XContext;
-import org.noear.solon.core.XContextEmpty;
-import org.noear.solon.core.XContextUtil;
+import org.noear.solon.core.handler.Context;
+import org.noear.solon.core.handler.ContextEmpty;
+import org.noear.solon.core.handler.ContextUtil;
 import org.noear.luffy.dso.JtLock;
 import org.noear.luffy.dso.LogLevel;
 import org.noear.luffy.dso.LogUtil;
@@ -164,13 +164,13 @@ public class ScheduleTask extends JtTaskBase {
         task.plan_last_time = new Date();
         DbApi.taskSetState(task, 2);
 
-        XContext ctx = XContextEmpty.create();
-        XContextUtil.currentSet(ctx);
+        Context ctx = ContextEmpty.create();
+        ContextUtil.currentSet(ctx);
 
         //2.2.执行
         ExecutorFactory.execOnly(task, ctx);
 
-        XContextUtil.currentRemove();
+        ContextUtil.currentRemove();
 
 
         //3.更新状态

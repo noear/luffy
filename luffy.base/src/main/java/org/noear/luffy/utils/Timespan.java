@@ -1,6 +1,6 @@
 package org.noear.luffy.utils;
 
-import org.noear.solon.annotation.XNote;
+import org.noear.solon.annotation.Note;
 
 import java.util.Date;
 
@@ -35,27 +35,27 @@ public class Timespan {
     }
 
 
-    @XNote("总毫秒数")
+    @Note("总毫秒数")
     public long milliseconds(){
         return interval;
     }
 
-    @XNote("总秒数")
+    @Note("总秒数")
     public long seconds(){
         return interval /1000;
     }
 
-    @XNote("总分钟")
+    @Note("总分钟")
     public long minutes(){
         return seconds()/60;
     }
 
-    @XNote("总小时")
+    @Note("总小时")
     public long hours(){
         return minutes()/60;
     }
 
-    @XNote("总天数")
+    @Note("总天数")
     public long days(){
         return hours()/24;
     }

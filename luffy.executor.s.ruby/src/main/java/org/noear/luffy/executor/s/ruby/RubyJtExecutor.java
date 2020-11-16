@@ -1,8 +1,8 @@
 package org.noear.luffy.executor.s.ruby;
 
 import org.noear.snack.ONode;
-import org.noear.solon.XApp;
-import org.noear.solon.core.XContext;
+import org.noear.solon.Solon;;
+import org.noear.solon.core.handler.Context;
 import org.noear.luffy.dso.JtUtil;
 import org.noear.luffy.executor.IJtExecutor;
 import org.noear.luffy.model.AFileModel;
@@ -46,11 +46,11 @@ public class RubyJtExecutor implements IJtExecutor {
         _eng_call = (Invocable) _eng;
         _bindings = _eng.getBindings(ScriptContext.ENGINE_SCOPE);
 
-        XApp.global().shared().forEach((k, v) -> {
+        Solon.global().shared().forEach((k, v) -> {
             sharedSet(k, v);
         });
 
-        XApp.global().onSharedAdd((k, v) -> {
+        Solon.global().onSharedAdd((k, v) -> {
             sharedSet(k, v);
         });
 
@@ -60,7 +60,7 @@ public class RubyJtExecutor implements IJtExecutor {
             StringBuilder sb = new StringBuilder();
 
             sb.append("require 'java'\n\n");
-            sb.append("java_import org.noear.solon.core.XContext\n");
+            sb.append("java_import org.noear.solon.core.handler.Context;\n");
             sb.append("java_import org.noear.snack.ONode\n");
 
             sb.append("java_import org.noear.luffy.utils.Datetime\n");
@@ -156,7 +156,7 @@ public class RubyJtExecutor implements IJtExecutor {
     }
 
     @Override
-    public Object exec(String name, AFileModel file, XContext ctx, Map<String, Object> model, boolean outString) throws Exception {
+    public Object exec(String name, AFileModel file, Context ctx, Map<String, Object> model, boolean outString) throws Exception {
         String name2 = name.replace(".", "_").replace("*","_");
 
         preLoad(name2, file);

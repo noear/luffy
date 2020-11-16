@@ -1,10 +1,10 @@
 package org.noear.luffy.dso;
 
 import okhttp3.Response;
-import org.noear.solon.XApp;
-import org.noear.solon.XUtil;
+import org.noear.solon.Solon;
+import org.noear.solon.Utils;
 import org.noear.solon.core.ExtendLoader;
-import org.noear.solon.core.XPlugin;
+import org.noear.solon.core.Plugin;
 import org.noear.luffy.utils.*;
 
 import java.io.File;
@@ -12,7 +12,7 @@ import java.io.FileOutputStream;
 
 public class JarUtil {
     public static boolean loadJar(String path, String data64 ,String data_md5 ,String xPlugin) throws Exception {
-        String extend = XApp.global().prop().argx().get("extend");
+        String extend = Solon.global().prop().argx().get("extend");
 
         //构建文件名
         int idx = path.lastIndexOf('/');
@@ -88,9 +88,9 @@ public class JarUtil {
 
             //尝试加载插件类
             if (TextUtils.isEmpty(xPlugin) == false) {
-                XPlugin p1 = newInstance(xPlugin);
+                Plugin p1 = newInstance(xPlugin);
                 if (p1 != null) {
-                    XApp.global().plug(p1);
+                    Solon.global().plug(p1);
                     return false;
                 }
             }
@@ -102,6 +102,6 @@ public class JarUtil {
     }
 
     public static <T> T newInstance(String className) {
-        return XUtil.newInstance(className);
+        return Utils.newInstance(className);
     }
 }

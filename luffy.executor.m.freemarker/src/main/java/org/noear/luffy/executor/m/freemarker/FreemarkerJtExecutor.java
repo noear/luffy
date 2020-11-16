@@ -4,8 +4,8 @@ import freemarker.cache.MruCacheStorage;
 import freemarker.cache.StringTemplateLoaderEx;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
-import org.noear.solon.XApp;
-import org.noear.solon.core.XContext;
+import org.noear.solon.Solon;
+import org.noear.solon.core.handler.Context;
 import org.noear.luffy.executor.IJtExecutor;
 import org.noear.luffy.model.AFileModel;
 import org.noear.luffy.utils.TextUtils;
@@ -45,12 +45,12 @@ public class FreemarkerJtExecutor implements IJtExecutor {
 
 
         try {
-            _engine.setSharedVariables(XApp.global().shared());
+            _engine.setSharedVariables(Solon.global().shared());
         } catch (Exception ex) {
             ex.printStackTrace();
         }
 
-        XApp.global().onSharedAdd((k,v)->{
+        Solon.global().onSharedAdd((k,v)->{
             sharedSet(k,v);
         });
     }
@@ -113,14 +113,14 @@ public class FreemarkerJtExecutor implements IJtExecutor {
     }
 
     @Override
-    public Object exec(String name, AFileModel file, XContext ctx, Map<String,Object> model, boolean outString) throws Exception {
+    public Object exec(String name, AFileModel file, Context ctx, Map<String,Object> model, boolean outString) throws Exception {
         if(preLoad(name,file)){
             if(model == null){
                 model = new HashMap<>();
             }
 
             if(ctx == null){
-                model.put("ctx", XContext.current());
+                model.put("ctx", Context.current());
             }else{
                 model.put("ctx", ctx);
             }

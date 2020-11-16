@@ -1,18 +1,18 @@
 package org.noear.luffy.dso;
 
 import org.noear.snack.core.exts.ThData;
-import org.noear.solon.annotation.XNote;
+import org.noear.solon.annotation.Note;
 
 import java.util.HashMap;
 import java.util.Map;
 
-@XNote("消息总线接口")
+@Note("消息总线接口")
 public class JtMsg {
     public static final JtMsg g  = new JtMsg();
 
     static ThData<Map<String,Object>> th_map= new ThData<>(()->new HashMap<>());
 
-    @XNote("转发消息")
+    @Note("转发消息")
     public boolean forward(String topic, Object content, String topic_source) throws Exception{
         if(topic == null || content == null){
             return false;
@@ -27,12 +27,12 @@ public class JtMsg {
 
         return JtFun.g.call("xbus_forward", data) != null;
     }
-    @XNote("转发消息")
+    @Note("转发消息")
     public boolean forward(Map<String,Object> data) throws Exception{
         return JtFun.g.call("xbus_forward", data) != null;
     }
 
-    @XNote("发布消息")
+    @Note("发布消息")
     public boolean publish(String topic, Object content) throws Exception{
         if(topic == null || content == null){
             return false;
@@ -47,7 +47,7 @@ public class JtMsg {
         return JtFun.g.call("xbus_publish", data) != null;
     }
 
-    @XNote("发布消息")
+    @Note("发布消息")
     public boolean publish(Map<String,Object> data) throws Exception {
         return JtFun.g.call("xbus_publish", data) != null;
     }

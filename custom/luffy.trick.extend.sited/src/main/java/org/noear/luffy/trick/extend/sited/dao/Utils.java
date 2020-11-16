@@ -2,14 +2,14 @@ package org.noear.luffy.trick.extend.sited.dao;
 
 import org.noear.luffy.trick.extend.sited.utils.Base64Util;
 import org.noear.luffy.trick.extend.sited.utils.TextUtils;
-import org.noear.solon.core.XContext;
+import org.noear.solon.core.handler.Context;
 
 import java.nio.charset.Charset;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Utils {
-    public static String condition(XContext ctx) {
+    public static String condition(Context ctx) {
 
         int isVip = ctx.paramAsInt("u_vip", 0);;
 

@@ -1,10 +1,9 @@
 package org.noear.luffy.utils;
 
 import com.zaxxer.hikari.HikariDataSource;
-import org.noear.solon.XApp;
-import org.noear.solon.XUtil;
+import org.noear.solon.Solon;
+import org.noear.solon.Utils;
 import org.noear.weed.DbContext;
-import org.noear.weed.wrap.DbType;
 
 import java.util.Map;
 
@@ -14,7 +13,7 @@ public class DbBuilder {
     //是否使用连接池
     public static boolean useConnectionPool() {
         if (_useConnectionPool == null) {
-            _useConnectionPool = ("0".equals(XApp.cfg().get("luffy.connection.pool")) == false);
+            _useConnectionPool = ("0".equals(Solon.cfg().get("luffy.connection.pool")) == false);
         }
 
         return _useConnectionPool;
@@ -24,7 +23,7 @@ public class DbBuilder {
         String url = map.get("url");
         if(TextUtils.isEmpty(url) == false) {
             if (url.indexOf("~/") >= 0) {
-                String path = XApp.cfg().argx().get("extend");
+                String path = Solon.cfg().argx().get("extend");
                 url = url.replace("~/", path);
             }
         }
@@ -52,10 +51,10 @@ public class DbBuilder {
             driverClassName = map.get("driver");
         }
 
-        if ((XUtil.isEmpty(url) && XUtil.isEmpty(server))
-                || XUtil.isEmpty(schema)
-                || XUtil.isEmpty(username)
-                || XUtil.isEmpty(password)) {
+        if ((Utils.isEmpty(url) && Utils.isEmpty(server))
+                || Utils.isEmpty(schema)
+                || Utils.isEmpty(username)
+                || Utils.isEmpty(password)) {
             throw new RuntimeException("please enter a normal database config");
         }
 

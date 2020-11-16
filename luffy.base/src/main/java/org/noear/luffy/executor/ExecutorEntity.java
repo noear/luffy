@@ -1,6 +1,6 @@
 package org.noear.luffy.executor;
 
-import org.noear.solon.core.XContext;
+import org.noear.solon.core.handler.Context;
 import org.noear.luffy.model.AFileModel;
 
 import java.util.Map;
@@ -25,7 +25,7 @@ public class ExecutorEntity implements IJtExecutor{
     }
 
     @Override
-    public Object exec(String name, AFileModel file, XContext ctx, Map<String, Object> model, boolean outString) throws Exception {
+    public Object exec(String name, AFileModel file, Context ctx, Map<String, Object> model, boolean outString) throws Exception {
         try {
             return executor.exec(name, file, ctx, model, outString);
         }catch (NoSuchMethodException ex){

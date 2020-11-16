@@ -1,7 +1,7 @@
 package org.noear.luffy.task;
 
 import org.noear.snack.ONode;
-import org.noear.solon.XUtil;
+import org.noear.solon.Utils;
 import org.noear.luffy.JtConfig;
 import org.noear.luffy.dso.*;
 import org.noear.luffy.utils.TextUtils;
@@ -45,7 +45,7 @@ public abstract class JtTaskBase implements IJtTask {
             try {
                 String cfg_str = CfgUtil.cfgGetValue(node_id());
 
-                if (XUtil.isEmpty(cfg_str) == false) {
+                if (Utils.isEmpty(cfg_str) == false) {
                     cfg_str = cfg_str.trim();
 
                     if (cfg_str.startsWith("{")) {

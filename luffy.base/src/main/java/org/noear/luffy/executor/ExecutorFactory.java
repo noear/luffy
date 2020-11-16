@@ -1,6 +1,6 @@
 package org.noear.luffy.executor;
 
-import org.noear.solon.core.XContext;
+import org.noear.solon.core.handler.Context;
 import org.noear.luffy.dso.JtBridge;
 import org.noear.luffy.model.AFileModel;
 import org.noear.luffy.utils.ExceptionUtils;
@@ -102,7 +102,7 @@ public class ExecutorFactory {
     /**
      * 执行一个文件并输出（jsx 或 ftl）
      */
-    public static void exec(String name, AFileModel file, XContext ctx) throws Exception {
+    public static void exec(String name, AFileModel file, Context ctx) throws Exception {
         //最后是动态的
         String text = (String) call(name, file, ctx, null, true);
         String call = ctx.param("callback");
@@ -158,7 +158,7 @@ public class ExecutorFactory {
     /**
      * 纯执行一个js文件（一般用于执行拦截器 或任务）
      */
-    public static Object execOnly(AFileModel file, XContext ctx) throws Exception {
+    public static Object execOnly(AFileModel file, Context ctx) throws Exception {
         IJtExecutor tmp = _map.get(file.edit_mode);
 
         //最后是动态的
@@ -181,7 +181,7 @@ public class ExecutorFactory {
     /**
      * 执行一个文件并返回
      */
-    public static Object call(String name, AFileModel file, XContext ctx, Map<String, Object> model, boolean outString) throws Exception {
+    public static Object call(String name, AFileModel file, Context ctx, Map<String, Object> model, boolean outString) throws Exception {
         IJtExecutor tmp = _map.get(file.edit_mode);
 
         try {

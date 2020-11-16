@@ -7,7 +7,7 @@ import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import org.noear.localjt.LocalJtApp;
 import org.noear.localjt.widget.JsDialog;
-import org.noear.solon.XApp;
+import org.noear.solon.Solon;;
 import org.noear.luffy.dso.PluginUtil;
 import org.noear.luffy.utils.TextUtils;
 
@@ -62,7 +62,7 @@ public class WebViewBuilder {
         //进入管理界面
         if(LocalJtApp.home.indexOf("/.admin/") < 0) {
             MenuItem shift = new MenuItem("进入管理界面");
-            String adminUrl = "http://localhost:" + XApp.global().port() + "/.admin/?_L0n5=81057AF6D4931710A5370514A4EE2DB5D2033055";
+            String adminUrl = "http://localhost:" + Solon.global().port() + "/.admin/?_L0n5=81057AF6D4931710A5370514A4EE2DB5D2033055";
             shift.setOnAction(e -> {
                 if(shift.getText().indexOf("管理") > 0){
                     shift.setText("进入应用界面");

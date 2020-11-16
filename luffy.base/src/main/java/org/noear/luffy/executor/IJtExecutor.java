@@ -1,6 +1,6 @@
 package org.noear.luffy.executor;
 
-import org.noear.solon.core.XContext;
+import org.noear.solon.core.handler.Context;
 import org.noear.luffy.model.AFileModel;
 
 import java.util.Map;
@@ -13,7 +13,7 @@ public interface IJtExecutor {
     //String compile(String name, AFileModel file);
 
     /** 执行文件 */
-    Object exec(String name, AFileModel file, XContext ctx, Map<String, Object> model, boolean outString) throws Exception;
+    Object exec(String name, AFileModel file, Context ctx, Map<String, Object> model, boolean outString) throws Exception;
 
     /** 执行代码 */
     default Object exec(String code, Map<String, Object> model) throws Exception{

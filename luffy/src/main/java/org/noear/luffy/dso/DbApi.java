@@ -1,7 +1,7 @@
 package org.noear.luffy.dso;
 
-import org.noear.solon.XApp;
-import org.noear.solon.core.XContext;
+import org.noear.solon.Solon;;
+import org.noear.solon.core.handler.Context;
 import org.noear.luffy.Config;
 import org.noear.luffy.executor.ExecutorFactory;
 import org.noear.luffy.model.AConfigM;
@@ -30,7 +30,7 @@ public class DbApi {
     /**
      * 新建文件
      */
-    public static boolean fileNew(int fid, XContext ctx) throws Exception {
+    public static boolean fileNew(int fid, Context ctx) throws Exception {
         DbTableQuery qr = db().table("a_file")
                 .set("path", ctx.param("path", ""))
                 .set("tag", ctx.param("tag", ""))
@@ -359,7 +359,7 @@ public class DbApi {
 
         logPipeline.add(dm);
 
-        if (XApp.cfg().isDebugMode() && content != null) {
+        if (Solon.cfg().isDebugMode() && content != null) {
             System.out.println(content);
         }
 

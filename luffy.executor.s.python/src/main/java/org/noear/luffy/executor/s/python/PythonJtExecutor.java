@@ -1,8 +1,8 @@
 package org.noear.luffy.executor.s.python;
 
 import org.noear.snack.ONode;
-import org.noear.solon.XApp;
-import org.noear.solon.core.XContext;
+import org.noear.solon.Solon;;
+import org.noear.solon.core.handler.Context;
 import org.noear.luffy.dso.CallUtil;
 import org.noear.luffy.dso.JtUtil;
 import org.noear.luffy.executor.IJtExecutor;
@@ -43,17 +43,17 @@ public class PythonJtExecutor implements IJtExecutor {
         _eng_call = (Invocable) _eng;
         _bindings = _eng.getBindings(ScriptContext.ENGINE_SCOPE);
 
-        XApp.global().shared().forEach((k, v) -> {
+        Solon.global().shared().forEach((k, v) -> {
             sharedSet(k, v);
         });
 
-        XApp.global().onSharedAdd((k, v) -> {
+        Solon.global().onSharedAdd((k, v) -> {
             sharedSet(k, v);
         });
 
         sharedSet("__JTEAPI", new __JTEAPI_CLZ());
 
-        sharedSet("XContext", XContext.class);
+        sharedSet("Context", Context.class);
         sharedSet("ONode", ONode.class);
 
         sharedSet("Datetime", Datetime.class);
@@ -143,7 +143,7 @@ public class PythonJtExecutor implements IJtExecutor {
     }
 
     @Override
-    public Object exec(String name, AFileModel file, XContext ctx, Map<String, Object> model, boolean outString) throws Exception {
+    public Object exec(String name, AFileModel file, Context ctx, Map<String, Object> model, boolean outString) throws Exception {
         String name2 = name.replace(".", "_").replace("*","_");
 
         preLoad(name2, file);

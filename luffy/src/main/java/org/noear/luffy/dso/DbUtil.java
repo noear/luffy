@@ -1,6 +1,6 @@
 package org.noear.luffy.dso;
 
-import org.noear.solon.core.XMap;
+import org.noear.solon.core.NvMap;
 import org.noear.luffy.utils.DbBuilder;
 import org.noear.weed.DbContext;
 import org.noear.weed.cache.LocalCache;
@@ -23,7 +23,7 @@ public class DbUtil {
         return _db;
     }
 
-    public static void setDefDb(XMap map) {
+    public static void setDefDb(NvMap map) {
         _db = DbBuilder.getDb(map);
     }
 

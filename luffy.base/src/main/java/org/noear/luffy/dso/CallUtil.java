@@ -1,6 +1,6 @@
 package org.noear.luffy.dso;
 
-import org.noear.solon.core.XContext;
+import org.noear.solon.core.handler.Context;
 import org.noear.luffy.executor.ExecutorFactory;
 import org.noear.luffy.model.AFileModel;
 import org.noear.luffy.utils.StringUtils;
@@ -22,7 +22,7 @@ public class CallUtil {
         AFileModel file = (AFileModel) JtFun.g.call("afile_get",map);
 
         if (file.file_id > 0 && TextUtils.isEmpty(file.content) == false) {
-            return ExecutorFactory.call(name, file, XContext.current(), null, outString);
+            return ExecutorFactory.call(name, file, Context.current(), null, outString);
         } else {
             return "";
         }
@@ -36,8 +36,8 @@ public class CallUtil {
             return null;
         }
 
-        if (attrs != null && XContext.current() != null) {
-            XContext.current().attrSet(attrs);
+        if (attrs != null && Context.current() != null) {
+            Context.current().attrSet(attrs);
         }
 
         return callDo(path, false);
@@ -51,8 +51,8 @@ public class CallUtil {
             return "";
         }
 
-        if (attrs != null && XContext.current() != null) {
-            XContext.current().attrSet(attrs);
+        if (attrs != null && Context.current() != null) {
+            Context.current().attrSet(attrs);
         }
 
         StringBuilder sb = StringUtils.borrowBuilder();

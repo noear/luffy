@@ -6,9 +6,8 @@ import okio.BufferedSink;
 import okio.Okio;
 import okio.Source;
 import org.noear.snack.ONode;
-import org.noear.solon.XApp;
-import org.noear.solon.annotation.XNote;
-import org.noear.weed.cache.ICacheService;
+import org.noear.solon.Solon;
+import org.noear.solon.annotation.Note;
 import org.noear.weed.cache.ICacheServiceEx;
 import org.noear.weed.ext.Fun0;
 
@@ -55,25 +54,25 @@ public class HttpUtils {
         _builder = new Request.Builder().url(url);
     }
 
-    @XNote("设置multipart")
+    @Note("设置multipart")
     public HttpUtils multipart(boolean multipart) {
         _multipart = multipart;
         return this;
     }
 
-    @XNote("设置UA")
+    @Note("设置UA")
     public HttpUtils userAgent(String ua) {
         _builder.header("User-Agent", ua);
         return this;
     }
 
-    @XNote("设置charset")
+    @Note("设置charset")
     public HttpUtils charset(String charset) {
         _charset = Charset.forName(charset);
         return this;
     }
 
-    @XNote("设置请求头")
+    @Note("设置请求头")
     public HttpUtils headers(Map<String, Object> headers) {
         if (headers != null) {
             headers.forEach((k, v) -> {
@@ -84,7 +83,7 @@ public class HttpUtils {
         return this;
     }
 
-    @XNote("设置请求头")
+    @Note("设置请求头")
     public HttpUtils header(String name, String value) {
         if (name != null) {
             _builder.header(name, value);
@@ -92,7 +91,7 @@ public class HttpUtils {
         return this;
     }
 
-    @XNote("添加请求头（可添加多个同名头）")
+    @Note("添加请求头（可添加多个同名头）")
     public HttpUtils headerAdd(String name, String value) {
         if (name != null) {
             _builder.addHeader(name, value);
@@ -100,7 +99,7 @@ public class HttpUtils {
         return this;
     }
 
-    @XNote("设置表单数据")
+    @Note("设置表单数据")
     public HttpUtils data(Map<String, Object> data) {
         tryInitForm();
 
@@ -111,14 +110,14 @@ public class HttpUtils {
         return this;
     }
 
-    @XNote("设置表单数据")
+    @Note("设置表单数据")
     public HttpUtils data(String key, String value) {
         tryInitForm();
         _form.add(new KeyValue(key, value));
         return this;
     }
 
-    @XNote("设置表单文件")
+    @Note("设置表单文件")
     public HttpUtils data(String key, String filename, InputStream inputStream, String contentType) {
         multipart(true);
         tryInitPartBuilder(MultipartBody.FORM);
@@ -130,12 +129,12 @@ public class HttpUtils {
         return this;
     }
 
-    @XNote("设置BODY txt")
+    @Note("设置BODY txt")
     public HttpUtils bodyTxt(String txt) {
         return bodyTxt(txt, null);
     }
 
-    @XNote("设置BODY txt及内容类型")
+    @Note("设置BODY txt及内容类型")
     public HttpUtils bodyTxt(String txt, String contentType) {
         if (contentType == null) {
             _body = FormBody.create(null, txt);
@@ -146,12 +145,12 @@ public class HttpUtils {
         return this;
     }
 
-    @XNote("设置BODY raw")
+    @Note("设置BODY raw")
     public HttpUtils bodyRaw(InputStream raw){
         return bodyRaw(raw, null);
     }
 
-    @XNote("设置BODY raw及内容类型")
+    @Note("设置BODY raw及内容类型")
     public HttpUtils bodyRaw(InputStream raw, String contentType) {
         _body = new StreamBody(contentType, raw);
 
@@ -159,7 +158,7 @@ public class HttpUtils {
     }
 
 
-    @XNote("设置请求cookies")
+    @Note("设置请求cookies")
     public HttpUtils cookies(Map<String, Object> cookies) {
         if (cookies != null) {
             tryInitCookies();
@@ -172,7 +171,7 @@ public class HttpUtils {
         return this;
     }
 
-    @XNote("执行请求，返回响应对象")
+    @Note("执行请求，返回响应对象")
     public Response exec(String mothod) throws Exception {
         if (_multipart) {
             tryInitPartBuilder(MultipartBody.FORM);
@@ -246,16 +245,16 @@ public class HttpUtils {
     }
 
     private int _cache=0;
-    @XNote("缓存时间")
+    @Note("缓存时间")
     public HttpUtils cache(int seconds) throws Exception {
         _cache = seconds;
         return this;
     }
 
-    @XNote("执行请求，返回字符串")
+    @Note("执行请求，返回字符串")
     public String exec2(String mothod) throws Exception {
         if (_cache > 0) {
-            ICacheServiceEx c = (ICacheServiceEx) XApp.global().shared().get("cache");
+            ICacheServiceEx c = (ICacheServiceEx) Solon.global().shared().get("cache");
             if (c != null) {
                 String url_key = _url;
                 if(_form != null) {
@@ -288,27 +287,27 @@ public class HttpUtils {
         }
     }
 
-    @XNote("发起GET请求，返回字符串（REST.select 从服务端获取一或多项资源）")
+    @Note("发起GET请求，返回字符串（REST.select 从服务端获取一或多项资源）")
     public String get() throws Exception {
         return exec2("GET");
     }
 
-    @XNote("发起POST请求，返回字符串（REST.create 在服务端新建一项资源）")
+    @Note("发起POST请求，返回字符串（REST.create 在服务端新建一项资源）")
     public String post() throws Exception {
         return exec2("POST");
     }
 
-    @XNote("发起PUT请求，返回字符串（REST.update 客户端提供改变后的完整资源）")
+    @Note("发起PUT请求，返回字符串（REST.update 客户端提供改变后的完整资源）")
     public String put() throws Exception {
         return exec2("PUT");
     }
 
-    @XNote("发起PATCH请求，返回字符串（REST.update 客户端提供改变的属性）")
+    @Note("发起PATCH请求，返回字符串（REST.update 客户端提供改变的属性）")
     public String patch() throws Exception {
         return exec2("PATCH");
     }
 
-    @XNote("发起DELETE请求，返回字符串（REST.delete 从服务端删除资源）")
+    @Note("发起DELETE请求，返回字符串（REST.delete 从服务端删除资源）")
     public String delete() throws Exception {
         return exec2("DELETE");
     }

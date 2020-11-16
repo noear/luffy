@@ -7,7 +7,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import org.noear.localjt.LocalJtApp;
-import org.noear.solon.XApp;
+import org.noear.solon.Solon;;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -40,7 +40,7 @@ public class WebShell extends Application {
     }
 
     public static InputStream getImage(String name) throws IOException {
-        String extend = XApp.cfg().argx().get("extend");
+        String extend = Solon.cfg().argx().get("extend");
 
         File file = new File(extend + name);
         if(file.exists()){

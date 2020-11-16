@@ -1,6 +1,6 @@
 package org.noear.luffy.dso;
 
-import org.noear.solon.XApp;
+import org.noear.solon.Solon;;
 import org.noear.luffy.executor.IJtConfigAdapter;
 import org.noear.luffy.executor.IJtExecutorAdapter;
 import org.noear.luffy.model.AFileModel;
@@ -38,7 +38,7 @@ public class JtAdapter implements IJtExecutorAdapter, IJtConfigAdapter {
     @Override
     public String nodeId() {
         if (_nodeId == null) {
-            _nodeId = XApp.cfg().get("luffy.node", "");
+            _nodeId = Solon.cfg().get("luffy.node", "");
         }
 
         return _nodeId;

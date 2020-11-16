@@ -5,9 +5,9 @@ import org.noear.luffy.trick.extend.sited.dao.Utils;
 import org.noear.luffy.trick.extend.sited.model.SiteModel;
 import org.noear.luffy.trick.extend.sited.utils.TextUtils;
 import org.noear.snack.ONode;
-import org.noear.solon.annotation.XController;
-import org.noear.solon.annotation.XMapping;
-import org.noear.solon.core.XContext;
+import org.noear.solon.annotation.Controller;
+import org.noear.solon.annotation.Mapping;
+import org.noear.solon.core.handler.Context;
 import org.noear.luffy.trick.extend.sited.utils.Datetime;
 import org.noear.weed.DataItem;
 import org.noear.weed.DbTableQuery;
@@ -21,10 +21,10 @@ import java.util.List;
  * 插件中心对外统一接口
  *
  * */
-@XController
+@Controller
 public class ApiController {
-    @XMapping("/api4.{ver}/all/{key}?")
-    public void all(XContext ctx,Integer ver, String key) throws Exception{
+    @Mapping("/api4.{ver}/all/{key}?")
+    public void all(Context ctx,Integer ver, String key) throws Exception{
         int app_id = ctx.paramAsInt("appid",0);
         int is_exa = 0;
 
@@ -87,8 +87,8 @@ public class ApiController {
         ctx.outputAsJson(data.toJson());
     }
 
-    @XMapping("/api4.{ver}/als/")
-    public void als(XContext ctx,Integer ver) throws Exception{
+    @Mapping("/api4.{ver}/als/")
+    public void als(Context ctx,Integer ver) throws Exception{
         List<SiteModel> list = DbUtil.db().table("sited")
                 .where(Utils.condition(ctx))
                 .and("client_ver <= ?", ver)
@@ -111,8 +111,8 @@ public class ApiController {
         ctx.outputAsJson(data.toJson());
     }
 
-    @XMapping("/api4.{ver}/chk/{url_}")
-    public void chk(XContext ctx,Integer ver,String url_) throws Exception{
+    @Mapping("/api4.{ver}/chk/{url_}")
+    public void chk(Context ctx,Integer ver,String url_) throws Exception{
         List<SiteModel> list = DbUtil.db().table("sited")
                 .where(Utils.condition(ctx))
                 .and("client_ver <= ?", ver)
@@ -141,8 +141,8 @@ public class ApiController {
         ctx.outputAsJson(data.toJson());
     }
 
-    @XMapping("/api4.{ver}/log/")
-    public void log(XContext ctx,Integer ver, Integer log) throws Exception {
+    @Mapping("/api4.{ver}/log/")
+    public void log(Context ctx,Integer ver, Integer log) throws Exception {
         try {
             if (log == null) {
                 ctx.output("0");

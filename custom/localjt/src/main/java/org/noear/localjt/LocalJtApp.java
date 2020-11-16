@@ -3,12 +3,12 @@ package org.noear.localjt;
 import org.noear.localjt.dso.WebShell;
 import org.noear.snack.core.Constants;
 import org.noear.snack.core.Feature;
-import org.noear.solon.XApp;
-import org.noear.solon.core.XMap;
+import org.noear.solon.Solon;
 import org.noear.luffy.Luffy;
 import org.noear.luffy.dso.JtUtilEx;
 import org.noear.luffy.dso.PluginUtil;
 import org.noear.luffy.utils.TextUtils;
+import org.noear.solon.core.NvMap;
 import org.noear.weed.WeedConfig;
 
 public class LocalJtApp{
@@ -29,14 +29,14 @@ public class LocalJtApp{
             err.printStackTrace();
         });
 
-        XApp app = Luffy.start(LocalJtApp.class, args,()->{
-            XMap argx = XApp.cfg().argx();
+        Solon app = Luffy.start(LocalJtApp.class, args,()->{
+            NvMap argx = Solon.cfg().argx();
 
             if(argx.getInt("model") != 2) {
                 //
                 //server: 0,个人app；1,个人网站；2,多人网站
                 //
-                XApp.global().sharedAdd("__luffy_standalone_model", 1);
+                Solon.global().sharedAdd("__luffy_standalone_model", 1);
             }
 
             //添加插件
@@ -58,7 +58,7 @@ public class LocalJtApp{
             err.printStackTrace();
         });
 
-        XMap argx = app.prop().argx();
+        NvMap argx = app.prop().argx();
 
 
         //主页

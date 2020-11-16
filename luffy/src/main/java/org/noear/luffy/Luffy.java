@@ -1,7 +1,7 @@
 package org.noear.luffy;
 
 import org.noear.luffy.dso.*;
-import org.noear.solon.XApp;
+import org.noear.solon.Solon;;
 import org.noear.solon.core.*;
 import org.noear.luffy.utils.ExceptionUtils;
 import org.noear.luffy.utils.TextUtils;
@@ -21,17 +21,17 @@ public class Luffy {
         }
     }
 
-    public static XApp start(Class<?> source, String[] args){
+    public static Solon start(Class<?> source, String[] args){
         return start(source,args,null);
     }
 
-    public static XApp start(Class<?> source, String[] args, Act0 onLoadEvent) {
+    public static Solon start(Class<?> source, String[] args, Act0 onLoadEvent) {
         Luffy._onLoadEvent = onLoadEvent;
 
         XmlSqlLoader.tryLoad();
 
         //0.构建参数
-        XMap xarg = XMap.from(args);
+        NvMap xarg = NvMap.from(args);
 
         //1.获取扩展目录
         String extend = InitUtil.tryInitExtend(xarg);
@@ -51,7 +51,7 @@ public class Luffy {
         JtBridge.configAdapterSet(JtAdapter.global);
 
         //4.启动服务
-        XApp app = XApp.start(source, xarg, (x) -> {
+        Solon app = Solon.start(source, xarg, (x) -> {
 
             String def_exec = x.prop().get("luffy.executor.default");
             if(TextUtils.isEmpty(def_exec) == false){

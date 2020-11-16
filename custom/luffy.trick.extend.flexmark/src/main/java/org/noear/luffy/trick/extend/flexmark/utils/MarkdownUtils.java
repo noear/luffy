@@ -7,14 +7,14 @@ import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.ParserEmulationProfile;
 import com.vladsch.flexmark.util.options.MutableDataSet;
-import org.noear.solon.XUtil;
+import org.noear.solon.Utils;
 
 import java.util.Arrays;
 
 public class MarkdownUtils {
 
     public static String markdown2Html(String markdown)  {
-        if(XUtil.isEmpty(markdown)){
+        if(Utils.isEmpty(markdown)){
             return markdown;
         }
 

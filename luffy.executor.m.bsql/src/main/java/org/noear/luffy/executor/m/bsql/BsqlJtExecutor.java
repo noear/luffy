@@ -3,8 +3,8 @@ package org.noear.luffy.executor.m.bsql;
 import org.beetl.core.Configuration;
 import org.beetl.core.GroupTemplate;
 import org.beetl.core.Template;
-import org.noear.solon.XApp;
-import org.noear.solon.core.XContext;
+import org.noear.solon.Solon;;
+import org.noear.solon.core.handler.Context;
 import org.noear.luffy.executor.IJtExecutor;
 import org.noear.luffy.model.AFileModel;
 import org.noear.luffy.utils.TextUtils;
@@ -57,7 +57,7 @@ public class BsqlJtExecutor implements IJtExecutor {
         _engine = new GroupTemplate(_loader,cfg);
 
         try {
-            XApp.global().shared().forEach((k,v)->{
+            Solon.global().shared().forEach((k,v)->{
                 sharedSet(k,v);
             });
 
@@ -65,7 +65,7 @@ public class BsqlJtExecutor implements IJtExecutor {
             ex.printStackTrace();
         }
 
-        XApp.global().onSharedAdd((k,v)->{
+        Solon.global().onSharedAdd((k,v)->{
             sharedSet(k,v);
         });
     }
@@ -123,14 +123,14 @@ public class BsqlJtExecutor implements IJtExecutor {
     }
 
     @Override
-    public Object exec(String name, AFileModel file, XContext ctx, Map<String,Object> model, boolean outString) throws Exception {
+    public Object exec(String name, AFileModel file, Context ctx, Map<String,Object> model, boolean outString) throws Exception {
         if(preLoad(name,file)){
             if(model == null){
                 model = new HashMap<>();
             }
 
             if(ctx == null){
-                ctx = XContext.current();
+                ctx = Context.current();
             }
 
             model.put("ctx", ctx);

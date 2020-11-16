@@ -1,6 +1,6 @@
 package org.noear.luffy.executor.s.ruby;
 
-import org.noear.solon.core.XContext;
+import org.noear.solon.core.handler.Context;
 import org.noear.luffy.executor.ExecutorFactory;
 import org.noear.luffy.model.AFileModel;
 
@@ -26,7 +26,7 @@ public  class JTEAPI_CLZ {
         AFileModel file = ExecutorFactory.fileGet(path2);
 
         if (file.file_id > 0) {
-            return ExecutorFactory.call(name, file, XContext.current(), model, true);
+            return ExecutorFactory.call(name, file, Context.current(), model, true);
         } else {
             return "";
         }

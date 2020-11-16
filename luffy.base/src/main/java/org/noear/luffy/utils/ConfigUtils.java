@@ -1,7 +1,7 @@
 package org.noear.luffy.utils;
 
 import org.noear.snack.ONode;
-import org.noear.solon.XUtil;
+import org.noear.solon.Utils;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.StringReader;
@@ -13,7 +13,7 @@ public class ConfigUtils {
             return new Properties();
         }
 
-        return XUtil.buildProperties(text);
+        return Utils.buildProperties(text);
     }
 
     public static ONode getNode(String text) {

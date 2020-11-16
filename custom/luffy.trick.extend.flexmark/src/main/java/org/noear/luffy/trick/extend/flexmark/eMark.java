@@ -1,18 +1,18 @@
 package org.noear.luffy.trick.extend.flexmark;
 
-import org.noear.solon.XUtil;
-import org.noear.solon.annotation.XNote;
+import org.noear.solon.Utils;
+import org.noear.solon.annotation.Note;
 import org.noear.luffy.trick.extend.flexmark.utils.MarkdownUtils;
 
 public class eMark {
-    @XNote("md格式转为html格式")
+    @Note("md格式转为html格式")
     public String mdToHtml(String markdown){
         return mdToHtml(markdown, null);
     }
 
-    @XNote("md格式转为html格式")
+    @Note("md格式转为html格式")
     public String mdToHtml(String markdown, String tabReplacer){
-        if(XUtil.isNotEmpty(tabReplacer)){
+        if(Utils.isNotEmpty(tabReplacer)){
             markdown = markdown.replace("\t",tabReplacer);
         }
 
