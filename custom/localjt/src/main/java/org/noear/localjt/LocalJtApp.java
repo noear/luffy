@@ -58,7 +58,7 @@ public class LocalJtApp{
             err.printStackTrace();
         });
 
-        NvMap argx = app.prop().argx();
+        NvMap argx = app.props().argx();
 
 
         //主页

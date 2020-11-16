@@ -3,8 +3,8 @@ package org.noear.luffy.event.http;
 import org.noear.luffy.dso.AImageHandler;
 import org.noear.luffy.model.AImageModel;
 import org.noear.luffy.dso.AImageUtil;
-import org.noear.solon.core.handler.Context;
-import org.noear.solon.core.handler.Handler;
+import org.noear.solon.core.handle.Context;
+import org.noear.solon.core.handle.Handler;
 
 /**
  * 图片路径的代理（有可能会，数据库会被恶意刷暴了）

@@ -1,7 +1,7 @@
 package org.noear.luffy.executor.s.javascript;
 
 import org.noear.solon.Solon;;
-import org.noear.solon.core.handler.Context;
+import org.noear.solon.core.handle.Context;
 import org.noear.luffy.executor.IJtExecutor;
 import org.noear.luffy.model.AFileModel;
 import org.noear.luffy.utils.ThreadData;
@@ -64,7 +64,7 @@ public class JavascriptJtExecutor implements IJtExecutor {
 
             sb.append("Date.prototype.toJSON =function(){ return this.getTime()};\n");
 
-            sb.append("var Context = Java.type('org.noear.solon.core.handler.Context;');\n");
+            sb.append("var Context = Java.type('org.noear.solon.core.handle.Context;');\n");
             sb.append("var ONode = Java.type('org.noear.snack.ONode');\n");
 
             sb.append("var Datetime = Java.type('org.noear.luffy.utils.Datetime');\n");

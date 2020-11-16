@@ -8,8 +8,8 @@ import org.noear.luffy.executor.ExecutorFactory;
 import org.noear.luffy.model.AImageModel;
 import org.noear.luffy.utils.*;
 import org.noear.solon.annotation.Note;
-import org.noear.solon.core.handler.Context;
-import org.noear.solon.core.handler.UploadedFile;
+import org.noear.solon.core.handle.Context;
+import org.noear.solon.core.handle.UploadedFile;
 
 import java.io.*;
 import java.net.URLEncoder;

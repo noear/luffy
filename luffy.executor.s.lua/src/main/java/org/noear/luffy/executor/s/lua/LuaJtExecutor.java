@@ -2,7 +2,7 @@ package org.noear.luffy.executor.s.lua;
 
 import org.noear.snack.ONode;
 import org.noear.solon.Solon;;
-import org.noear.solon.core.handler.Context;
+import org.noear.solon.core.handle.Context;
 import org.noear.luffy.executor.IJtExecutor;
 import org.noear.luffy.model.AFileModel;
 import org.noear.luffy.utils.Datetime;
@@ -68,7 +68,7 @@ public class LuaJtExecutor implements IJtExecutor {
 
             sb.append("require 'org.luaj.vm2.lib.DebugLib'\n\n");
 
-//            sb.append("Context = luajava.bindClass('org.noear.solon.core.handler.Context;')\n");
+//            sb.append("Context = luajava.bindClass('org.noear.solon.core.handle.Context;')\n");
 //            sb.append("ONode = luajava.bindClass('org.noear.snack.ONode')\n");
 
             sb.append("\n");

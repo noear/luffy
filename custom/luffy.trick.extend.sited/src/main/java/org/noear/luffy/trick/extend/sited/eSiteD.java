@@ -7,7 +7,7 @@ import org.noear.luffy.trick.extend.sited.dao.custom.DdApi;
 import org.noear.luffy.trick.extend.sited.dao.custom.DdSource;
 import org.noear.luffy.trick.extend.sited.utils.*;
 import org.noear.solon.annotation.Note;
-import org.noear.solon.core.handler.UploadedFile;
+import org.noear.solon.core.handle.UploadedFile;
 import org.noear.weed.DbContext;
 
 import org.noear.weed.cache.ICacheServiceEx;

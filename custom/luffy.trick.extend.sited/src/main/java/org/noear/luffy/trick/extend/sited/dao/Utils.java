@@ -2,7 +2,7 @@ package org.noear.luffy.trick.extend.sited.dao;
 
 import org.noear.luffy.trick.extend.sited.utils.Base64Util;
 import org.noear.luffy.trick.extend.sited.utils.TextUtils;
-import org.noear.solon.core.handler.Context;
+import org.noear.solon.core.handle.Context;
 
 import java.nio.charset.Charset;
 import java.util.regex.Matcher;

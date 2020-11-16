@@ -9,7 +9,7 @@ import java.util.Properties;
 public class XPluginImp implements Plugin {
     @Override
     public void start(Solon app) {
-        Properties prop = app.prop().getProp("luffy.lock.redis");
+        Properties prop = app.props().getProp("luffy.lock.redis");
 
         if (prop != null && prop.size() >= 5) {
             JtBridge.lockSet(new RedisJtLock(prop));

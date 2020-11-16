@@ -14,9 +14,9 @@ import org.noear.luffy.utils.TextUtils;
 import org.noear.solon.Solon;
 import org.noear.solon.Utils;
 import org.noear.solon.Solon;
-import org.noear.solon.core.handler.Handler;
-import org.noear.solon.core.handler.HandlerLink;
-import org.noear.solon.core.handler.MethodType;
+import org.noear.solon.core.handle.Handler;
+import org.noear.solon.core.handle.HandlerLink;
+import org.noear.solon.core.handle.MethodType;
 import org.noear.weed.WeedConfig;
 
 import java.net.URL;
@@ -46,7 +46,7 @@ public class AppUtil {
             throw new RuntimeException(ex);
         }
 
-        final String node2 = app.prop().argx().get("node");
+        final String node2 = app.props().argx().get("node");
         final String html2 = html.trim();
 
         app.post("/setup.jsx", (ctx) -> {
@@ -103,7 +103,7 @@ public class AppUtil {
      * 运行应用
      * */
     public static void runAsWork(Solon app) {
-        String sss = app.prop().argx().get("sss");
+        String sss = app.props().argx().get("sss");
 
         /*
          * 注入共享对传（会传导到javascript 和 freemarker 引擎）

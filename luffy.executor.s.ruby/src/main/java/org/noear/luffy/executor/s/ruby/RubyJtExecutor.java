@@ -2,7 +2,7 @@ package org.noear.luffy.executor.s.ruby;
 
 import org.noear.snack.ONode;
 import org.noear.solon.Solon;;
-import org.noear.solon.core.handler.Context;
+import org.noear.solon.core.handle.Context;
 import org.noear.luffy.dso.JtUtil;
 import org.noear.luffy.executor.IJtExecutor;
 import org.noear.luffy.model.AFileModel;
@@ -60,7 +60,7 @@ public class RubyJtExecutor implements IJtExecutor {
             StringBuilder sb = new StringBuilder();
 
             sb.append("require 'java'\n\n");
-            sb.append("java_import org.noear.solon.core.handler.Context;\n");
+            sb.append("java_import org.noear.solon.core.handle.Context;\n");
             sb.append("java_import org.noear.snack.ONode\n");
 
             sb.append("java_import org.noear.luffy.utils.Datetime\n");

@@ -5,8 +5,8 @@ import org.noear.luffy.executor.ExecutorFactory;
 import org.noear.luffy.model.AFileModel;
 import org.noear.luffy.utils.ExceptionUtils;
 import org.noear.luffy.utils.TextUtils;
-import org.noear.solon.core.handler.Context;
-import org.noear.solon.core.handler.Handler;
+import org.noear.solon.core.handle.Context;
+import org.noear.solon.core.handle.Handler;
 
 /**
  * 应用文件的代理，静态文件或动态文件（数据库安全）
