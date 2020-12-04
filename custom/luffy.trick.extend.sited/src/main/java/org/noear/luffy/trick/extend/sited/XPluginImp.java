@@ -20,6 +20,6 @@ public class XPluginImp implements Plugin {
         });
 
         app.sharedAdd("eSiteD", new eSiteD());
-        app.beanScan(ApiController.class);
+        app.beanMake(ApiController.class);
     }
 }
