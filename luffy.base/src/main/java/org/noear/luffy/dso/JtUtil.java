@@ -2,6 +2,7 @@ package org.noear.luffy.dso;
 
 import org.noear.snack.ONode;
 import org.noear.solon.Solon;
+import org.noear.solon.Utils;
 import org.noear.solon.annotation.Note;
 import org.noear.solon.core.handle.Context;
 import org.noear.luffy.executor.ExecutorFactory;
@@ -80,9 +81,7 @@ public class JtUtil {
                         //
                         // properties
                         //
-                        StringReader cfg_reader = new StringReader(cfg);
-                        Properties prop = new Properties();
-                        RunUtil.runActEx(() -> prop.load(cfg_reader));
+                        Properties prop = Utils.buildProperties(cfg);
                         prop.forEach((k, v) -> {
                             _map.put(k.toString(), v.toString());
                         });
