@@ -11,6 +11,7 @@ import org.noear.luffy.utils.*;
 import org.noear.solon.core.handle.UploadedFile;
 import org.noear.weed.DbContext;
 
+import javax.naming.ldap.LdapContext;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.URI;
@@ -26,6 +27,36 @@ public class JtUtil {
     public static final JtUtil g = new JtUtil();
 
     private final Map<String,DbContext> _db_cache = new HashMap<>();
+
+    @Note("获取Ldap用户信息")
+    public LdapUser ldap(String cfg, String uid, String userPassword) throws Exception {
+        if (TextUtils.isEmpty(cfg)) {
+            return null;
+        }
+
+        if (cfg.startsWith("@")) {
+            //转为真实的配置
+            cfg = cfgGet(cfg.substring(1));
+        }
+
+        Properties prop = Utils.buildProperties(cfg);
+        String url = prop.getProperty("url");
+        String baseDn = prop.getProperty("baseDn");
+        String username = prop.getProperty("username");
+        String paasword = prop.getProperty("paasword");
+
+        LdapContext ldapCtx = null;
+
+        try {
+            ldapCtx = LdapUtils.ldapConnect(url, username, paasword);
+
+            return LdapUtils.ldapAuth(ldapCtx, baseDn, uid, userPassword);
+        } finally {
+            if (ldapCtx != null) {
+                ldapCtx.close();
+            }
+        }
+    }
 
     /**
      * 生成GUID

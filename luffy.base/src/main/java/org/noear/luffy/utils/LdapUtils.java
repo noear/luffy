@@ -4,101 +4,102 @@ import javax.naming.Context;
 import javax.naming.NamingEnumeration;
 import javax.naming.NamingException;
 import javax.naming.directory.*;
-import java.util.Hashtable;
-import java.util.Map;
+import javax.naming.ldap.Control;
+import javax.naming.ldap.InitialLdapContext;
+import javax.naming.ldap.LdapContext;
+import java.security.MessageDigest;
+import java.util.*;
 
 public class LdapUtils {
-    private Map<String, Object> auth(String password, String userName) throws NamingException {
-        String bindLdapUser = "root"; // 连接LDAP服务器的管理员账号密码
-        String bindLdapPwd = "123456";
-        String ldapBaseDN = "ou=People,o=test"; // 这个根据自己需要更改
-        String attrName = "password";   // 获取DN下面的属性名
-        String port = "389"; // ldap 服务器占用的端口号
-        String ldapIp = "192.168.120.222"; // ldap 服务器的IP地址
-
-        String url = "ldap://" + ldapIp + ":" + port + '/' + ldapBaseDN;
-        System.console().printf("[auth ldap] ldap url : " + url);
-
-        Hashtable<String, Object> env = new Hashtable<String, Object>();
-        env.put(Context.INITIAL_CONTEXT_FACTORY, "com.sun.jndi.ldap.LdapCtxFactory");
-        env.put(Context.SECURITY_AUTHENTICATION, "simple");
-        env.put(Context.SECURITY_CREDENTIALS, bindLdapPwd);
-        env.put(Context.SECURITY_PRINCIPAL, bindLdapUser);
+    /**
+     * 获取ldap链接对象
+     *
+     * @param url
+     * @param bindLdapUser
+     * @param bindLdapPwd
+     * @return LdapContext
+     */
+    public static LdapContext ldapConnect(String url, String bindLdapUser, String bindLdapPwd) throws NamingException {
+        String factory = "com.sun.jndi.ldap.LdapCtxFactory";
+        String simple = "simple";
+        Hashtable<String, String> env = new Hashtable<String, String>();
+        env.put(Context.INITIAL_CONTEXT_FACTORY, factory);
         env.put(Context.PROVIDER_URL, url);
-        DirContext ctx = null;
+        env.put(Context.SECURITY_AUTHENTICATION, simple);
+        env.put(Context.SECURITY_PRINCIPAL, bindLdapUser);
+        env.put(Context.SECURITY_CREDENTIALS, bindLdapPwd);
+        Control[] connCtls = null;
 
-        try {
-            // Ldap link
-            ctx = new InitialDirContext(env);
-            System.console().printf("[auth ldap linked] InitialDirContext success");
-
-            // Ldap search
-            SearchControls searchControls = new SearchControls();
-            searchControls.setSearchScope(SearchControls.SUBTREE_SCOPE);
-            String filter = "sid" + userName;// 加上filter之后DN就变成sid={userName},ou=People,o=test
-            NamingEnumeration<?> nameEnu = ctx.search("", filter, searchControls);
-            System.console().printf("[step1 ladp linked] begin to search, filter :" + filter);
-
-            if (nameEnu == null) {
-                // User Not Found
-                System.console().printf("[step error] DirContext.search() return null. filter : " + filter);
-                return createResult(104, 2001, "User Not Found");
-            } else {
-                System.console().printf("[step2 ldap] Begin to print elements");
-                String ldapUserPwd = null;
-
-                while (nameEnu.hasMore()) {
-                    System.console().printf("[step3 ldap] nameEnu element is not null");
-                    Object obj = nameEnu.nextElement();
-                    System.console().printf(obj.toString());
-                    if (obj instanceof SearchResult) {
-                        System.console().printf("[step4 ldap] obj instanceof SearchResult");
-                        SearchResult result = (SearchResult) obj;
-                        Attributes attrs = result.getAttributes();
-                        if (attrs == null) {
-                            // Password Error
-                            System.console().printf("[step error] SearchResult.getAttrbutes() is null. ");
-                            return createResult(102, 4003, "Password Error");
-                        } else {
-                            System.console().printf("[step5 ldap] begin to get attribute : " + attrName);   // attrName就是属性名
-                            Attribute attr = attrs.get(attrName);
-                            if (attr != null) {
-                                System.console().printf("[step6 ldap] attribute is not null.");
-                                ldapUserPwd = (String) attr.get();
-                                System.console().printf("[step7 print ldapPwd] the ldap password is : *********");
-                                System.console().printf("[step7 print ldapPwd] the request password is : *********");
-                                if (password.equalsIgnoreCase(ldapUserPwd)) {
-                                    // OK
-                                    System.console().printf("[step8 ldap] equals password , success .");
-                                    return createResult(0, 0, "OK");
-                                } else {
-                                    // Password Error
-                                    System.console().printf("[step9 ldap] equals password , failure . password is not same .");
-                                    return createResult(102, 4003, "Password Error");
-                                }
-                            }
-                        }
-                    }
-                }
-                System.console().printf("[step error] while end . ldapUserPwd is null , can't find password from ldap .");
-                return createResult(102, 4003, "Password Error");
-            }
-        } catch (NamingException e) {
-            e.printStackTrace();
-            System.console().printf("[ldap link failed] message :" + e.getMessage());
-            throw e;
-        } finally {
-            if (ctx != null) {
-                ctx.close();
-            }
-        }
+        return new InitialLdapContext(env, connCtls);
     }
 
-    private Map<String, Object> createResult(int ret, int code, String msg) {
-        Map<String, Object> result = new Hashtable<>(); //WmsvrFactory.createParamsObj();
-        result.put("ret", ret);
-        result.put("code", code);
-        result.put("msg", msg);
-        return result;
+    /**
+     * 获取用户信息
+     *
+     * @param ctx
+     * @param baseDn
+     * @return LdapUser
+     */
+    public static LdapUser ldapAuth(LdapContext ctx, String baseDn, String uid, String userPassword) throws NamingException {
+
+        if (ctx != null) {
+            //过滤条件
+            String filter = "(&(objectClass=inetOrgPerson)(uid=" + uid + "))";
+            String[] attrPersonArray = {"uid", "userPassword", "displayName", "cn", "sn", "mail", "description"};
+            SearchControls searchControls = new SearchControls();//搜索控件
+            searchControls.setSearchScope(2);//搜索范围
+            searchControls.setReturningAttributes(attrPersonArray);
+            //1.要搜索的上下文或对象的名称；2.过滤条件，可为null，默认搜索所有信息；3.搜索控件，可为null，使用默认的搜索控件
+            NamingEnumeration<SearchResult> answer = ctx.search(baseDn, filter.toString(), searchControls);
+            while (answer.hasMore()) {
+                SearchResult result = (SearchResult) answer.next();
+                NamingEnumeration<? extends Attribute> attrs = result.getAttributes().getAll();
+                LdapUser lu = new LdapUser();
+                while (attrs.hasMore()) {
+                    Attribute attr = (Attribute) attrs.next();
+                    if ("userPassword".equals(attr.getID())) {
+                        Object value = attr.get();
+                        lu.setUserPassword(new String((byte[]) value));
+                    } else if ("uid".equals(attr.getID())) {
+                        lu.setUid(attr.get().toString());
+                    } else if ("displayName".equals(attr.getID())) {
+                        lu.setDisplayName(attr.get().toString());
+                    } else if ("cn".equals(attr.getID())) {
+                        lu.setCn(attr.get().toString());
+                    } else if ("sn".equals(attr.getID())) {
+                        lu.setSn(attr.get().toString());
+                    } else if ("mail".equals(attr.getID())) {
+                        lu.setMail(attr.get().toString());
+                    } else if ("description".equals(attr.getID())) {
+                        lu.setDescription(attr.get().toString());
+                    }
+                }
+                if (lu.getUid() != null && userPassword.equals(lu.getUserPassword())) {
+                    return lu;
+                }
+
+            }
+        }
+
+        return null;
+    }
+
+    public static String buildLdapPassword(String orgPwd) {
+        //TEST LDAP密码MD5加密，先MD5，再BASE64
+        byte[] byteArray = null;
+
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            md.reset();
+            md.update(orgPwd.getBytes("UTF-8"));
+
+            byteArray = md.digest();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        //{MD5}ICy5YqxZB1uWSwcVLSNLcA==
+        return "{MD5}" + (new sun.misc.BASE64Encoder()).encode(byteArray);
     }
 }
