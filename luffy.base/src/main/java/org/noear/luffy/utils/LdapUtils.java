@@ -40,11 +40,11 @@ public class LdapUtils {
      * @param baseDn
      * @return LdapUser
      */
-    public static LdapUser ldapAuth(LdapContext ctx, String baseDn, String uid, String userPassword) throws NamingException {
+    public static LdapUser ldapAuth(LdapContext ctx, String baseDn, String userFilter, String userPassword) throws NamingException {
 
         if (ctx != null) {
             //过滤条件
-            String filter = "(&(objectClass=inetOrgPerson)(uid=" + uid + "))";
+            String filter = "(&(objectClass=inetOrgPerson)("+userFilter+"))";
             String[] attrPersonArray = {"uid", "userPassword", "displayName", "cn", "sn", "mail", "description"};
             SearchControls searchControls = new SearchControls();//搜索控件
             searchControls.setSearchScope(2);//搜索范围
