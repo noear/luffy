@@ -1,6 +1,7 @@
 package features;
 
 import org.junit.Test;
+import org.noear.luffy.dso.JtUtil;
 import org.noear.luffy.utils.LdapUser;
 import org.noear.luffy.utils.LdapUtils;
 import org.noear.snack.ONode;
@@ -20,30 +21,7 @@ public class LdapUtilsTest {
 
         LdapContext ctx = LdapUtils.ldapConnect(url, root, pwd);//集团 ldap认证
 
-        String userPassword = LdapUtils.buildLdapPassword("1234");
-        LdapUser user = LdapUtils.ldapAuth(ctx, basedn, "uid=noear", userPassword);//获取集团ldap中用户信息
-
-        if(user == null){
-            System.out.println("验证失败");
-        }else{
-            System.out.println(ONode.stringify(user));
-        }
-
-        if (ctx != null)
-            ctx.close();
-    }
-
-    @Test
-    public void test2() throws Exception {
-        String url = "ldap://8.136.188.140:389";
-        String basedn = "DC=company,DC=com";  // basedn
-        String root = "cn=admin,dc=company,dc=com";  // 用户
-        String pwd = "sKSaupjEChi72YGb";  // pwd
-
-        LdapContext ctx = LdapUtils.ldapConnect(url, root, pwd);//集团 ldap认证
-
-        String userPassword = LdapUtils.buildLdapPassword("rd81310.");
-        LdapUser user = LdapUtils.ldapAuth(ctx, basedn, "cn=xieyuejia", userPassword);//获取集团ldap中用户信息
+        LdapUser user = LdapUtils.ldapAuth(ctx, basedn, "uid=noear", "1234");//获取集团ldap中用户信息
 
         if(user == null){
             System.out.println("验证失败");

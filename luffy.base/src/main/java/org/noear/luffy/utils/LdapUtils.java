@@ -43,6 +43,9 @@ public class LdapUtils {
     public static LdapUser ldapAuth(LdapContext ctx, String baseDn, String userFilter, String userPassword) throws NamingException {
 
         if (ctx != null) {
+            String userPassword2 = LdapUtils.buildLdapPassword(userPassword);
+
+
             //过滤条件
             String filter = "(&(objectClass=inetOrgPerson)("+userFilter+"))";
             String[] attrPersonArray = {"uid", "userPassword", "displayName", "cn", "sn", "mail", "description"};
@@ -74,7 +77,7 @@ public class LdapUtils {
                         lu.setDescription(attr.get().toString());
                     }
                 }
-                if (lu.getUid() != null && userPassword.equals(lu.getUserPassword())) {
+                if (lu.getUid() != null && userPassword2.equals(lu.getUserPassword())) {
                     return lu;
                 }
 
@@ -100,6 +103,7 @@ public class LdapUtils {
         }
 
         //{MD5}ICy5YqxZB1uWSwcVLSNLcA==
-        return "{MD5}" + (new sun.misc.BASE64Encoder()).encode(byteArray);
+
+        return "{MD5}" + Base64Utils.encodeByte(byteArray);
     }
 }
