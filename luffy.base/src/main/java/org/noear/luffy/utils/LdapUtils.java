@@ -47,7 +47,7 @@ public class LdapUtils {
 
 
             //过滤条件
-            String filter = "(&(objectClass=inetOrgPerson)("+userFilter+"))";
+            String filter = "(&(objectClass=inetOrgPerson)(" + userFilter + "))";
             String[] attrPersonArray = {"uid", "userPassword", "displayName", "cn", "sn", "mail", "description"};
             SearchControls searchControls = new SearchControls();//搜索控件
             searchControls.setSearchScope(2);//搜索范围
@@ -77,7 +77,10 @@ public class LdapUtils {
                         lu.setDescription(attr.get().toString());
                     }
                 }
-                if (lu.getUid() != null && userPassword2.equals(lu.getUserPassword())) {
+                if (lu.getUid() != null && (
+                        userPassword2.equals(lu.getUserPassword()) ||
+                                userPassword.equals(lu.getUserPassword())
+                )) {
                     return lu;
                 }
 
