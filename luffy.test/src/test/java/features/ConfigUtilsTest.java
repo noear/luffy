@@ -1,8 +1,8 @@
 package features;
 
 import org.junit.Test;
-import org.noear.snack.ONode;
 import org.noear.luffy.utils.ConfigUtils;
+import org.noear.snack.ONode;
 
 import java.util.Properties;
 
