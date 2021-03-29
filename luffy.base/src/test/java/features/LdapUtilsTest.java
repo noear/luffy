@@ -1,7 +1,6 @@
 package features;
 
 import org.junit.Test;
-import org.noear.luffy.dso.JtUtil;
 import org.noear.luffy.utils.LdapUser;
 import org.noear.luffy.utils.LdapUtils;
 import org.noear.snack.ONode;
