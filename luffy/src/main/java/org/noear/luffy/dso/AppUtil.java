@@ -14,9 +14,8 @@ import org.noear.luffy.utils.TextUtils;
 import org.noear.solon.Solon;
 import org.noear.solon.SolonApp;
 import org.noear.solon.Utils;
-import org.noear.solon.Solon;
 import org.noear.solon.core.handle.Handler;
-import org.noear.solon.core.handle.HandlerLink;
+import org.noear.solon.core.handle.HandlerPipeline;
 import org.noear.solon.core.handle.MethodType;
 import org.noear.weed.WeedConfig;
 
@@ -148,10 +147,9 @@ public class AppUtil {
         app.http("**", AppHandler.g());
 
         //后缀代理（置于所有代理的前面）
-        Handler h1 = app.handlerGet();
-        HandlerLink hx = new HandlerLink();
-        hx.node = SufHandler.g();
-        hx.nextNode = h1;
+        HandlerPipeline hx = new HandlerPipeline()
+                .next(SufHandler.g())
+                .next(app.handlerGet());
 
         app.handlerSet(hx);
     }
