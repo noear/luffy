@@ -19,6 +19,7 @@ public class AFileModel {
 
     /**  */
     public int file_id;
+    public int file_type;
 
     public String tag;
     public String label;
@@ -49,11 +50,14 @@ public class AFileModel {
     public int plan_max;
     public int plan_count;
 
+    public String use_whitelist;
+
     /** 创建时间 */
     public Date create_fulltime;
     /** 更新时间 */
     public Date update_fulltime;
 
     public boolean _is_day_task;
+
 
 }
