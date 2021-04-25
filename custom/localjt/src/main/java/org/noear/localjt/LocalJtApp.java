@@ -43,7 +43,7 @@ public class LocalJtApp{
             //添加插件
             plugin_add = argx.get("add");
             PluginUtil.add(plugin_add);
-            //添加插件
+            //更新插件
             PluginUtil.udp(argx.get("upd"));
             //移徐插件
             PluginUtil.rem(argx.get("rem"));

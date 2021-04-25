@@ -7,6 +7,7 @@ import org.noear.luffy.Luffy;
 import org.noear.luffy.dso.JtUtilEx;
 import org.noear.luffy.dso.PluginUtil;
 import org.noear.luffy.utils.TextUtils;
+import org.noear.solon.core.NvMap;
 
 public class CloudJtApp {
     public static void main(String[] args) {
@@ -21,14 +22,19 @@ public class CloudJtApp {
 //        });
 
         Luffy.start(CloudJtApp.class, args, () -> {
-            String add = Solon.cfg().argx().get("add");
-            String home = Solon.cfg().argx().get("home");
-            String title = Solon.cfg().argx().get("title");
+            NvMap argx = Solon.cfg().argx();
 
-            String init = Solon.cfg().argx().get("init");
+            String home = argx.get("home");
+            String title = argx.get("title");
+
+            String init = argx.get("init");
 
             //::0.安装插件
-            PluginUtil.add(add);
+            PluginUtil.add(argx.get("add"));
+            //更新插件
+            PluginUtil.udp(argx.get("upd"));
+            //移徐插件
+            PluginUtil.rem(argx.get("rem"));
 
             //::1.初始化调用
             PluginUtil.initCall(init);
