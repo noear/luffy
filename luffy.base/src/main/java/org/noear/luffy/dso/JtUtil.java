@@ -26,7 +26,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class JtUtil {
     public static final JtUtil g = new JtUtil();
 
-    private final Map<String,DbContext> _db_cache = new HashMap<>();
+    private final Map<String, DbContext> _db_cache = new HashMap<>();
 
     @Note("获取Ldap用户信息")
     public LdapUser ldap(String cfg, String userFilter, String userPassword) throws Exception {
@@ -76,8 +76,8 @@ public class JtUtil {
      * 生成数据库上下文
      */
     @Note("生成数据库上下文")
-    public DbContext db(String cfg) throws Exception{
-        return db(cfg,null);
+    public DbContext db(String cfg) throws Exception {
+        return db(cfg, null);
     }
 
     @Note("生成数据库上下文")
@@ -132,8 +132,9 @@ public class JtUtil {
 
     /**
      * 空的只读集合
-     * */
+     */
     private final Map<String, Object> _empMap = Collections.unmodifiableMap(new HashMap<>());
+
     @Note("空的Map<String,Object>集合")
     public Map<String, Object> empMap() {
         return _empMap;
@@ -141,12 +142,14 @@ public class JtUtil {
 
 
     private List<Object> _empList = Collections.unmodifiableList(new ArrayList<>());
+
     @Note("空的List<Object>集合")
     public List<Object> empList() {
         return _empList;
     }
 
     private Set<Object> _empSet = Collections.unmodifiableSet(new HashSet<>());
+
     @Note("创建一个Set<Object>集合")
     public Set<Object> empSet() {
         return _empSet;
@@ -155,7 +158,7 @@ public class JtUtil {
 
     /**
      * 新建集合
-     * */
+     */
     @Note("创建一个Map<String,Object>集合")
     public Map<String, Object> newMap() {
         return new HashMap<>();
@@ -178,17 +181,17 @@ public class JtUtil {
     }
 
     @Note("创建一个ByteArrayOutputStream空对象")
-    public OutputStream newOutputStream(){
+    public OutputStream newOutputStream() {
         return new ByteArrayOutputStream();
     }
 
     @Note("创建一个XFile空对象")
-    public UploadedFile newXfile(){
+    public UploadedFile newXfile() {
         return new UploadedFile();
     }
 
     @Note("创建一个URI")
-    public URI newUri(String str){
+    public URI newUri(String str) {
         return URI.create(str);
     }
 
@@ -211,17 +214,17 @@ public class JtUtil {
 
 
     @Note("编码url")
-    public String urlEncode(String str) throws Exception{
-        if(str == null){
+    public String urlEncode(String str) throws Exception {
+        if (str == null) {
             return str;
         }
 
-       return URLEncoder.encode(str, "utf-8");
+        return URLEncoder.encode(str, "utf-8");
     }
 
     @Note("解码url")
-    public String urlDecode(String str) throws Exception{
-        if(str == null){
+    public String urlDecode(String str) throws Exception {
+        if (str == null) {
             return str;
         }
 
@@ -229,22 +232,21 @@ public class JtUtil {
     }
 
 
-
     @Note("获取执行器清单")
-    public Set<String> executorList(){
+    public Set<String> executorList() {
         return ExecutorFactory.list();
     }
 
     @Note("添加共享对象（key, 以 _ 开头）")
-    public boolean sharedAdd(String key, Object obj){
-        if(TextUtils.isEmpty(key)){
+    public boolean sharedAdd(String key, Object obj) {
+        if (TextUtils.isEmpty(key)) {
             return false;
         }
 
-        if(key.startsWith("_")) {
+        if (key.startsWith("_")) {
             Solon.global().sharedAdd(key, obj);
             return true;
-        }else{
+        } else {
             return false;
         }
     }
@@ -259,13 +261,11 @@ public class JtUtil {
     }
 
 
-
-
-
     @Note("生成md5码")
     public String md5(String str) {
         return EncryptUtils.md5(str, "UTF-8");
     }
+
     @Note("生成md5码")
     public String md5(String str, String charset) {
         return EncryptUtils.md5(str, charset);
@@ -276,6 +276,7 @@ public class JtUtil {
     public String sha1(String str) {
         return EncryptUtils.sha1(str, "UTF-8");//UTF-16LE, utf-8
     }
+
     @Note("生成sha1码")
     public String sha1(String str, String charset) {
         return EncryptUtils.sha1(str, charset);
@@ -286,6 +287,7 @@ public class JtUtil {
     public String sha256(String str) {
         return EncryptUtils.sha256(str, "UTF-8");//UTF-16LE, utf-8
     }
+
     @Note("生成sha256码")
     public String sha256(String str, String charset) {
         return EncryptUtils.sha256(str, charset);
@@ -293,8 +295,8 @@ public class JtUtil {
 
 
     @Note("HMAC 加密")
-    public byte[] hmac(String str, String key, String algorithm){
-        return EncryptUtils.hmac(str,key,algorithm, null);
+    public byte[] hmac(String str, String key, String algorithm) {
+        return EncryptUtils.hmac(str, key, algorithm, null);
     }
 
     @Note("HMAC 加密")
@@ -313,20 +315,22 @@ public class JtUtil {
     }
 
     @Note("AES 加密")
-    public String aesEncrypt(String str, String password){
+    public String aesEncrypt(String str, String password) {
         return EncryptUtils.aesEncrypt(str, password);
     }
+
     @Note("AES 加密")
     public String aesEncrypt(String str, String password, String algorithm, String offset, String charset) {
         return EncryptUtils.aesEncrypt(str, password, algorithm, offset, charset);
     }
 
     @Note("AES 解密")
-    public String aesDecrypt(String str, String password){
+    public String aesDecrypt(String str, String password) {
         return EncryptUtils.aesDecrypt(str, password);
     }
+
     @Note("AES 解密")
-    public String aesDecrypt(String str, String password, String algorithm, String offset, String charset){
+    public String aesDecrypt(String str, String password, String algorithm, String offset, String charset) {
         return EncryptUtils.aesDecrypt(str, password, algorithm, offset, charset);
     }
 
@@ -365,29 +369,28 @@ public class JtUtil {
     }
 
     @Note("OutStream转为InputStream")
-    public InputStream streamOutToIn(OutputStream outStream) throws Exception
-    {
+    public InputStream streamOutToIn(OutputStream outStream) throws Exception {
         return IOUtils.outToIn(outStream);
     }
 
     @Note("String转为InputStream")
-    public InputStream stringToStream(String str) throws Exception{
+    public InputStream stringToStream(String str) throws Exception {
         return new ByteArrayInputStream(str.getBytes("UTF-8"));
     }
 
     @Note("Object转为ONode")
     public ONode oNode(Object obj) throws Exception {
-        if(obj == null){
+        if (obj == null) {
             return new ONode();
-        }else {
-            if(obj instanceof String){
+        } else {
+            if (obj instanceof String) {
                 String tmp = ((String) obj).trim();
 
-                if(tmp.length()==0){
+                if (tmp.length() == 0) {
                     return new ONode();
                 }
 
-                if(tmp.startsWith("{")){
+                if (tmp.startsWith("{")) {
                     return ONode.load(tmp);
                 }
             }
@@ -435,21 +438,21 @@ public class JtUtil {
     }
 
 
-
     @Note("日志")
-    public boolean log(Map<String,Object> data) throws Exception{
+    public boolean log(Map<String, Object> data) throws Exception {
         return LogUtil.log(data);
     }
 
     @Note("日志")
-    public boolean log(String content) throws Exception{
-        return LogUtil.log(null,LogLevel.INFO,content);
+    public boolean log(String content) throws Exception {
+        return LogUtil.log(null, LogLevel.INFO, content);
     }
 
     private String _localAddr;
+
     @Note("服务地址")
-    public String localAddr(){
-        if(_localAddr == null) {
+    public String localAddr() {
+        if (_localAddr == null) {
             _localAddr = LocalUtil.getLocalAddress(Solon.global().port());
         }
 
@@ -457,7 +460,7 @@ public class JtUtil {
     }
 
     @Note("运行时状态")
-    public RuntimeStatus runtimeStatus(){
+    public RuntimeStatus runtimeStatus() {
         RuntimeStatus rs = RuntimeUtils.getStatus();
         rs.address = localAddr();
 
@@ -465,19 +468,19 @@ public class JtUtil {
     }
 
     @Note("设置上下文状态（用于在模板中停止请求）")
-    public int statusSet(int status) throws Exception{
+    public int statusSet(int status) throws Exception {
         Context.current().status(status);
-        throw new RuntimeException(status+" status");
+        throw new RuntimeException(status + " status");
     }
 
     @Note("将对象转为string")
-    public String stringOf(Object obj){
-        if(obj == null){
+    public String stringOf(Object obj) {
+        if (obj == null) {
             return null;
         }
 
-        if(obj instanceof Throwable){
-            return ExceptionUtils.getString((Throwable)obj);
+        if (obj instanceof Throwable) {
+            return ExceptionUtils.getString((Throwable) obj);
         }
 
         return obj.toString();
@@ -492,11 +495,11 @@ public class JtUtil {
     }
 
     @Note("配置获取")
-    public String cfgGet(String name,String def) throws Exception {
+    public String cfgGet(String name, String def) throws Exception {
         String tmp = JtBridge.cfgGet(name);
-        if(tmp == null){
+        if (tmp == null) {
             return def;
-        }else{
+        } else {
             return tmp;
         }
     }
@@ -508,7 +511,7 @@ public class JtUtil {
     }
 
     @Note("转换为配置对象")
-    public AConfigM cfgOf(String value){
+    public AConfigM cfgOf(String value) {
         return new AConfigM(value);
     }
 
@@ -521,25 +524,26 @@ public class JtUtil {
     }
 
     @Note("线程睡眠")
-    public void sleep(long millis) throws InterruptedException{
+    public void sleep(long millis) throws InterruptedException {
         Thread.sleep(millis);
     }
 
 
     @Note("嘿嘿")
-    public String heihei(String text, String... mobileS){
+    public String heihei(String text, String... mobileS) {
         List<String> ary = Arrays.asList(mobileS);
         return HeiheiApi.push(ary, text);
     }
 
 
     protected Map<String, Object> _ridS = new ConcurrentHashMap<>();
+
     @Note("添加参考接口字典")
     public void ridAdd(String key, Object obj) {
         _ridS.putIfAbsent(key, obj);
     }
 
-    protected Map<String, Object> ridGet(){
+    protected Map<String, Object> ridGet() {
         return _ridS;
     }
 
@@ -565,7 +569,7 @@ public class JtUtil {
         tmp.put("new Timespan(date)", Timespan.class);
 
         Map<String, Object> tmp2 = ridGet();
-        if(tmp2 != null){
+        if (tmp2 != null) {
             tmp.putAll(tmp2);
         }
 
@@ -577,5 +581,15 @@ public class JtUtil {
         Collections.sort(list, Comparator.comparing(m -> m.get("name").toString().toLowerCase()));
 
         return list;
+    }
+
+    @Note("GZIP压缩")
+    public String gzip(String str) throws IOException {
+        return GzipUtils.gZip(str);
+    }
+
+    @Note("GZIP解缩")
+    public String unGzip(String str) throws IOException {
+        return GzipUtils.unGZip(str);
     }
 }
