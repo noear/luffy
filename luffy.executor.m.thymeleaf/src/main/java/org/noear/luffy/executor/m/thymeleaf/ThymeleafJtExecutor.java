@@ -64,6 +64,14 @@ public class ThymeleafJtExecutor implements IJtExecutor {
         }
     }
 
+    public void tagReg(String name,Object obj){
+        try {
+            _sharedVariable.put(name, obj);
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+    }
+
     public boolean put(String name, AFileModel file) {
         if (TextUtils.isEmpty(file.content)) {
             return false;

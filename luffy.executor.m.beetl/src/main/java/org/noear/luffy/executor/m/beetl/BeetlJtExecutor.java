@@ -4,6 +4,7 @@ import org.beetl.core.Configuration;
 import org.beetl.core.GroupTemplate;
 import org.beetl.core.Template;
 import org.noear.solon.Solon;
+import org.noear.solon.core.event.EventBus;
 import org.noear.solon.core.handle.Context;
 import org.noear.luffy.executor.IJtExecutor;
 import org.noear.luffy.model.AFileModel;
@@ -69,6 +70,14 @@ public class BeetlJtExecutor implements IJtExecutor {
             _engine.getSharedVars().put(name, obj);
         }catch (Exception ex){
             ex.printStackTrace();
+        }
+    }
+
+    public void tagReg(String name, Class<?> tag) {
+        try {
+            _engine.registerTag(name, tag);
+        } catch (Exception ex) {
+            EventBus.push(ex);
         }
     }
 

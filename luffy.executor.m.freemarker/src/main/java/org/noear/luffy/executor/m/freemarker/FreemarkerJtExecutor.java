@@ -5,6 +5,7 @@ import freemarker.cache.StringTemplateLoaderEx;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import org.noear.solon.Solon;
+import org.noear.solon.core.event.EventBus;
 import org.noear.solon.core.handle.Context;
 import org.noear.luffy.executor.IJtExecutor;
 import org.noear.luffy.model.AFileModel;
@@ -63,6 +64,13 @@ public class FreemarkerJtExecutor implements IJtExecutor {
         }
     }
 
+    public void tagReg(String name,Object obj){
+        try {
+            _engine.setSharedVariable(name, obj);
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+    }
 
 
 

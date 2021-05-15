@@ -77,6 +77,11 @@ public class VelocityJtExecutor implements IJtExecutor {
     }
 
 
+    public void tagReg(Object obj) {
+        _engine.loadDirective(obj.getClass().getName());
+    }
+
+
     public boolean put(String name, AFileModel file){
         if(TextUtils.isEmpty(file.content)){
             return false;

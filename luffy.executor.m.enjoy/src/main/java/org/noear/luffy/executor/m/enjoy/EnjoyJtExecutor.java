@@ -1,9 +1,11 @@
 package org.noear.luffy.executor.m.enjoy;
 
+import com.jfinal.template.Directive;
 import com.jfinal.template.Engine;
 import com.jfinal.template.Template;
 import com.jfinal.template.source.ISource;
 import org.noear.solon.Solon;
+import org.noear.solon.core.event.EventBus;
 import org.noear.solon.core.handle.Context;
 import org.noear.luffy.executor.IJtExecutor;
 import org.noear.luffy.model.AFileModel;
@@ -56,6 +58,14 @@ public class EnjoyJtExecutor implements IJtExecutor {
             _engine.addSharedObject(name, obj);
         } catch (Exception ex) {
             ex.printStackTrace();
+        }
+    }
+
+    public void tagReg(String name, Class<? extends Directive> clz) {
+        try {
+            _engine.addDirective(name, clz);
+        } catch (Exception ex) {
+            EventBus.push(ex);
         }
     }
 
