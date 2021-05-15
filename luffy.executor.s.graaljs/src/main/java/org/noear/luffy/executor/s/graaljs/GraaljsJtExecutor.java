@@ -51,6 +51,8 @@ public class GraaljsJtExecutor implements IJtExecutor {
         //添加配置，支持本地java对接
         _bindings = _eng.getBindings(ScriptContext.ENGINE_SCOPE);
         _bindings.put("polyglot.js.allowAllAccess",true);
+        //_bindings.put("js.nashorn-compat",true);
+
         //_bindings.put("polyglot.js.allowHostAccess", true);
         //_bindings.put("polyglot.js.allowHostClassLookup", (Predicate<String>) s -> true);
 
