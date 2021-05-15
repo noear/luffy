@@ -59,6 +59,13 @@ public class JavascriptJtExecutor implements IJtExecutor {
         sharedSet("__JTEAPI", new __JTEAPI_CLZ());
 
         try {
+            _eng.eval("load('nashorn:mozilla_compat.js');");
+
+            //
+            // https://blog.csdn.net/dszgf5717/article/details/108546287
+            // 特性 importPackage('java.awt'); new Point();
+            //
+
             StringBuilder sb = new StringBuilder();
 
             sb.append("var __global={lib:{},lib_new:{}};\n");

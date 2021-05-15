@@ -71,10 +71,15 @@ public class GraaljsJtExecutor implements IJtExecutor {
 
         try {
             /**
-             * 兼容nashorn模式
+             * 兼容nashorn 扩展能力
              * https://stackoverflow.com/questions/57456476/equivalent-of-nashorns-importpackage-in-graal-js-script-engine
              * */
             _eng.eval("load('nashorn:mozilla_compat.js');");
+
+            //
+            // https://blog.csdn.net/dszgf5717/article/details/108546287
+            // 特性 importPackage('java.awt'); new Point();
+            //
 
 
             StringBuilder sb = new StringBuilder();
