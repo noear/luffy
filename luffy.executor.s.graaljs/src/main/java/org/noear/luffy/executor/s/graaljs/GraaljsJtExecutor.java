@@ -51,7 +51,7 @@ public class GraaljsJtExecutor implements IJtExecutor {
         //添加配置，支持本地java对接
         _bindings = _eng.getBindings(ScriptContext.ENGINE_SCOPE);
         _bindings.put("polyglot.js.allowAllAccess",true);
-        //_bindings.put("js.nashorn-compat",true);
+        _bindings.put("polyglot.js.nashorn-compat",true);
 
         //_bindings.put("polyglot.js.allowHostAccess", true);
         //_bindings.put("polyglot.js.allowHostClassLookup", (Predicate<String>) s -> true);
@@ -68,7 +68,15 @@ public class GraaljsJtExecutor implements IJtExecutor {
         sharedSet("__JTEAPI", new __JTEAPI_CLZ());
 
 
+
         try {
+            /**
+             * 兼容nashorn模式
+             * https://stackoverflow.com/questions/57456476/equivalent-of-nashorns-importpackage-in-graal-js-script-engine
+             * */
+            _eng.eval("load('nashorn:mozilla_compat.js');");
+
+
             StringBuilder sb = new StringBuilder();
 
             sb.append("var __global={lib:{},lib_new:{}};\n");
