@@ -229,7 +229,7 @@ public class HttpUtils {
                 _builder.method("TRACE", null);
                 break;
             default:
-                throw new RuntimeException("This method is not supported");
+                throw new IllegalArgumentException("This method is not supported");
         }
 
         Call call = httpClient.newCall(_builder.build());
@@ -283,7 +283,7 @@ public class HttpUtils {
         if (code >= 200 && code <= 300) {
             return text;
         } else {
-            throw new RuntimeException(code + "错误：" + text);
+            throw new HttpResultException(code + " 错误：" + text);
         }
     }
 
