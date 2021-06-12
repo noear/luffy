@@ -6,7 +6,7 @@
 
     <groupId>org.noear</groupId>
     <artifactId>luffy-parent</artifactId>
-    <version>1.0.8</version>
+    <version>1.1.0</version>
     <packaging>pom</packaging>
 
     <name>luffy-parent</name>
@@ -18,8 +18,8 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
 
-        <solon.ver>1.4.9</solon.ver>
-        <weed3.ver>3.3.14</weed3.ver>
+        <solon.ver>1.5.0</solon.ver>
+        <weed3.ver>3.3.15</weed3.ver>
         <snack3.ver>3.1.17</snack3.ver>
 
         <okhttp.ver>3.14.8</okhttp.ver>
