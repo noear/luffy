@@ -1,5 +1,7 @@
 package org.noear.luffy.utils;
 
+import org.noear.snack.ONode;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -55,6 +57,9 @@ public class RuntimeStatus {
     public long memoryUsed;
 
 
-    public List<Map<String,Object>> memoryPools = new ArrayList<>();
+    public List<Map<String, Object>> memoryPools = new ArrayList<>();
 
+    public String toJson() {
+        return ONode.stringify(this);
+    }
 }
