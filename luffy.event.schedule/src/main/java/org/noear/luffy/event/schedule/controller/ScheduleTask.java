@@ -10,11 +10,8 @@ import org.noear.luffy.event.schedule.dso.DbApi;
 import org.noear.luffy.executor.ExecutorFactory;
 import org.noear.luffy.model.AFileModel;
 import org.noear.luffy.task.JtTaskBase;
-import org.noear.luffy.task.cron.CronUtils;
-import org.noear.luffy.utils.Datetime;
 import org.noear.luffy.utils.ExceptionUtils;
 import org.noear.luffy.utils.Timecount;
-import org.noear.luffy.utils.Timespan;
 
 import java.util.Date;
 import java.util.List;
@@ -100,54 +97,28 @@ public class ScheduleTask extends JtTaskBase {
         }
 
         //1.4.检查时间
-        Date temp = task.plan_last_time;
-        if (temp == null) {
-            temp = task.plan_begin_time;
+        Date baseTime = task.plan_last_time;
+        if (baseTime == null) {
+            baseTime = task.plan_begin_time;
         }
 
-        if (temp == null) {
+        if (baseTime == null) {
             return;
         }
 
         //1.5.检查执行时间是否到了
+        Date nextTime = null;
         if (task.plan_interval.length() > 7 && task.plan_interval.contains(" ")) {
-            //cron
-            Date next = CronUtils.getNextTime(task.plan_interval, temp);
+            //说明是： cron
+            nextTime = ScheduleHelper.getNextTimeByCron(task, baseTime);
+        }else {
+            //说明是：1s,1m,1h,1d,1M
+            nextTime = ScheduleHelper.getNextTimeBySimple(task, baseTime);
+        }
 
-            //1.5.2.如果未到执行时间则反回
-            if (System.currentTimeMillis() > next.getTime()) {
-                return;
-            }
-        } else {
-            Datetime last_time = new Datetime(temp);
-
-            String s1 = task.plan_interval.substring(0, task.plan_interval.length() - 1);
-            String s2 = task.plan_interval.substring(task.plan_interval.length() - 1);
-
-            switch (s2) {
-                case "m":
-                    last_time.addMinute(Integer.parseInt(s1));
-                    break;
-                case "h":
-                    last_time.addHour(Integer.parseInt(s1));
-                    break;
-                case "d":
-                    task._is_day_task = true;
-                    last_time.addDay(Integer.parseInt(s1));
-                    break;
-                case "M":
-                    task._is_day_task = true;
-                    last_time.addMonth(Integer.parseInt(s1));
-                    break;
-                default:
-                    last_time.addDay(1);
-                    break;
-            }
-
-            //1.5.2.如果未到执行时间则反回
-            if (new Timespan(last_time.getFulltime()).seconds() < 0) {
-                return;
-            }
+        //1.5.1.如果未到执行时间则反回
+        if (System.currentTimeMillis() > nextTime.getTime()) {
+            return;
         }
 
         //////////////////////////////////////////
