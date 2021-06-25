@@ -117,7 +117,7 @@ public class ScheduleTask extends JtTaskBase {
         }
 
         //1.5.1.如果未到执行时间则反回
-        if (System.currentTimeMillis() < nextTime.getTime()) {
+        if (System.currentTimeMillis() > nextTime.getTime()) {
             return;
         }
 
