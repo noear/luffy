@@ -51,15 +51,6 @@ public class CronTest {
         println(CronUtils.getNextTime("0 0 1 * * ? +08", new Date()));
     }
 
-    @Test
-    public void test5() throws Exception {
-        TimeZone.setDefault(TimeZone.getTimeZone(ZoneOffset.ofHours(0)));
-        System.out.println(new Date());
-        System.out.println(CronUtils.isSatisfiedBy("0 1 * * * ? +00", new Date()));
-        System.out.println(CronUtils.isSatisfiedBy("0 0 1 * * ? +00", new Date()));
-        System.out.println(CronUtils.isSatisfiedBy("0 0 1 * * ? +08", new Date()));
-    }
-
     private void println(Date date) {
         System.out.println(date.getTime() + " :: " + date);
     }
