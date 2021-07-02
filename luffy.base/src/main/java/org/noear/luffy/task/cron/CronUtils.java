@@ -1,9 +1,8 @@
 package org.noear.luffy.task.cron;
 
 import java.text.ParseException;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.time.ZoneOffset;
+import java.util.*;
 
 /**
  * Cron 工具类
@@ -13,6 +12,8 @@ public class CronUtils {
 
     /**
      * 获取表达式
+     *
+     * @param cron 支持：0 * * * * ? * 或 0 * * * * ? * +80
      */
     public static CronExpression get(String cron) throws ParseException {
         CronExpression expr = cached.get(cron);
@@ -22,7 +23,22 @@ public class CronUtils {
                 expr = cached.get(cron);
 
                 if (expr == null) {
-                    expr = new CronExpression(cron);
+                    int tzIdx = cron.indexOf("+");
+                    if (tzIdx < 0) {
+                        tzIdx = cron.indexOf("-");
+                    }
+
+                    if (tzIdx > 0) {
+                        String tz = cron.substring(tzIdx);
+                        ZoneOffset tz2 = ZoneOffset.of(tz);
+                        cron = cron.substring(0, tzIdx - 1);
+
+                        expr = new CronExpression(cron);
+                        expr.setTimeZone(TimeZone.getTimeZone(tz2));
+                    } else {
+                        expr = new CronExpression(cron);
+                    }
+
                     cached.put(cron, expr);
                 }
             }
