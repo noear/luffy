@@ -38,9 +38,9 @@ public class AFileModel {
     public String label;
     /** 备注 */
     public String note;
-
     /** 路径 */
     public String path;
+
     /** 是否静态 */
     public boolean is_staticize;
     /** 可编辑 */
