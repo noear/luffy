@@ -8,15 +8,15 @@ import java.util.*;
  * Cron 工具类
  * */
 public class CronUtils {
-    private static Map<String, CronExpression> cached = new HashMap<>();
+    private static Map<String, CronExpressionPlus> cached = new HashMap<>();
 
     /**
      * 获取表达式
      *
      * @param cron 支持：0 * * * * ? * 或 0 * * * * ? * +80
      */
-    public static CronExpression get(String cron) throws ParseException {
-        CronExpression expr = cached.get(cron);
+    public static CronExpressionPlus get(String cron) throws ParseException {
+        CronExpressionPlus expr = cached.get(cron);
 
         if (expr == null) {
             synchronized (cron.intern()) {
@@ -33,10 +33,10 @@ public class CronUtils {
                         ZoneOffset tz2 = ZoneOffset.of(tz);
                         cron = cron.substring(0, tzIdx - 1);
 
-                        expr = new CronExpression(cron);
+                        expr = new CronExpressionPlus(cron);
                         expr.setTimeZone(TimeZone.getTimeZone(tz2));
                     } else {
-                        expr = new CronExpression(cron);
+                        expr = new CronExpressionPlus(cron);
                     }
 
                     cached.put(cron, expr);

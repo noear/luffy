@@ -1,6 +1,5 @@
 package org.noear.luffy.event.schedule;
 
-import org.noear.solon.Solon;;
 import org.noear.solon.SolonApp;
 import org.noear.solon.core.Plugin;
 import org.noear.luffy.task.TaskFactory;
