@@ -18,6 +18,12 @@ import java.util.List;
 
 /**
  * 定时任务处理器（数据库安全）
+ *
+ * 成功:9
+ * 出错:8
+ * 处理中:2
+ * 待处理:1（立即执行）
+ * 待处理:0
  * */
 public class ScheduleTask extends JtTaskBase {
     public ScheduleTask() {

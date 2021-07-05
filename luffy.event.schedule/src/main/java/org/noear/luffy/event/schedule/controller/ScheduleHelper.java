@@ -21,30 +21,34 @@ public class ScheduleHelper {
 
         next.datetime = cron.getNextValidTimeAfter(baseTime);
 
-        //如果，限制特定的小时
-        if (cron.getHours().size() < 24) {
-            int now_hour = now_time.getHours();
-            next.allow = false;
+        if (task.plan_state != 1) {
+            //如果，限制特定的小时
+            if (cron.getHours().size() < 24) {
+                int now_hour = now_time.getHours();
+                next.allow = false;
 
-            for (Integer h : cron.getHours()) {
-                if (now_hour == h) {
-                    next.allow = true;
-                    break;
+                for (Integer h : cron.getHours()) {
+                    if (now_hour == h) {
+                        next.allow = true;
+                        break;
+                    }
                 }
             }
-        }
 
-        //如果，限制特定的分
-        if (next.allow && cron.getMinutes().size() < 60) {
-            int now_minute = now_time.getMinutes();
-            next.allow = false;
+            //如果，限制特定的分
+            if (next.allow && cron.getMinutes().size() < 60) {
+                int now_minute = now_time.getMinutes();
+                next.allow = false;
 
-            for (Integer m : cron.getMinutes()) {
-                if (now_minute == m) {
-                    next.allow = true;
-                    break;
+                for (Integer m : cron.getMinutes()) {
+                    if (now_minute == m) {
+                        next.allow = true;
+                        break;
+                    }
                 }
             }
+        } else {
+            next.allow = true;
         }
 
         return next;
@@ -91,6 +95,10 @@ public class ScheduleHelper {
         }
 
         next.datetime = next_time.getFulltime();
+
+        if (task.plan_state == 1) {
+            next.allow = true;
+        }
 
         return next;
     }
