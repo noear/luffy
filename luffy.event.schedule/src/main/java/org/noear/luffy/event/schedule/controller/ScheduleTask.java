@@ -107,17 +107,21 @@ public class ScheduleTask extends JtTaskBase {
         }
 
         //1.5.检查执行时间是否到了
-        Date nextTime = null;
+        ScheduleNext scheduleNext = null;
         if (task.plan_interval.length() > 7 && task.plan_interval.contains(" ")) {
             //说明是： cron
-            nextTime = ScheduleHelper.getNextTimeByCron(task, baseTime);
+            scheduleNext = ScheduleHelper.getNextTimeByCron(task, baseTime);
         }else {
             //说明是：1s,1m,1h,1d,1M
-            nextTime = ScheduleHelper.getNextTimeBySimple(task, baseTime);
+            scheduleNext = ScheduleHelper.getNextTimeBySimple(task, baseTime);
         }
 
         //1.5.1.如果未到执行时间则反回
-        if (System.currentTimeMillis() < nextTime.getTime()) {
+        if(scheduleNext.allow == false){
+            return;
+        }
+
+        if (System.currentTimeMillis() < scheduleNext.datetime.getTime()) {
             return;
         }
 

@@ -33,20 +33,6 @@ public class DbApi {
     }
 
     public static void taskSetState(AFileModel task, int state) throws SQLException {
-
-        //对以天为进阶的任务，做同时间处理
-        if (task._is_day_task && state == 9) {
-            String s_d = new Datetime(task.plan_last_time).toString("yyyy-MM-dd");
-            String s_t = new Datetime(task.plan_begin_time).toString("HH:mm:ss");
-
-            try {
-                Datetime temp = Datetime.parse(s_d + " " + s_t, "yyyy-MM-dd HH:mm:ss");
-                task.plan_last_time = temp.getFulltime();
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-        }
-
         db().table("a_file")
                 .set("plan_state", state)
                 .set("plan_count", task.plan_count)

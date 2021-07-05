@@ -56,8 +56,4 @@ public class AFileModel {
     public Date create_fulltime;
     /** 更新时间 */
     public Date update_fulltime;
-
-    public boolean _is_day_task;
-
-
 }
