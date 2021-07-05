@@ -1,6 +1,7 @@
 package org.noear.luffy.event.schedule.controller;
 
 import org.noear.luffy.model.AFileModel;
+import org.noear.luffy.task.cron.CronExpressionPlus;
 import org.noear.luffy.task.cron.CronUtils;
 import org.noear.luffy.utils.Datetime;
 
@@ -12,13 +13,45 @@ import java.util.Date;
  */
 public class ScheduleHelper {
     public static ScheduleNext getNextTimeByCron(AFileModel task, Date baseTime) throws ParseException {
-        ScheduleNext scheduleNext = new ScheduleNext();
-        scheduleNext.datetime = CronUtils.getNextTime(task.plan_interval, baseTime);
-        return scheduleNext;
+        ScheduleNext next = new ScheduleNext();
+
+        Datetime now_time = Datetime.Now();
+
+        CronExpressionPlus cron = CronUtils.get(task.plan_interval);
+
+        next.datetime = cron.getNextValidTimeAfter(baseTime);
+
+        //如果，限制特定的小时
+        if (cron.getHours().size() < 24) {
+            int now_hour = now_time.getHours();
+            next.allow = false;
+
+            for (Integer h : cron.getHours()) {
+                if (now_hour == h) {
+                    next.allow = true;
+                    break;
+                }
+            }
+        }
+
+        //如果，限制特定的分
+        if (next.allow && cron.getMinutes().size() < 60) {
+            int now_minute = now_time.getMinutes();
+            next.allow = false;
+
+            for (Integer m : cron.getMinutes()) {
+                if (now_minute == m) {
+                    next.allow = true;
+                    break;
+                }
+            }
+        }
+
+        return next;
     }
 
     public static ScheduleNext getNextTimeBySimple(AFileModel task, Date baseTime) {
-        ScheduleNext scheduleNext = new ScheduleNext();
+        ScheduleNext next = new ScheduleNext();
 
         Datetime begin_time = new Datetime(task.plan_begin_time);
         Datetime next_time = new Datetime(baseTime);
@@ -42,8 +75,8 @@ public class ScheduleHelper {
                 next_time.addHour(Integer.parseInt(s1));
                 break;
             case "d": //日
-                scheduleNext.intervalOfDay = true;
-                scheduleNext.allow = (now_time.getHours() == begin_time.getHours());
+                next.intervalOfDay = true;
+                next.allow = (now_time.getHours() == begin_time.getHours());
 
                 next_time.setHour(begin_time.getHours());
                 next_time.setMinute(begin_time.getMinutes());
@@ -52,13 +85,13 @@ public class ScheduleHelper {
                 next_time.addDay(Integer.parseInt(s1));
                 break;
             default:
-                scheduleNext.allow = false; //不支持的格式，不允许执行
+                next.allow = false; //不支持的格式，不允许执行
                 next_time.addDay(1);
                 break;
         }
 
-        scheduleNext.datetime = next_time.getFulltime();
+        next.datetime = next_time.getFulltime();
 
-        return scheduleNext;
+        return next;
     }
 }
