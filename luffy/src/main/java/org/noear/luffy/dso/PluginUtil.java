@@ -1,5 +1,6 @@
 package org.noear.luffy.dso;
 
+import org.noear.luffy.utils.GzipUtils;
 import org.noear.snack.ONode;
 import org.noear.solon.Solon;;
 import org.noear.luffy.Config;
@@ -156,7 +157,7 @@ public class PluginUtil {
         }
 
         if(onlyInstall) {
-            if (db().table("a_plugin").whereEq("plugin_tag", packageTag).exists()) {
+            if (db().table("a_plugin").whereEq("plugin_tag", packageTag).selectExists()) {
                 return false;
             }
         }
@@ -211,13 +212,19 @@ public class PluginUtil {
         String url = null;
 
         if(center.indexOf("://")>0){
-            url =  center + "/.plugin/pull.jsx?_fapk=1&plugin_tag=" + packageTag;
+            url =  center + "/.plugin/pull.jsx?_fapk=1&_gzip=1&plugin_tag=" + packageTag;
         }else {
-            url = "http://" + center + "/.plugin/pull.jsx?_fapk=1&plugin_tag=" + packageTag;
+            url = "http://" + center + "/.plugin/pull.jsx?_fapk=1&_gzip=1&plugin_tag=" + packageTag;
         }
 
 
         String json = new HttpUtils(url).get();
+
+        //支持zip传递
+        if(json.startsWith("{") == false){
+            json = GzipUtils.unGZip(json);
+        }
+
         ONode data = ONode.load(json);
         if (data.get("code").getInt() != 1) {
             return false;
