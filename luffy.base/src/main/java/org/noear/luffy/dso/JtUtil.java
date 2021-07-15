@@ -347,6 +347,21 @@ public class JtUtil {
         return Base64Utils.decode(text);
     }
 
+
+    /**
+     * base64
+     */
+    @Note("JsonD编码")
+    public String jsondEncode(String table, List data) throws IOException{
+        return JsondUtils.encode(table, data);
+    }
+
+    @Note("JsonD解码")
+    public String jsondDecode(String jsond) throws IOException{
+        return JsondUtils.decode(jsond);
+    }
+
+
     /**
      * 生成随机码
      */
@@ -592,4 +607,5 @@ public class JtUtil {
     public String unGzip(String str) throws IOException {
         return GzipUtils.unGZip(str);
     }
+
 }
