@@ -89,7 +89,7 @@ public class JtUtilEx extends JtUtil {
         String data = Base64Utils.encodeByte(data_byte);
         String path = "/img/" + guid() + "." + extension;
 
-        DbApi.imgSet(null, path, file.contentType, data, "");
+        DbApi.imgSet(null, path, file.contentType, data, "", file.name);
 
         return path;
     }

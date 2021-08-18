@@ -1,6 +1,7 @@
 package org.noear.luffy.dso;
 
 import org.noear.solon.Solon;;
+import org.noear.solon.Utils;
 import org.noear.solon.core.handle.Context;
 import org.noear.luffy.Config;
 import org.noear.luffy.executor.ExecutorFactory;
@@ -271,14 +272,22 @@ public class DbApi {
     }
 
     public static boolean imgSet(String tag, String path, String content_type, String data, String label) throws Exception {
+        return imgSet(tag, path, content_type, data, label, null);
+    }
+
+    public static boolean imgSet(String tag, String path, String content_type, String data, String label, String note) throws Exception {
         boolean is_ok = false;
 
         DbTableQuery qr = db().table("a_image")
-                .set("`content_type`", content_type)
-                .set("`data`", data)
-                .set("`data_size`", data.length())
-                .set("`label`", label)
+                .set("content_type", content_type)
+                .set("data", data)
+                .set("data_size", data.length())
+                .set("label", label)
                 .set("update_fulltime", "$NOW()");
+
+        if(Utils.isNotEmpty(note)) {
+            qr.set("note", note);
+        }
 
         if (tag != null) {
             qr.set("`tag`", tag);
