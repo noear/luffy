@@ -2,8 +2,12 @@ package org.noear.luffy.dso;
 
 import org.noear.luffy.model.AImageModel;
 import org.noear.luffy.utils.Base64Utils;
+import org.noear.solon.Solon;
+import org.noear.solon.Utils;
 import org.noear.solon.core.handle.Context;
+import org.noear.solon.core.handle.UploadedFile;
 
+import java.net.URLEncoder;
 import java.util.Date;
 
 /**
@@ -42,6 +46,21 @@ public class AImageHandler {
                 context.headerSet(LAST_MODIFIED, app_runtime.toString());
                 context.contentType(file.content_type);
                 context.charset("utf-8");
+
+
+                if (file.note != null) {
+                    String extension = path.substring(idx);
+                    if (file.note.endsWith(extension) &&
+                            (extension.equals(".zip")
+                                    || extension.equals(".jar")
+                                    || extension.equals(".rar")
+                                    || extension.equals(".sql")
+                            )
+                    ) {
+                        String fileName = URLEncoder.encode(file.note, Solon.cfg().fileEncoding());
+                        context.headerSet("Content-Disposition", "attachment; filename=\"" + fileName + "\"");
+                    }
+                }
             }
         }
 
