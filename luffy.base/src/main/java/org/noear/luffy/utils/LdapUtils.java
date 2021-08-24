@@ -16,7 +16,7 @@ import java.util.*;
  * */
 public class LdapUtils {
     /**
-     * 获取人员
+     * 查找人员
      *
      * @param ctx 连接上下文
      * @param baseDn
@@ -46,7 +46,7 @@ public class LdapUtils {
     }
 
     /**
-     * 查找分组
+     * 查找分组（一般指角色）
      * */
     public static LdapGroup findGroup(LdapContext ctx, String baseDn, String groupCn) throws Exception {
         if (TextUtils.isEmpty(groupCn)) {
@@ -64,7 +64,7 @@ public class LdapUtils {
             return null;
         }
 
-        //过滤条件
+        //组装过滤条件
         StringBuilder filter = new StringBuilder();
         filter.append("(&(objectClass=")
                 .append(objectClass)
@@ -85,7 +85,7 @@ public class LdapUtils {
     }
 
     /**
-     * 查找节点
+     * 查找单节点
      */
     public static <T extends LdapNode> T ldapFindOne(LdapContext ctx, String baseDn, String filter, Class<T> tClass) throws Exception {
 
@@ -121,7 +121,7 @@ public class LdapUtils {
     }
 
     /**
-     * 查找节点
+     * 查找节点列表
      */
     public static <T extends LdapNode> List<T> ldapFindList(LdapContext ctx, String baseDn, String filter, Class<T> tClass) throws Exception {
         List<T> tList = new ArrayList<>();
