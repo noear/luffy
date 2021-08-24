@@ -10,9 +10,12 @@ import javax.naming.ldap.LdapContext;
 import java.security.MessageDigest;
 import java.util.*;
 
+/**
+ * Ldap 工具类
+ * */
 public class LdapUtils {
     /**
-     * 获取ldap链接对象
+     * 获取ldap链接上下文
      *
      * @param url
      * @param bindLdapUser
@@ -22,6 +25,7 @@ public class LdapUtils {
     public static LdapContext ldapConnect(String url, String bindLdapUser, String bindLdapPwd) throws NamingException {
         String factory = "com.sun.jndi.ldap.LdapCtxFactory";
         String simple = "simple";
+
         Hashtable<String, String> env = new Hashtable<String, String>();
         env.put(Context.INITIAL_CONTEXT_FACTORY, factory);
         env.put(Context.PROVIDER_URL, url);
@@ -90,6 +94,11 @@ public class LdapUtils {
         return null;
     }
 
+    /**
+     * 构建ldap密码
+     *
+     * @param orgPwd 原始密码
+     * */
     public static String buildLdapPassword(String orgPwd) {
         //TEST LDAP密码MD5加密，先MD5，再BASE64
         byte[] byteArray = null;
