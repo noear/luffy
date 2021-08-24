@@ -17,15 +17,15 @@ import javax.naming.directory.Attributes;
 @Setter
 @Getter
 public class LdapPerson implements LdapNode {
-    public String uid;
-    public String cn;
-    public String sn;
-    public String userPassword;
-    public String displayName;
-    public String mail;
-    public String description;
-    public String uidNumber;
-    public String gidNumber;
+    private String uid;
+    private String cn;
+    private String sn;
+    private String userPassword;
+    private String displayName;
+    private String mail;
+    private String description;
+    private String uidNumber;
+    private String gidNumber;
 
     @Override
     public void bind(Attributes attrs) throws NamingException {
