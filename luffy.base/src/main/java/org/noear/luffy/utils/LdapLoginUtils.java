@@ -41,11 +41,9 @@ public class LdapLoginUtils {
      * Load 登录
      */
     public static LdapUser ldapLogin(Properties prop, String userName, String userPassword) throws Exception {
-
-
         String url = prop.getProperty("url");
-        String groupCn = prop.getProperty("groupCn");
         String baseDn = prop.getProperty("baseDn");
+        String groupCn = prop.getProperty("groupCn");
         String username = prop.getProperty("username");
         String paasword = prop.getProperty("paasword");
 
