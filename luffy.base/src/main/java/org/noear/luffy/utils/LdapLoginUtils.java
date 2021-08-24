@@ -31,7 +31,7 @@ public class LdapLoginUtils {
      * Load 登录
      */
     public static LdapUser ldapLogin(String userName, String userPassword) throws Exception {
-        //读取链拉配置
+        //读取连接配置
         Properties prop = Solon.cfg().getProp("ldap");
 
         return ldapLogin(prop, userName, userPassword);
@@ -41,19 +41,20 @@ public class LdapLoginUtils {
      * Load 登录
      */
     public static LdapUser ldapLogin(Properties prop, String userName, String userPassword) throws Exception {
-        //获取连接配置
+        //1.获取连接配置
         String url = prop.getProperty("url");
         String baseDn = prop.getProperty("baseDn");
         String groupCn = prop.getProperty("groupCn");
         String username = prop.getProperty("username");
         String paasword = prop.getProperty("paasword");
 
-        //定义用户过滤条件
+        //2.定义用户过滤条件
         String userFilter = "cn=" + userName;
         if (Utils.isNotEmpty(groupCn)) {
             userFilter += ",cn=" + groupCn;
         }
 
+        //3.认证
         LdapContext ldapCtx = null;
 
         try {
