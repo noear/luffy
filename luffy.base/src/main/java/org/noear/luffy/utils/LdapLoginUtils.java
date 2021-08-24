@@ -41,6 +41,7 @@ public class LdapLoginUtils {
      * Load 登录
      */
     public static LdapUser ldapLogin(Properties prop, String userName, String userPassword) throws Exception {
+        //获取连接配置
         String url = prop.getProperty("url");
         String baseDn = prop.getProperty("baseDn");
         String groupCn = prop.getProperty("groupCn");
