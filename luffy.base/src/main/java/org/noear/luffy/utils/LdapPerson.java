@@ -11,6 +11,8 @@ import javax.naming.directory.Attributes;
 
 /**
  * Ldap 人员
+ *
+ * @author noear
  * */
 @Setter
 @Getter

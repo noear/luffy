@@ -24,6 +24,7 @@ import java.util.Properties;
  *
  * </code></pre>
  *
+ * @author noear
  */
 public class LdapLoginUtils {
     /**

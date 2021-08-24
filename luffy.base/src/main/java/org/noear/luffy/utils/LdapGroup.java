@@ -13,6 +13,8 @@ import java.util.List;
 
 /**
  * Ldap 分组
+ *
+ * @author noear
  * */
 @Setter
 @Getter
