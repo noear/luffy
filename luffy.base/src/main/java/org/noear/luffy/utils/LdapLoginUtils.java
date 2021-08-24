@@ -27,13 +27,21 @@ import java.util.Properties;
  *
  */
 public class LdapLoginUtils {
-
     /**
      * Load 登录
      */
     public static LdapUser ldapLogin(String userName, String userPassword) throws Exception {
         //读取链拉配置
         Properties prop = Solon.cfg().getProp("ldap");
+
+        return ldapLogin(prop, userName, userPassword);
+    }
+
+    /**
+     * Load 登录
+     */
+    public static LdapUser ldapLogin(Properties prop, String userName, String userPassword) throws Exception {
+
 
         String url = prop.getProperty("url");
         String groupCn = prop.getProperty("groupCn");
