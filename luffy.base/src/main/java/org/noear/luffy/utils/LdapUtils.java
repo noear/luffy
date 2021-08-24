@@ -161,11 +161,11 @@ public class LdapUtils {
      * 获取ldap链接上下文
      *
      * @param url
-     * @param bindLdapUser
-     * @param bindLdapPwd
+     * @param bindLdapDn bindDn
+     * @param bindLdapPwd paasword
      * @return LdapContext
      */
-    public static LdapContext ldapConnect(String url, String bindLdapUser, String bindLdapPwd) throws NamingException {
+    public static LdapContext ldapConnect(String url, String bindLdapDn, String bindLdapPwd) throws NamingException {
         String factory = "com.sun.jndi.ldap.LdapCtxFactory";
         String simple = "simple";
 
@@ -173,7 +173,7 @@ public class LdapUtils {
         env.put(Context.INITIAL_CONTEXT_FACTORY, factory);
         env.put(Context.PROVIDER_URL, url);
         env.put(Context.SECURITY_AUTHENTICATION, simple);
-        env.put(Context.SECURITY_PRINCIPAL, bindLdapUser);
+        env.put(Context.SECURITY_PRINCIPAL, bindLdapDn);
         env.put(Context.SECURITY_CREDENTIALS, bindLdapPwd);
         Control[] connCtls = null;
 

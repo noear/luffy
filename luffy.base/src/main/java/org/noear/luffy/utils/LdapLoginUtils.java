@@ -48,21 +48,23 @@ public class LdapLoginUtils {
         //1.获取连接配置
         String url = props.getProperty("url");
         String baseDn = props.getProperty("baseDn");
-        String groupCn = props.getProperty("groupCn");
-        String username = props.getProperty("username");
+        String bindDn = props.getProperty("bindDn");
         String paasword = props.getProperty("paasword");
+        String groupCn = props.getProperty("groupCn");
 
         //2.定义用户过滤条件
-        String userCn = userName;
+        if(TextUtils.isEmpty(bindDn)){
+            bindDn = props.getProperty("username"); //兼容旧写法
+        }
 
         //3.认证
         LdapContext ldapCtx = null;
         LdapPerson ldapPerson = null;
 
         try {
-            ldapCtx = LdapUtils.ldapConnect(url, username, paasword);
+            ldapCtx = LdapUtils.ldapConnect(url, bindDn, paasword);
 
-            ldapPerson = LdapUtils.findPerson(ldapCtx, baseDn, userCn, userPassword);
+            ldapPerson = LdapUtils.findPerson(ldapCtx, baseDn, userName, userPassword);
 
             //4.如果有用户且有分组
             if (ldapPerson != null && TextUtils.isNotEmpty(groupCn)) {

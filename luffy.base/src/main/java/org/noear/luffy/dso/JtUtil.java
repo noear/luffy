@@ -42,13 +42,17 @@ public class JtUtil {
         Properties prop = Utils.buildProperties(cfg);
         String url = prop.getProperty("url");
         String baseDn = prop.getProperty("baseDn");
-        String username = prop.getProperty("username");
+        String bindDn = prop.getProperty("bindDn");
         String paasword = prop.getProperty("paasword");
+
+        if(TextUtils.isEmpty(bindDn)){
+            bindDn = prop.getProperty("username");
+        }
 
         LdapContext ldapCtx = null;
 
         try {
-            ldapCtx = LdapUtils.ldapConnect(url, username, paasword);
+            ldapCtx = LdapUtils.ldapConnect(url, bindDn, paasword);
 
             return LdapUtils.findPerson(ldapCtx, baseDn, userFilter, userPassword);
         } finally {
