@@ -1,7 +1,7 @@
 package features;
 
 import org.junit.Test;
-import org.noear.luffy.utils.LdapUser;
+import org.noear.luffy.utils.LdapPerson;
 import org.noear.luffy.utils.LdapUtils;
 import org.noear.snack.ONode;
 
@@ -20,7 +20,7 @@ public class LdapUtilsTest {
 
         LdapContext ctx = LdapUtils.ldapConnect(url, root, pwd);//集团 ldap认证
 
-        LdapUser user = LdapUtils.ldapAuth(ctx, basedn, "uid=noear", "1234");//获取集团ldap中用户信息
+        LdapPerson user = LdapUtils.findPerson(ctx, basedn, "uid=noear", "1234");//获取集团ldap中用户信息
 
         if(user == null){
             System.out.println("验证失败");

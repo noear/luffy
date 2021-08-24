@@ -1,13 +1,12 @@
 package org.noear.luffy.utils;
 
 import org.noear.solon.Solon;
-import org.noear.solon.Utils;
 
 import javax.naming.ldap.LdapContext;
 import java.util.Properties;
 
 /**
- * Ldap登录 使用示例
+ * Ldap 登录（工具使用示例）
  *
  * <pre><code>
  * String userName = "";
@@ -30,41 +29,62 @@ public class LdapLoginUtils {
     /**
      * Load 登录
      */
-    public static LdapUser ldapLogin(String userName, String userPassword) throws Exception {
+    public static LdapPerson ldapLogin(String userName, String userPassword) throws Exception {
         //读取连接配置
-        Properties prop = Solon.cfg().getProp("ldap");
+        Properties props = Solon.cfg().getProp("ldap");
 
-        return ldapLogin(prop, userName, userPassword);
+        return ldapLogin(props, userName, userPassword);
     }
 
     /**
      * Load 登录
      */
-    public static LdapUser ldapLogin(Properties prop, String userName, String userPassword) throws Exception {
+    public static LdapPerson ldapLogin(Properties props, String userName, String userPassword) throws Exception {
+        if (props == null || props.size() < 4) {
+            return null;
+        }
+
         //1.获取连接配置
-        String url = prop.getProperty("url");
-        String baseDn = prop.getProperty("baseDn");
-        String groupCn = prop.getProperty("groupCn");
-        String username = prop.getProperty("username");
-        String paasword = prop.getProperty("paasword");
+        String url = props.getProperty("url");
+        String baseDn = props.getProperty("baseDn");
+        String groupCn = props.getProperty("groupCn");
+        String username = props.getProperty("username");
+        String paasword = props.getProperty("paasword");
 
         //2.定义用户过滤条件
-        String userFilter = "cn=" + userName;
-        if (Utils.isNotEmpty(groupCn)) {
-            userFilter += ",cn=" + groupCn;
-        }
+        String userCn = userName;
 
         //3.认证
         LdapContext ldapCtx = null;
+        LdapPerson ldapPerson = null;
 
         try {
             ldapCtx = LdapUtils.ldapConnect(url, username, paasword);
 
-            return LdapUtils.ldapAuth(ldapCtx, baseDn, userFilter, userPassword);
+            ldapPerson = LdapUtils.findPerson(ldapCtx, baseDn, userCn, userPassword);
+
+            //4.如果有用户且有分组
+            if (ldapPerson != null && TextUtils.isNotEmpty(groupCn)) {
+                LdapGroup group = LdapUtils.findGroup(ldapCtx, baseDn, groupCn);
+
+                //如果组不存在
+                if (group == null) {
+                    ldapPerson = null;
+                }
+
+                //如果组里没有此人
+                if(group.hasMember(userName) == false){
+                    ldapPerson = null;
+                }
+            }
+
         } finally {
             if (ldapCtx != null) {
                 ldapCtx.close();
             }
         }
+
+
+        return ldapPerson;
     }
 }

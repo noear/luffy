@@ -29,7 +29,7 @@ public class JtUtil {
     private final Map<String, DbContext> _db_cache = new HashMap<>();
 
     @Note("获取Ldap用户信息")
-    public LdapUser ldap(String cfg, String userFilter, String userPassword) throws Exception {
+    public LdapPerson ldap(String cfg, String userFilter, String userPassword) throws Exception {
         if (TextUtils.isEmpty(cfg)) {
             return null;
         }
@@ -50,7 +50,7 @@ public class JtUtil {
         try {
             ldapCtx = LdapUtils.ldapConnect(url, username, paasword);
 
-            return LdapUtils.ldapAuth(ldapCtx, baseDn, userFilter, userPassword);
+            return LdapUtils.findPerson(ldapCtx, baseDn, userFilter, userPassword);
         } finally {
             if (ldapCtx != null) {
                 ldapCtx.close();

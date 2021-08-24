@@ -8,6 +8,10 @@ public class TextUtils {
         return str == null || str.isEmpty();
     }
 
+    public static boolean isNotEmpty(String str) {
+        return !isEmpty(str);
+    }
+
     /** 是否为数字 */
     public static boolean isNumber(String str) {
         if (TextUtils.isEmpty(str)) {
