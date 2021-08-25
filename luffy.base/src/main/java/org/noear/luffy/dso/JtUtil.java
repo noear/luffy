@@ -1,5 +1,7 @@
 package org.noear.luffy.dso;
 
+import org.noear.okldap.LdapClient;
+import org.noear.okldap.LdapSession;
 import org.noear.snack.ONode;
 import org.noear.solon.Solon;
 import org.noear.solon.Utils;
@@ -10,8 +12,8 @@ import org.noear.luffy.model.AConfigM;
 import org.noear.luffy.utils.*;
 import org.noear.solon.core.handle.UploadedFile;
 import org.noear.weed.DbContext;
+import org.noear.okldap.entity.LdapPerson;
 
-import javax.naming.ldap.LdapContext;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.URI;
@@ -39,26 +41,10 @@ public class JtUtil {
             cfg = cfgGet(cfg.substring(1));
         }
 
-        Properties prop = Utils.buildProperties(cfg);
-        String url = prop.getProperty("url");
-        String baseDn = prop.getProperty("baseDn");
-        String bindDn = prop.getProperty("bindDn");
-        String paasword = prop.getProperty("paasword");
+        Properties props = Utils.buildProperties(cfg);
 
-        if(TextUtils.isEmpty(bindDn)){
-            bindDn = prop.getProperty("username");
-        }
-
-        LdapContext ldapCtx = null;
-
-        try {
-            ldapCtx = LdapUtils.ldapConnect(url, bindDn, paasword);
-
-            return LdapUtils.findPerson(ldapCtx, baseDn, userFilter, userPassword);
-        } finally {
-            if (ldapCtx != null) {
-                ldapCtx.close();
-            }
+        try (LdapSession session = new LdapClient(props).open()) {
+            return session.findPersonOne(userFilter, userPassword);
         }
     }
 
