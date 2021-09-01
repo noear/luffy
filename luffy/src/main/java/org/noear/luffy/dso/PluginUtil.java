@@ -1,5 +1,7 @@
 package org.noear.luffy.dso;
 
+import org.noear.luffy.executor.ExecutorFactory;
+import org.noear.luffy.model.AFileModel;
 import org.noear.luffy.utils.GzipUtils;
 import org.noear.snack.ONode;
 import org.noear.solon.Solon;;
@@ -7,11 +9,18 @@ import org.noear.luffy.Config;
 import org.noear.luffy.utils.Base64Utils;
 import org.noear.luffy.utils.HttpUtils;
 import org.noear.luffy.utils.TextUtils;
+import org.noear.solon.Utils;
+import org.noear.solon.core.ExtendLoader;
+import org.noear.solon.core.handle.Context;
+import org.noear.solon.core.handle.ContextEmpty;
+import org.noear.solon.core.handle.ContextUtil;
 import org.noear.weed.DataItem;
 import org.noear.weed.DataList;
 import org.noear.weed.DbContext;
 import org.noear.weed.wrap.DbType;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.List;
 import java.util.Map;
 
@@ -46,18 +55,43 @@ public class PluginUtil {
      * 初始化调用
      * */
     public static void initCall(String path) {
-        if (TextUtils.isEmpty(path)) {
-            return;
+        try {
+            //运行本地库的初始化
+            if (TextUtils.isNotEmpty(path)) {
+                CallUtil.callFile(path, JtUtil.g.empMap());
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
 
         try {
-            CallUtil.callFile(path, JtUtil.g.empMap());
+            //运行扩展目录下的初始化
+            File location = ExtendUtil.directory();
+
+            if (location != null) {
+                File initFile = new File(location, "_init.js");
+
+                if (initFile.exists()) {
+                    try (FileInputStream ins = new FileInputStream(initFile)) {
+                        String initCode = Utils.transferToString(ins, "utf-8");
+                        System.out.println("load _init.js: " + initFile.getPath());
+
+                        AFileModel file = new AFileModel();
+
+                        file.content = initCode;
+                        file.path = "/__jt/" + initFile.getName();
+                        file.tag = "luffy";
+
+                        file.edit_mode = "javascript";
+
+                        ExecutorFactory.execOnly(file, new ContextEmpty());
+                    }
+                }
+            }
         } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
-
-
 
     /**
      * 安装插件
