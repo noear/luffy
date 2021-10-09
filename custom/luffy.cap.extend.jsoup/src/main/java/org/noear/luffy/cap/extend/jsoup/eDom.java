@@ -6,6 +6,8 @@ import org.jsoup.nodes.Document;
 import org.noear.solon.annotation.Note;
 
 public class eDom {
+    public static final eDom instance = new eDom();
+
     @Note("解析为 html 并生成 dom（具体参考：Jsoup 接口）")
     public Document parse(String html) throws Exception{
         return Jsoup.parse(html);

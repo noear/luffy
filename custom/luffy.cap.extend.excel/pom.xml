@@ -11,7 +11,7 @@
         <relativePath>../../luffy-parent/pom.xml</relativePath>
     </parent>
 
-    <artifactId>luffy.cap.extend.sited</artifactId>
+    <artifactId>luffy.cap.extend.excel</artifactId>
     <packaging>jar</packaging>
 
     <dependencies>
@@ -20,15 +20,17 @@
             <artifactId>solon</artifactId>
             <scope>provided</scope>
         </dependency>
+
         <dependency>
-            <groupId>org.noear</groupId>
-            <artifactId>weed3</artifactId>
-            <scope>provided</scope>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>5.0.0</version>
         </dependency>
+
         <dependency>
             <groupId>org.noear</groupId>
-            <artifactId>snack3</artifactId>
-            <scope>provided</scope>
+            <artifactId>solon-test</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
