@@ -22,10 +22,18 @@ public class DemoTest {
         map.put("name","noear");
         map.put("age","12");
 
+        Map<String,Object> map2 = new LinkedHashMap<>();
+        map2.put("name","noear2");
+        map2.put("age","122");
+
         list.add(map);
+        list.add(map2);
 
         File file = new File("/Users/noear/Documents/demo/test.xls");
         if(file.exists() == false){
+            file.createNewFile();
+        }else{
+            file.delete();
             file.createNewFile();
         }
 
