@@ -55,10 +55,10 @@ public class eExcel {
                     cell.setCellValue("");
                 } else if (value instanceof Date) {
                     cell.setCellValue((Date) value);
-                } else if (value instanceof LocalDate) {
-                    cell.setCellValue((LocalDate) value);
-                } else if (value instanceof LocalDateTime) {
-                    cell.setCellValue((LocalDateTime) value);
+//                } else if (value instanceof LocalDate) {
+//                    cell.setCellValue((LocalDate) value);
+//                } else if (value instanceof LocalDateTime) {
+//                    cell.setCellValue((LocalDateTime) value);
                 } else if (value instanceof Calendar) {
                     cell.setCellValue((Calendar) value);
                 } else if (value instanceof RichTextString) {
