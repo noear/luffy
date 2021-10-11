@@ -1,6 +1,6 @@
 package org.noear.cloudjt;
 
-import org.noear.snack.core.Constants;
+import org.noear.snack.core.Options;
 import org.noear.snack.core.Feature;
 import org.noear.solon.Solon;;
 import org.noear.luffy.Luffy;
@@ -11,7 +11,7 @@ import org.noear.solon.core.NvMap;
 
 public class CloudJtApp {
     public static void main(String[] args) {
-        Constants.features_serialize = Feature.of(
+        Options.features_serialize = Feature.of(
                 Feature.OrderedField,
                 Feature.BrowserCompatible,
                 Feature.WriteClassName,
