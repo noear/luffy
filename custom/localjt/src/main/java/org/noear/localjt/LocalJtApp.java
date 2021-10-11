@@ -26,7 +26,7 @@ public class LocalJtApp{
                 Feature.QuoteFieldNames);
 
         WeedConfig.onException((cmd, err) -> {
-            System.out.println(cmd.text2());
+            System.out.println(cmd.toSqlString());
             err.printStackTrace();
         });
 
