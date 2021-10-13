@@ -2,16 +2,17 @@ package org.noear.luffy.queue.redis;
 
 import org.noear.luffy.dso.*;
 import org.noear.luffy.utils.ConfigUtils;
+import org.noear.redisx.RedisClient;
 
 import java.util.Properties;
 
 public class RedisJtQueue implements IJtQueue {
-    private RedisX _redisX;
+    private RedisClient _redisX;
     private String _name;
 
     public RedisJtQueue(String name, Properties prop) {
         _name = name;
-        _redisX = new RedisX(prop);
+        _redisX = new RedisClient(prop);
     }
 
     public static void init(String cfg) throws Exception {
@@ -61,16 +62,16 @@ public class RedisJtQueue implements IJtQueue {
 
     @Override
     public String peek() {
-        return _redisX.open1( (rs) -> rs.key(name()).listGet(-1));
+        return _redisX.openAndGet( (rs) -> rs.key(name()).listGet(-1));
     }
 
     @Override
     public String poll() {
-        return _redisX.open1((rs) -> rs.key(name()).listPop());
+        return _redisX.openAndGet((rs) -> rs.key(name()).listPop());
     }
 
     @Override
     public void remove() {
-        _redisX.open0((rs) -> rs.key(name()).listPop());
+        _redisX.open((rs) -> rs.key(name()).listPop());
     }
 }

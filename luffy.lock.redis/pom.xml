@@ -29,8 +29,8 @@
         </dependency>
 
         <dependency>
-            <groupId>redis.clients</groupId>
-            <artifactId>jedis</artifactId>
+            <groupId>org.noear</groupId>
+            <artifactId>redisx</artifactId>
         </dependency>
     </dependencies>
 

@@ -2,14 +2,15 @@ package org.noear.luffy.lock.redis;
 
 import org.noear.luffy.dso.*;
 import org.noear.luffy.utils.ConfigUtils;
+import org.noear.redisx.RedisClient;
 
 import java.util.Properties;
 
 public class RedisJtLock implements IJtLock {
-    private RedisX _redisX;
+    private RedisClient _redisX;
 
     public RedisJtLock(Properties prop){
-        _redisX = new RedisX(prop);
+        _redisX = new RedisClient(prop);
     }
 
     public static void init(String cfg) throws Exception {
@@ -35,14 +36,14 @@ public class RedisJtLock implements IJtLock {
     public boolean tryLock(String group, String key, int inSeconds, String inMaster) {
         String key2 = group + ".lk." + key;
 
-        return _redisX.open1((ru) -> ru.key(key2).expire(inSeconds).lock(inMaster));
+        return _redisX.openAndGet((ru) -> ru.key(key2).expire(inSeconds).lock(inMaster));
     }
 
     @Override
     public boolean tryLock(String group, String key, int inSeconds) {
         String key2 = group + ".lk." + key;
 
-        return _redisX.open1((ru) -> ru.key(key2).expire(inSeconds).lock("_"));
+        return _redisX.openAndGet((ru) -> ru.key(key2).expire(inSeconds).lock("_"));
     }
 
     @Override
@@ -54,14 +55,14 @@ public class RedisJtLock implements IJtLock {
     public boolean isLocked(String group, String key) {
         String key2 = group + ".lk." + key;
 
-        return _redisX.open1((ru) -> ru.key(key2).exists());
+        return _redisX.openAndGet((ru) -> ru.key(key2).exists());
     }
 
     @Override
     public void unLock(String group, String key) {
         String key2 = group+".lk." + key;
 
-        _redisX.open0((ru) -> {
+        _redisX.open((ru) -> {
             ru.key(key2).delete();
         });
     }

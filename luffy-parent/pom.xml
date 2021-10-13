@@ -18,7 +18,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
 
-        <solon.ver>1.5.42</solon.ver>
+        <solon.ver>1.5.44</solon.ver>
         <weed3.ver>3.3.24</weed3.ver>
         <snack3.ver>3.2.0</snack3.ver>
 
@@ -93,17 +93,17 @@
                 <version>${snack3.ver}</version>
             </dependency>
 
+            <dependency>
+                <groupId>org.noear</groupId>
+                <artifactId>redisx</artifactId>
+                <version>1.1</version>
+            </dependency>
+
             <!-- Http 框架 -->
             <dependency>
                 <groupId>com.squareup.okhttp3</groupId>
                 <artifactId>okhttp</artifactId>
                 <version>${okhttp.ver}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>redis.clients</groupId>
-                <artifactId>jedis</artifactId>
-                <version>3.6.1</version>
             </dependency>
 
             <!-- 缩略图 框架 -->
