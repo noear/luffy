@@ -34,7 +34,7 @@ public class InitUtil {
     }
 
     private static void do_initDb() throws Exception {
-        int num = db().dbTables().size();
+        int num = db().getMetaData().getTableAll().size();
         if (num >= 8) {
             return;
         }

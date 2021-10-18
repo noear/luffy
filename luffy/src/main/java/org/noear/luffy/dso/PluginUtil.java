@@ -324,7 +324,7 @@ public class PluginUtil {
 
             }
 
-            if (db().dbType() == DbType.H2) {
+            if (db().getType() == DbType.H2) {
                 db().table("a_config")
                         .set("value", "LocalJt")
                         .whereEq("name", "_frm_admin_title")

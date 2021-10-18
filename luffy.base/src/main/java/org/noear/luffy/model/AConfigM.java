@@ -119,8 +119,6 @@ public class AConfigM {
         }
 
 
-        DbContext db = new DbContext();
-
         if (pool) {
             HikariDataSource source = new HikariDataSource();
 
@@ -149,12 +147,9 @@ public class AConfigM {
                 source.setDriverClassName(driverClassName);
             }
 
-            db.dataSourceSet(source);
-            db.schemaSet(schema);
+            return new DbContext(source, schema);
         } else {
-            db.propSet(prop);
+            return new DbContext(prop);
         }
-
-        return db;
     }
 }
