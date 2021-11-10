@@ -11,10 +11,10 @@
         <relativePath>../../luffy-parent/pom.xml</relativePath>
     </parent>
 
-    <artifactId>localjt</artifactId>
+    <artifactId>luffy-cjt</artifactId>
     <packaging>jar</packaging>
 
-    <name>jtl</name>
+    <name>${project.artifactId}</name>
     <description>java project for ${project.artifactId}</description>
 
     <properties>
@@ -91,6 +91,18 @@
             <version>${project.version}</version>
         </dependency>
 
+<!--        <dependency>-->
+<!--            <groupId>org.noear</groupId>-->
+<!--            <artifactId>usopp.extend.flexmark</artifactId>-->
+<!--            <version>${project.version}</version>-->
+<!--        </dependency>-->
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-nop</artifactId>
+            <version>1.7.25</version>
+        </dependency>
+
         <dependency>
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
@@ -98,10 +110,9 @@
         </dependency>
 
         <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <version>RELEASE</version>
-            <scope>compile</scope>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.49</version>
         </dependency>
 
     </dependencies>
@@ -141,7 +152,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>org.noear.localjt.LocalJtApp</mainClass>
+                            <mainClass>org.noear.cloudjt.CloudJtApp</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -155,10 +166,36 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <!--新增的docker maven插件-->
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>1.2.2</version>
+                <!--docker镜像相关的配置信息-->
+                <configuration>
+                    <!--镜像名，这里用工程名-->
+                    <imageName>${project.artifactId}</imageName>
+                    <!--TAG,这里用工程版本号-->
+                    <imageTags>
+                        <imageTag>${project.version}</imageTag>
+                        <imageTag>latest</imageTag>
+                    </imageTags>
+                    <!--镜像的FROM，使用java官方镜像-->
+                    <baseImage>adoptopenjdk/openjdk11</baseImage>
+                    <!--该镜像的容器启动后，直接运行spring boot工程-->
+                    <entryPoint>["java", "-jar", "/${project.build.finalName}.jar", "--server.port=8080","--drift=1"]</entryPoint>
+                    <!--构建镜像的配置信息-->
+                    <resources>
+                        <resource>
+                            <targetPath>/</targetPath>
+                            <directory>${project.build.directory}</directory>
+                            <include>${project.build.finalName}.jar</include>
+                        </resource>
+                    </resources>
+                </configuration>
+            </plugin>
+
         </plugins>
-
     </build>
-
-
-
 </project>

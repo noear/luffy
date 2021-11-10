@@ -15,12 +15,14 @@
 
         <module>luffy-parent</module>
 
+        <module>luffy-cjt</module>
+        <module>luffy-ljt</module>
+
         <module>luffy.test</module>
 
         <module>custom/luffy.cap.extend.sited</module>
         <module>custom/luffy.cap.extend.mock</module>
-        <module>custom/cloudjt</module>
-        <module>custom/localjt</module>
+
     </modules>
 
 </project>
