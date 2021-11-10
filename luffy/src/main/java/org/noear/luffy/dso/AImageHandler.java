@@ -49,17 +49,8 @@ public class AImageHandler {
 
 
                 if (file.note != null) {
-                    String extension = path.substring(idx);
-                    if (file.note.endsWith(extension) &&
-                            (extension.equals(".zip")
-                                    || extension.equals(".jar")
-                                    || extension.equals(".rar")
-                                    || extension.equals(".sql")
-                            )
-                    ) {
-                        String fileName = URLEncoder.encode(file.note, Solon.cfg().fileEncoding());
-                        context.headerSet("Content-Disposition", "attachment; filename=\"" + fileName + "\"");
-                    }
+                    String fileName = URLEncoder.encode(file.note, Solon.cfg().fileEncoding());
+                    context.headerSet("Content-Disposition", "filename=\"" + fileName + "\"");
                 }
             }
         }
