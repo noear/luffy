@@ -9,6 +9,7 @@ import org.noear.luffy.dso.JtUtilEx;
 import org.noear.luffy.dso.PluginUtil;
 import org.noear.luffy.utils.TextUtils;
 import org.noear.solon.SolonApp;
+import org.noear.solon.Utils;
 import org.noear.solon.core.NvMap;
 import org.noear.weed.WeedConfig;
 
@@ -31,25 +32,25 @@ public class LocalJtApp{
         });
 
         SolonApp app = Luffy.start(LocalJtApp.class, args,()->{
-            NvMap argx = Solon.cfg().argx();
+            Solon.cfg().loadEnv("luffy.");
 
-            if(argx.getInt("model") != 2) {
+            if("2".equals(getArg("model")) == false) {
                 //
                 //server: 0,个人app；1,个人网站；2,多人网站
                 //
                 Solon.global().sharedAdd("__luffy_standalone_model", 1);
             }
 
-            //添加插件
-            plugin_add = argx.get("add");
+            //::添加插件
+            plugin_add = getArg("add");
             PluginUtil.add(plugin_add);
             //更新插件
-            PluginUtil.udp(argx.get("upd"));
+            PluginUtil.udp(getArg("upd"));
             //移徐插件
-            PluginUtil.rem(argx.get("rem"));
+            PluginUtil.rem(getArg("rem"));
 
             //::1.初始化调用
-            PluginUtil.initCall(argx.get("init"));
+            PluginUtil.initCall(getArg("init"));
 
             //::2.重启数据
             JtUtilEx.g2.restart();
@@ -100,5 +101,21 @@ public class LocalJtApp{
                 }
             }
         }
+    }
+
+    /**
+     * 获取启动参数
+     *
+     * @param name 参数名
+     */
+    private static String getArg(String name) {
+        //尝试去启动参数取
+        String tmp = Solon.cfg().argx().get(name);
+        if (Utils.isEmpty(tmp)) {
+            //如果为空，尝试从属性配置取
+            tmp = Solon.cfg().get("luffy." + name);
+        }
+
+        return tmp;
     }
 }
