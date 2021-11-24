@@ -1,0 +1,18 @@
+version: '3'
+
+#镜像说明:
+#单机版：noearorg/luffy-jtl ，使用h2嵌入式数据库
+#服务器版：noearorg/luffy-jtc ，使用mysql8数据库
+
+services:
+  luffy:
+    image: noearorg/luffy-jtl 
+    container_name: luffy
+    environment:
+      - luffy.model=2
+    ports:
+      - "18080:8080"
+    volumes:
+      - "./luffy_ext:/luffy_ext"
+
+
