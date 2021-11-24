@@ -15,8 +15,8 @@
 
         <module>luffy-parent</module>
 
-        <module>luffy-cjt</module>
-        <module>luffy-ljt</module>
+        <module>luffy-jtc</module>
+        <module>luffy-jtl</module>
 
         <module>luffy.test</module>
 
