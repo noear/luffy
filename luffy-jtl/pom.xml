@@ -183,6 +183,9 @@
                             <include>${project.build.finalName}.jar</include>
                         </resource>
                     </resources>
+                    <volumes>
+                        <volume>/luffy_ext</volume>
+                    </volumes>
                 </configuration>
             </plugin>
 
