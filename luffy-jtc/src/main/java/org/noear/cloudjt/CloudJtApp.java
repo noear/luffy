@@ -27,7 +27,6 @@ public class CloudJtApp {
             String home = getArg("home");
             String title = getArg("title");
 
-            String init = getArg("init");
 
             //::安装插件
             PluginUtil.add(getArg("add"));
@@ -37,7 +36,7 @@ public class CloudJtApp {
             PluginUtil.rem(getArg("rem"));
 
             //::1.初始化调用
-            PluginUtil.initCall(init);
+            PluginUtil.initCall(getArg("init"));
 
             //::2.初始化配置
             if (TextUtils.isEmpty(home) == false) {

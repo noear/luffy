@@ -10,13 +10,14 @@ import org.noear.luffy.dso.PluginUtil;
 import org.noear.luffy.utils.TextUtils;
 import org.noear.solon.SolonApp;
 import org.noear.solon.Utils;
-import org.noear.solon.core.NvMap;
 import org.noear.weed.WeedConfig;
 
-public class LocalJtApp{
+public class LocalJtApp {
 
     public static String home;
     public static String title;
+    public static String model;
+
     public static String plugin_add;
 
     public static void main(String[] args) {
@@ -31,15 +32,24 @@ public class LocalJtApp{
             err.printStackTrace();
         });
 
-        SolonApp app = Luffy.start(LocalJtApp.class, args,()->{
+        SolonApp app = Luffy.start(LocalJtApp.class, args, () -> {
             Solon.cfg().loadEnv("luffy.");
 
-            if("2".equals(getArg("model")) == false) {
+            home = getArg("home");
+            title = getArg("title");
+            model = getArg("model");
+
+            if (Utils.isEmpty(model)) {
+                model = "0";
+            }
+
+            if ("2".equals(model) == false) {
                 //
                 //server: 0,个人app；1,个人网站；2,多人网站
                 //
                 Solon.global().sharedAdd("__luffy_standalone_model", 1);
             }
+
 
             //::添加插件
             plugin_add = getArg("add");
@@ -60,11 +70,7 @@ public class LocalJtApp{
             err.printStackTrace();
         });
 
-        NvMap argx = app.cfg().argx();
-
-
         //主页
-        home = argx.get("home");
 
         if (TextUtils.isEmpty(home)) {
             home = "http://localhost:" + app.port() + "/.admin/?_L0n5=1CE24B1CF36B0C5B94AACE6263DBD947FFA53531";
@@ -73,16 +79,15 @@ public class LocalJtApp{
         }
 
         //::2.标题
-        title = argx.get("title");
         if (TextUtils.isEmpty(title)) {
             title = "LocalJt";
         }
 
-        if(argx.getInt("model") == 0) {
+        if ("0".equals(model)) {
             new Thread(() -> {
                 WebShell.start(args);
             }).start();
-        }else{
+        } else {
             //尝试浏览器打开
             if (java.awt.Desktop.isDesktopSupported()) {
                 try {
