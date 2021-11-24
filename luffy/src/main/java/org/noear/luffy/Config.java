@@ -8,7 +8,7 @@ public class Config {
     public static final String code_center="luffy.center";
     public static final String code_node="luffy.node";
 
-    public static final String code_ext="jt_ext";
+    public static final String code_ext="luffy_ext";
 
     public static final String frm_root_img = DbApi.cfgGet("_frm_root_img","/img/");
 
