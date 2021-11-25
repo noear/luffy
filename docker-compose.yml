@@ -8,8 +8,6 @@ services:
   luffy:
     image: noearorg/luffy-jtl 
     container_name: luffy
-    environment:
-      - luffy.model=2
     ports:
       - "18080:8080"
     volumes:

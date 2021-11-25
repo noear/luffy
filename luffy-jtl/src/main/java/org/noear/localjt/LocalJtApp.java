@@ -37,11 +37,8 @@ public class LocalJtApp {
 
             home = getArg("home");
             title = getArg("title");
-            model = getArg("model");
+            model = getArg("model", "2");
 
-            if (Utils.isEmpty(model)) {
-                model = "0";
-            }
 
             if ("2".equals(model) == false) {
                 //
@@ -114,6 +111,10 @@ public class LocalJtApp {
      * @param name 参数名
      */
     private static String getArg(String name) {
+        return getArg(name, null);
+    }
+
+    private static String getArg(String name, String def) {
         //尝试去启动参数取
         String tmp = Solon.cfg().argx().get(name);
         if (Utils.isEmpty(tmp)) {
@@ -121,6 +122,10 @@ public class LocalJtApp {
             tmp = Solon.cfg().get("luffy." + name);
         }
 
-        return tmp;
+        if (Utils.isEmpty(tmp)) {
+            return def;
+        } else {
+            return tmp;
+        }
     }
 }
