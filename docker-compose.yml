@@ -2,7 +2,7 @@ version: '3'
 
 #镜像说明:
 #单机版：noearorg/luffy-jtl ，使用h2嵌入式数据库
-#服务器版：noearorg/luffy-jtc ，使用mysql8数据库
+#集群版：noearorg/luffy-jtc ，使用mysql8数据库
 
 services:
   luffy:
