@@ -49,3 +49,16 @@
 
 #### 应用演示（基于luffy开发的应用）
 * http://teamx.noear.org/
+
+# 部署
+
+#### 极速体验
+
+* 运行运行：`docker run -it --rm -p 18080:8080 noearorg/luffy-jtl`
+* 然后打开：`http://localhost:18080/.admin/?_L0n5=1CE24B1CF36B0C5B94AACE6263DBD947FFA53531`
+
+#### 常规体验
+
+* 使用 docker-compose 部署，配置参考 docker-compose.yml
+
+
