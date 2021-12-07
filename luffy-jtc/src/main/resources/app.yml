@@ -1,3 +1,4 @@
 solon.output.meta: 1
+#solon.extend: luffy_ext #内部处理
 
 luffy.executor.default: freemarker
