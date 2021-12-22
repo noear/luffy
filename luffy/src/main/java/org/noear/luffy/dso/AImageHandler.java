@@ -3,9 +3,7 @@ package org.noear.luffy.dso;
 import org.noear.luffy.model.AImageModel;
 import org.noear.luffy.utils.Base64Utils;
 import org.noear.solon.Solon;
-import org.noear.solon.Utils;
 import org.noear.solon.core.handle.Context;
-import org.noear.solon.core.handle.UploadedFile;
 
 import java.net.URLEncoder;
 import java.util.Date;
@@ -49,7 +47,7 @@ public class AImageHandler {
 
 
                 if (file.note != null) {
-                    String fileName = URLEncoder.encode(file.note, Solon.cfg().fileEncoding());
+                    String fileName = URLEncoder.encode(file.note, Solon.encoding());
                     context.headerSet("Content-Disposition", "filename=\"" + fileName + "\"");
                 }
             }
