@@ -25,7 +25,7 @@
         <okhttp.ver>3.14.9</okhttp.ver>
 
         <okldap.ver>1.1</okldap.ver>
-        <h2.ver>release</h2.ver>
+        <h2.ver>RELEASE</h2.ver>
 
         <flexmark.version>0.34.48</flexmark.version>
     </properties>
