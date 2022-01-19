@@ -21,7 +21,7 @@ public class DbBuilder {
 
     public static DbContext getDb(Map<String, String> map) {
         String url = map.get("url");
-        if(TextUtils.isEmpty(url) == false) {
+        if (TextUtils.isEmpty(url) == false) {
             if (url.indexOf("~/") >= 0) {
                 String path = Solon.cfg().argx().get("extend");
                 url = url.replace("~/", path);
@@ -74,6 +74,10 @@ public class DbBuilder {
 
         if (driverClassName != null) {
             driverClassName = driverClassName.trim();
+
+            if (driverClassName.contains(".h2.")) {
+                type = "h2";
+            }
         }
 
         if (schema != null) {

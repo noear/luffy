@@ -191,8 +191,10 @@ public class PluginUtil {
         }
 
         if(onlyInstall) {
-            if (db().table("a_plugin").whereEq("plugin_tag", packageTag).selectExists()) {
-                return false;
+            if (db().getMetaData().getTable("a_plugin") != null) {
+                if (db().table("a_plugin").whereEq("plugin_tag", packageTag).selectExists()) {
+                    return false;
+                }
             }
         }
 
