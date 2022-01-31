@@ -99,7 +99,7 @@ public class LocalJtApp {
                     }
                 }
             } catch (Throwable e) {
-                //跳过异常
+                e.printStackTrace();
             }
         }
     }

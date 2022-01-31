@@ -10,7 +10,7 @@ luffy.connection.pool: 0
 
 luffy.db.name: "localjt"
 luffy.db.schema: "PUBLIC"
-luffy.db.url: "jdbc:h2:~/localjt;MODE=MYSQL;DB_CLOSE_DELAY=-1;AUTO_RECONNECT=TRUE;DATABASE_TO_LOWER=TRUE;IGNORECASE=TRUE;CASE_INSENSITIVE_IDENTIFIERS=TRUE"
+luffy.db.url: "jdbc:h2:./luffy_ext/localjt;MODE=MYSQL;DB_CLOSE_DELAY=-1;AUTO_RECONNECT=TRUE;DATABASE_TO_LOWER=TRUE;IGNORECASE=TRUE;CASE_INSENSITIVE_IDENTIFIERS=TRUE"
 luffy.db.username: "sa"
 luffy.db.password: "Ca78XJDFawZ5jaOL"
 luffy.db.driverClassName: "org.h2.Driver"

@@ -21,13 +21,6 @@ public class DbBuilder {
 
     public static DbContext getDb(Map<String, String> map) {
         String url = map.get("url");
-        if (TextUtils.isEmpty(url) == false) {
-            if (url.indexOf("~/") >= 0) {
-                String path = Solon.cfg().argx().get("extend");
-                url = url.replace("~/", path);
-            }
-        }
-
 
         String server = map.get("server");
 
