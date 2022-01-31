@@ -82,6 +82,8 @@ public class LocalJtApp {
             title = "LocalJt";
         }
 
+        System.setProperty("java.awt.headless", "false");
+
         if ("0".equals(model)) {
             new Thread(() -> {
                 WebShell.start(args);
