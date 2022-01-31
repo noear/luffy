@@ -75,6 +75,8 @@ public class LocalJtApp {
             home = "http://localhost:" + app.port() + home;
         }
 
+        System.out.println("home:: "+ home);
+
         //::2.标题
         if (TextUtils.isEmpty(title)) {
             title = "LocalJt";
