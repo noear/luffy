@@ -32,6 +32,8 @@ public class LocalJtApp {
             err.printStackTrace();
         });
 
+        System.setProperty("java.awt.headless", "false");
+
         SolonApp app = Luffy.start(LocalJtApp.class, args, () -> {
             Solon.cfg().loadEnv("luffy.");
 
@@ -81,8 +83,6 @@ public class LocalJtApp {
         if (TextUtils.isEmpty(title)) {
             title = "LocalJt";
         }
-
-        System.setProperty("java.awt.headless", "false");
 
         if ("0".equals(model)) {
             new Thread(() -> {
