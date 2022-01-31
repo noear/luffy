@@ -88,7 +88,6 @@ public class LocalJtApp {
             //尝试用本地浏览器打开
             try {
                 if (java.awt.Desktop.isDesktopSupported()) {
-
                     // 创建一个URI实例
                     java.net.URI uri = java.net.URI.create(home);
                     // 获取当前系统桌面扩展
