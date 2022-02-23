@@ -1,4 +1,8 @@
+server.port: 8080
 solon.output.meta: 1
 #solon.extend: luffy_ext #内部处理
+
+luffy.center: "http://jtx.noear.org"
+luffy.node: "localjt"
 
 luffy.executor.default: freemarker
