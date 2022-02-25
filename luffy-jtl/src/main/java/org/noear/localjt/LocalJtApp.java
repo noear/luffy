@@ -77,7 +77,7 @@ public class LocalJtApp {
             home = "http://localhost:" + app.port() + home;
         }
 
-        System.out.println("home::"+ home);
+        System.out.println("home::" + home);
 
         //::2.标题
         if (TextUtils.isEmpty(title)) {
@@ -90,8 +90,8 @@ public class LocalJtApp {
             }).start();
         } else {
             //尝试用本地浏览器打开
-            if (java.awt.Desktop.isDesktopSupported()) {
-                try {
+            try {
+                if (java.awt.Desktop.isDesktopSupported()) {
                     // 创建一个URI实例
                     java.net.URI uri = java.net.URI.create(home);
                     // 获取当前系统桌面扩展
@@ -101,9 +101,9 @@ public class LocalJtApp {
                         // 获取系统默认浏览器打开链接
                         dp.browse(uri);
                     }
-                } catch (Throwable e) {
-                    e.printStackTrace();
                 }
+            } catch (Throwable e) {
+                System.err.println("[Luffy] Desktop startup is not supported");
             }
         }
     }
