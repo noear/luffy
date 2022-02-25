@@ -32,8 +32,6 @@ public class LocalJtApp {
             err.printStackTrace();
         });
 
-        System.setProperty("java.awt.headless", "false");
-
         SolonApp app = Luffy.start(LocalJtApp.class, args, () -> {
             Solon.cfg().loadEnv("luffy.");
 
