@@ -123,12 +123,6 @@
 
         <plugins>
             <plugin>
-                <groupId>org.noear</groupId>
-                <artifactId>weed3-maven-plugin</artifactId>
-                <version>3.2.27</version>
-            </plugin>
-
-            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
