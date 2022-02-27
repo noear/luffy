@@ -97,6 +97,7 @@
             <version>1.10</version>
         </dependency>
 
+        <!-- 不能换版本，否则可能不兼容 -->
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
