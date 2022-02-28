@@ -12,7 +12,6 @@
     <name>_root</name>
 
     <modules>
-
         <module>luffy-parent</module>
 
         <module>luffy-jtc</module>
@@ -22,7 +21,6 @@
 
         <module>custom/luffy.cap.extend.sited</module>
         <module>custom/luffy.cap.extend.mock</module>
-
     </modules>
 
 </project>
