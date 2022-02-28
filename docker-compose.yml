@@ -8,6 +8,8 @@ services:
   luffy:
     image: noearorg/luffy-jtl 
     container_name: luffy
+    environment:
+      - TZ=Asia/Shanghai          #设置时区
     ports:
       - "18080:8080"
     volumes:
