@@ -55,7 +55,7 @@ public class HeiheiApi {
         String rest = null;
 
         try {
-            rest = HttpUtils.http(apiUrl).headers(headers).bodyTxt(message, "text/plain").post();
+            rest = HttpUtils.shortHttp(apiUrl).headers(headers).bodyTxt(message, "text/plain").post();
         } catch (Exception ex) {
             //ex.printStackTrace();
             LogUtil.log("heihei", LogLevel.ERROR, ExceptionUtils.getString(ex));
