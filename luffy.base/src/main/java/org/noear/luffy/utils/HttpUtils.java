@@ -19,26 +19,51 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Supplier;
 
 public class HttpUtils {
-    private final static Fun0<Dispatcher> okhttp_dispatcher = () -> {
+    private final static Supplier<Dispatcher> okhttp_dispatcher = () -> {
         Dispatcher temp = new Dispatcher();
-        temp.setMaxRequests(3000);
-        temp.setMaxRequestsPerHost(600);
+        temp.setMaxRequests(20000);
+        temp.setMaxRequestsPerHost(10000);
         return temp;
     };
 
-    private final static OkHttpClient httpClient = new OkHttpClient.Builder()
-            .connectTimeout(60 * 5, TimeUnit.SECONDS)
+    private final static OkHttpClient httpShortClient = new OkHttpClient.Builder()
+            .connectTimeout(10 , TimeUnit.SECONDS)
+            .writeTimeout(10, TimeUnit.SECONDS)
+            .readTimeout(10, TimeUnit.SECONDS)
+            .dispatcher(okhttp_dispatcher.get())
+            .build();
+
+    //用于跑定时任务调度
+    private final static OkHttpClient httpLongClient = new OkHttpClient.Builder()
+            .connectTimeout(30, TimeUnit.SECONDS)
             .writeTimeout(60 * 5, TimeUnit.SECONDS)
             .readTimeout(60 * 5, TimeUnit.SECONDS)
-            .dispatcher(okhttp_dispatcher.run())
+            .dispatcher(okhttp_dispatcher.get())
             .build();
 
     public static HttpUtils http(String url) {
-        return new HttpUtils(url);
+        //默认为长时间
+        return new HttpUtils(url, httpLongClient);
     }
 
+    /**
+     * 短时间处理
+     * */
+    public static HttpUtils shortHttp(String url) {
+        return new HttpUtils(url, httpShortClient);
+    }
+
+    /**
+     * 长时间处理
+     * */
+    public static HttpUtils longHttp(String url) {
+        return new HttpUtils(url, httpLongClient);
+    }
+
+    private OkHttpClient _client;
     private String _url;
     private Charset _charset;
     private Map<String, String> _cookies;
@@ -49,9 +74,26 @@ public class HttpUtils {
     private MultipartBody.Builder _part_builer;
     private Request.Builder _builder;
 
-    public HttpUtils(String url) {
+    public HttpUtils(String url, OkHttpClient client) {
         _url = url;
+        _client = client;
         _builder = new Request.Builder().url(url);
+    }
+
+    /**
+     * 短时间处理
+     * */
+    public HttpUtils asShortHttp(){
+        _client = httpShortClient;
+        return this;
+    }
+
+    /**
+     * 长时间处理
+     * */
+    public HttpUtils asLongHttp(){
+        _client = httpLongClient;
+        return this;
     }
 
     @Note("设置multipart")
@@ -232,7 +274,7 @@ public class HttpUtils {
                 throw new IllegalArgumentException("This method is not supported");
         }
 
-        Call call = httpClient.newCall(_builder.build());
+        Call call = _client.newCall(_builder.build());
         return call.execute();
     }
 

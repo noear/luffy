@@ -187,7 +187,7 @@ public class JtUtil {
 
     @Note("执行 HTTP 请求")
     public HttpUtils http(String url) {
-        return new HttpUtils(url);
+        return HttpUtils.http(url);
     }
 
 

@@ -254,7 +254,7 @@ public class PluginUtil {
         }
 
 
-        String json = new HttpUtils(url).get();
+        String json =  HttpUtils.http(url).get();
 
         //支持zip传递
         if(json.startsWith("{") == false){
