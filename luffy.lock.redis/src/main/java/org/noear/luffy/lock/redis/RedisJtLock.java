@@ -9,7 +9,7 @@ import java.util.Properties;
 public class RedisJtLock implements IJtLock {
     private RedisClient _redisX;
 
-    public RedisJtLock(Properties prop){
+    public RedisJtLock(Properties prop) {
         _redisX = new RedisClient(prop);
     }
 
@@ -36,14 +36,14 @@ public class RedisJtLock implements IJtLock {
     public boolean tryLock(String group, String key, int inSeconds, String inMaster) {
         String key2 = group + ".lk." + key;
 
-        return _redisX.openAndGet((ru) -> ru.key(key2).expire(inSeconds).lock(inMaster));
+        return _redisX.getLock(key2).tryLock(inSeconds, inMaster);
     }
 
     @Override
     public boolean tryLock(String group, String key, int inSeconds) {
         String key2 = group + ".lk." + key;
 
-        return _redisX.openAndGet((ru) -> ru.key(key2).expire(inSeconds).lock("_"));
+        return _redisX.getLock(key2).tryLock();
     }
 
     @Override
@@ -55,15 +55,13 @@ public class RedisJtLock implements IJtLock {
     public boolean isLocked(String group, String key) {
         String key2 = group + ".lk." + key;
 
-        return _redisX.openAndGet((ru) -> ru.key(key2).exists());
+        return _redisX.getLock(key2).isLocked();
     }
 
     @Override
     public void unLock(String group, String key) {
-        String key2 = group+".lk." + key;
+        String key2 = group + ".lk." + key;
 
-        _redisX.open((ru) -> {
-            ru.key(key2).delete();
-        });
+        _redisX.getLock(key2).unLock();
     }
 }

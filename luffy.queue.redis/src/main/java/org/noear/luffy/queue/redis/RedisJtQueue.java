@@ -3,16 +3,18 @@ package org.noear.luffy.queue.redis;
 import org.noear.luffy.dso.*;
 import org.noear.luffy.utils.ConfigUtils;
 import org.noear.redisx.RedisClient;
+import org.noear.redisx.plus.RedisQueue;
 
+import java.util.Collection;
 import java.util.Properties;
 
 public class RedisJtQueue implements IJtQueue {
-    private RedisClient _redisX;
+    private RedisQueue _queue;
     private String _name;
 
     public RedisJtQueue(String name, Properties prop) {
         _name = name;
-        _redisX = new RedisClient(prop);
+        _queue = new RedisClient(prop).getQueue(name);
     }
 
     public static void init(String cfg) throws Exception {
@@ -43,35 +45,27 @@ public class RedisJtQueue implements IJtQueue {
     @Override
     public void add(String item) {
         if (item != null) {
-            _redisX.open0((rs) -> {
-                rs.key(name()).listAdd(item);
-            });
+            _queue.add(item);
         }
     }
 
     @Override
-    public void addAll(Iterable<String> items) {
-        _redisX.open0((rs) -> {
-            for (String item : items) {
-                if (item != null) {
-                    rs.key(name()).listAdd(item);
-                }
-            }
-        });
+    public void addAll(Collection<String> items) {
+        _queue.addAll(items);
     }
 
     @Override
     public String peek() {
-        return _redisX.openAndGet( (rs) -> rs.key(name()).listGet(-1));
+        return _queue.peek();
     }
 
     @Override
     public String poll() {
-        return _redisX.openAndGet((rs) -> rs.key(name()).listPop());
+        return _queue.pop();
     }
 
     @Override
     public void remove() {
-        _redisX.open((rs) -> rs.key(name()).listPop());
+         _queue.pop();
     }
 }

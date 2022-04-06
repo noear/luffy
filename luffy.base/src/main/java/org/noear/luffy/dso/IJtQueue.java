@@ -1,5 +1,7 @@
 package org.noear.luffy.dso;
 
+import java.util.Collection;
+
 public interface IJtQueue {
     String name();
 
@@ -11,7 +13,7 @@ public interface IJtQueue {
     /**
      * 推入到尾部
      */
-    void addAll(Iterable<String> items);
+    void addAll(Collection<String> items);
 
     /*
      * 预览头部元素
