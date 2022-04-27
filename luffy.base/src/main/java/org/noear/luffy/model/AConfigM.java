@@ -1,15 +1,14 @@
 package org.noear.luffy.model;
 
-import com.zaxxer.hikari.HikariDataSource;
+import org.noear.luffy.utils.DsUtils;
 import org.noear.snack.ONode;
 import org.noear.solon.core.NvMap;
 import org.noear.luffy.utils.ConfigUtils;
 import org.noear.luffy.utils.TextUtils;
 import org.noear.weed.DbContext;
 
-import java.util.Map;
+import javax.sql.DataSource;
 import java.util.Properties;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class AConfigM {
     public final String value;
@@ -89,67 +88,16 @@ public class AConfigM {
     /**
      * 获取 db:DbContext
      */
-    private static Map<String,DbContext> _dbMap = new ConcurrentHashMap<>();
     public DbContext getDb() {
         return getDb(false);
     }
 
     public DbContext getDb(boolean pool) {
-        if (TextUtils.isEmpty(value)) {
-            return null;
-        }
-
-        DbContext db = _dbMap.get(value);
-        if (db == null) {
-            db = getDbDo(pool);
-            DbContext l = _dbMap.putIfAbsent(value, db);
-            if (l != null) {
-                db = l;
-            }
-        }
-        return db;
+        return AConfigResolver.toDb(this, pool);
     }
 
-    private DbContext getDbDo(boolean pool) {
-        Properties prop = getProp();
-        String url = prop.getProperty("url");
 
-        if(TextUtils.isEmpty(url)){
-            return null;
-        }
-
-
-        if (pool) {
-            HikariDataSource source = new HikariDataSource();
-
-            String schema = prop.getProperty("schema");
-            String username = prop.getProperty("username");
-            String password = prop.getProperty("password");
-            String driverClassName = prop.getProperty("driverClassName");
-
-            if (TextUtils.isEmpty(url) == false) {
-                source.setJdbcUrl(url);
-            }
-
-            if (TextUtils.isEmpty(username) == false) {
-                source.setUsername(username);
-            }
-
-            if (TextUtils.isEmpty(password) == false) {
-                source.setPassword(password);
-            }
-
-            if (TextUtils.isEmpty(schema) == false) {
-                source.setSchema(schema);
-            }
-
-            if (TextUtils.isEmpty(driverClassName) == false) {
-                source.setDriverClassName(driverClassName);
-            }
-
-            return new DbContext(source, schema);
-        } else {
-            return new DbContext(prop);
-        }
+    public DataSource getDs(boolean pool) {
+        return DsUtils.getDs(getProp(), pool);
     }
 }
