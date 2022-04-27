@@ -39,7 +39,7 @@ public class JarUtil {
                 return false;
             }
 
-            try(Response res = HttpUtils.http(path).exec("GET")){
+            try(Response res = HttpUtils.http(path).asLongHttp().exec("GET")){
 
                 if(res.isSuccessful() == false){
                     return false;
