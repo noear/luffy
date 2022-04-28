@@ -54,8 +54,13 @@ public class HttpUtils {
     private Request.Builder _builder;
 
     public HttpUtils(String url, OkHttpClient client) {
+        if (client == null) {
+            _client = httpClient;
+        } else {
+            _client = client;
+        }
+
         _url = url;
-        _client = client;
         _builder = new Request.Builder().url(url);
     }
 
