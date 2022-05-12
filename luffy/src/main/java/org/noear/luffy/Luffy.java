@@ -75,7 +75,7 @@ public class Luffy {
         app.beanScan(Luffy.class);
 
         //5.初始化功能
-        if (app.cfg().size() < 4) {
+        if (app.cfg().size() < 8) {
             //5.1.如果没有DB配置；则启动配置服务
             AppUtil.runAsInit(app, extend);
         } else {

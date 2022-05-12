@@ -1,4 +1,8 @@
 server.port: 8080
+
+server.request.maxBodySize: 200mb #kb,mb
+server.request.maxFileSize: 200mb #kb,mb (默认使用 maxBodySize 配置值)
+
 solon.output.meta: 1
 #solon.extend: luffy_ext #内部处理
 
