@@ -4,16 +4,17 @@ import com.jfinal.template.Directive;
 import org.noear.solon.Solon;;
 import org.noear.solon.SolonApp;
 import org.noear.solon.core.Aop;
+import org.noear.solon.core.AopContext;
 import org.noear.solon.core.Plugin;
 import org.noear.luffy.executor.ExecutorFactory;
 
 public class XPluginImp implements Plugin {
     @Override
-    public void start(SolonApp app) {
+    public void start(AopContext context) {
         EnjoyJtExecutor executor = EnjoyJtExecutor.singleton();
 
-        Aop.beanOnloaded(() -> {
-            Aop.beanForeach((k, v) -> {
+        context.beanOnloaded((ctx) -> {
+            ctx.beanForeach((k, v) -> {
                 if (k.startsWith("view:")) { //java view widget
                     if(Directive.class.isAssignableFrom(v.clz())){
                         executor.tagReg(k.split(":")[1], (Class<? extends Directive>)v.clz());

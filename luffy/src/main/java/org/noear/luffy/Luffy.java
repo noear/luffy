@@ -72,7 +72,7 @@ public class Luffy {
         });
 
         //4.1.加载自己的bean
-        app.beanScan(Luffy.class);
+        Aop.context().beanScan(Luffy.class);
 
         //5.初始化功能
         if (app.cfg().size() < 8) {
