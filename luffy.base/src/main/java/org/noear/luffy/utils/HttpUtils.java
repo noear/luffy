@@ -291,8 +291,13 @@ public class HttpUtils {
         return this;
     }
 
-    @Note("执行请求，返回字符串")
+    @Deprecated
     public String exec2(String mothod) throws Exception {
+        return execAsBody(mothod);
+    }
+
+    @Note("执行请求，返回字符串")
+    public String execAsBody(String mothod) throws Exception {
         if (_cache > 0) {
             ICacheServiceEx c = (ICacheServiceEx) Solon.global().shared().get("cache");
             if (c != null) {
@@ -308,6 +313,11 @@ public class HttpUtils {
         } else {
             return exec2_do(mothod);
         }
+    }
+
+    @Note("执行请求，返回状态码")
+    public int execAsCode(String mothod) throws Exception {
+        return exec(mothod).code();
     }
 
     private String exec2_do(String mothod) throws Exception {
@@ -329,27 +339,32 @@ public class HttpUtils {
 
     @Note("发起GET请求，返回字符串（REST.select 从服务端获取一或多项资源）")
     public String get() throws Exception {
-        return exec2("GET");
+        return execAsBody("GET");
     }
 
     @Note("发起POST请求，返回字符串（REST.create 在服务端新建一项资源）")
     public String post() throws Exception {
-        return exec2("POST");
+        return execAsBody("POST");
     }
 
     @Note("发起PUT请求，返回字符串（REST.update 客户端提供改变后的完整资源）")
     public String put() throws Exception {
-        return exec2("PUT");
+        return execAsBody("PUT");
     }
 
     @Note("发起PATCH请求，返回字符串（REST.update 客户端提供改变的属性）")
     public String patch() throws Exception {
-        return exec2("PATCH");
+        return execAsBody("PATCH");
     }
 
     @Note("发起DELETE请求，返回字符串（REST.delete 从服务端删除资源）")
     public String delete() throws Exception {
-        return exec2("DELETE");
+        return execAsBody("DELETE");
+    }
+
+    @Note("发起HEAD请求，返回状态码")
+    public int head() throws Exception{
+        return execAsCode("HEAD");
     }
 
     private static String getRequestCookieString(Map<String, String> cookies) {
