@@ -306,12 +306,12 @@ public class HttpUtils {
                     url_key = EncryptUtils.md5(_url + ONode.stringify(_form));
                 }
 
-                return c.getBy(_cache, url_key, (uc) -> exec2_do(mothod));
+                return c.getBy(_cache, url_key, (uc) -> execAsBodyDo(mothod));
             } else {
-                return exec2_do(mothod);
+                return execAsBodyDo(mothod);
             }
         } else {
-            return exec2_do(mothod);
+            return execAsBodyDo(mothod);
         }
     }
 
@@ -320,7 +320,7 @@ public class HttpUtils {
         return exec(mothod).code();
     }
 
-    private String exec2_do(String mothod) throws Exception {
+    private String execAsBodyDo(String mothod) throws Exception {
         Response tmp = exec(mothod);
         int code = tmp.code();
         String text = tmp.body().string();

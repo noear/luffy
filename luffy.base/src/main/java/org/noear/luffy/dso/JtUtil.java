@@ -185,6 +185,12 @@ public class JtUtil {
         return URI.create(str);
     }
 
+
+    @Note("执行 PING 操作")
+    public void ping(String addrs) throws Exception{
+        PingUtils.ping(addrs);
+    }
+
     @Note("执行 HTTP 请求")
     public HttpUtils http(String url) {
         return HttpUtils.http(url);
