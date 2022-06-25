@@ -26,11 +26,6 @@
             <artifactId>luffy.base</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>org.noear</groupId>
-            <artifactId>luffy.base</artifactId>
-        </dependency>
-
         <!-- ORM 框架 -->
         <dependency>
             <groupId>org.noear</groupId>

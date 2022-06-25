@@ -3,6 +3,7 @@ package org.noear.luffy;
 import org.noear.luffy.dso.*;
 import org.noear.solon.Solon;;
 import org.noear.solon.SolonApp;
+import org.noear.solon.Utils;
 import org.noear.solon.core.*;
 import org.noear.luffy.utils.ExceptionUtils;
 import org.noear.luffy.utils.TextUtils;
@@ -75,7 +76,7 @@ public class Luffy {
         Aop.context().beanScan(Luffy.class);
 
         //5.初始化功能
-        if (app.cfg().size() < 8) {
+        if (Utils.isEmpty(app.cfg().get("luffy.db.schema"))) {
             //5.1.如果没有DB配置；则启动配置服务
             AppUtil.runAsInit(app, extend);
         } else {
