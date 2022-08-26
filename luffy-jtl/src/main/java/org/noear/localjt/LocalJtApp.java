@@ -10,6 +10,8 @@ import org.noear.luffy.dso.PluginUtil;
 import org.noear.luffy.utils.TextUtils;
 import org.noear.solon.SolonApp;
 import org.noear.solon.Utils;
+import org.noear.solon.web.staticfiles.StaticMappings;
+import org.noear.solon.web.staticfiles.repository.ExtendStaticRepository;
 import org.noear.weed.WeedConfig;
 
 public class LocalJtApp {
@@ -44,7 +46,7 @@ public class LocalJtApp {
                 //
                 //server: 0,个人app；1,个人网站；2,多人网站
                 //
-                Solon.global().sharedAdd("__luffy_standalone_model", 1);
+                Solon.app().sharedAdd("__luffy_standalone_model", 1);
             }
 
 
@@ -61,6 +63,10 @@ public class LocalJtApp {
 
             //::2.重启数据
             JtUtilEx.g2.restart();
+
+
+            //添加扩展静态目录支持
+            StaticMappings.add("/", new ExtendStaticRepository());
         });
 
         app.onError((err) -> {

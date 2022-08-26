@@ -8,6 +8,8 @@ import org.noear.luffy.dso.JtUtilEx;
 import org.noear.luffy.dso.PluginUtil;
 import org.noear.luffy.utils.TextUtils;
 import org.noear.solon.Utils;
+import org.noear.solon.web.staticfiles.StaticMappings;
+import org.noear.solon.web.staticfiles.repository.ExtendStaticRepository;
 
 public class CloudJtApp {
     public static void main(String[] args) {
@@ -51,6 +53,9 @@ public class CloudJtApp {
 
             //::3.重启数据
             JtUtilEx.g2.restart();
+
+            //添加扩展静态目录支持
+            StaticMappings.add("/", new ExtendStaticRepository());
         });
     }
 
