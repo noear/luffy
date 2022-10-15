@@ -217,7 +217,7 @@ public class PluginUtil {
     private static void do_install_dependency(String packageTag) throws Exception{
         String tag = packageTag.split("\\.")[0];
 
-        if(db().table("a_plugin").where("tag=? AND is_installed=1",tag).exists()){
+        if(db().table("a_plugin").where("tag=? AND is_installed=1",tag).selectExists()){
             return;
         }
 
@@ -422,7 +422,7 @@ public class PluginUtil {
                     .set("thumbnail", meta.get("thumbnail").getString())
                     .set("category", meta.get("category").getString())
                     .set("is_installed", 1)
-                    .upsert("plugin_tag");
+                    .upsertBy("plugin_tag");
         }
 
         //5.下载a_image表的jar包
