@@ -1,7 +1,7 @@
 package org.noear.luffy.cap.extend.sited.dao;
 
-import org.noear.weed.DbContext;
-import org.noear.weed.cache.ICacheServiceEx;
+import org.noear.wood.DbContext;
+import org.noear.wood.cache.ICacheServiceEx;
 
 public class DbUtil {
 

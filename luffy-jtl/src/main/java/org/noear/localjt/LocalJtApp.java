@@ -12,7 +12,7 @@ import org.noear.solon.SolonApp;
 import org.noear.solon.Utils;
 import org.noear.solon.web.staticfiles.StaticMappings;
 import org.noear.solon.web.staticfiles.repository.ExtendStaticRepository;
-import org.noear.weed.WeedConfig;
+import org.noear.wood.WoodConfig;
 
 public class LocalJtApp {
 
@@ -29,7 +29,7 @@ public class LocalJtApp {
                 Feature.WriteClassName,
                 Feature.QuoteFieldNames);
 
-        WeedConfig.onException((cmd, err) -> {
+        WoodConfig.onException((cmd, err) -> {
             System.out.println(cmd.toSqlString());
             err.printStackTrace();
         });

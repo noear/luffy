@@ -7,8 +7,8 @@ import org.noear.solon.Utils;
 import org.noear.solon.core.*;
 import org.noear.luffy.utils.ExceptionUtils;
 import org.noear.luffy.utils.TextUtils;
-import org.noear.weed.ext.Act0;
-import org.noear.weed.xml.XmlSqlLoader;
+import org.noear.wood.ext.Act0;
+import org.noear.wood.xml.XmlSqlLoader;
 
 public class Luffy {
     private static Act0 _onLoadEvent;

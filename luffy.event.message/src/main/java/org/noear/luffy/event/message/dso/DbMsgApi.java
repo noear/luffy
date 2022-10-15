@@ -6,10 +6,10 @@ import org.noear.luffy.model.AFileModel;
 import org.noear.luffy.event.message.Config;
 import org.noear.luffy.utils.Datetime;
 import org.noear.luffy.utils.ExceptionUtils;
-import org.noear.weed.DataItem;
-import org.noear.weed.DataList;
-import org.noear.weed.DbContext;
-import org.noear.weed.DbTableQuery;
+import org.noear.wood.DataItem;
+import org.noear.wood.DataList;
+import org.noear.wood.DbContext;
+import org.noear.wood.DbTableQuery;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -119,7 +119,7 @@ public class DbMsgApi {
 
         boolean isExists = db().table("a_message_distribution")
                 .where("msg_id=?", msg_id).and("file_id=?", subs.file_id)
-                .exists();
+                .selectExists();
 
         if (isExists == false) {
             db().table("a_message_distribution").usingExpr(true)

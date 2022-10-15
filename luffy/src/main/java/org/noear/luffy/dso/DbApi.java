@@ -11,9 +11,9 @@ import org.noear.luffy.model.AImageModel;
 import org.noear.luffy.utils.Datetime;
 import org.noear.luffy.utils.EventPipeline;
 import org.noear.luffy.utils.TextUtils;
-import org.noear.weed.DataItem;
-import org.noear.weed.DbContext;
-import org.noear.weed.DbTableQuery;
+import org.noear.wood.DataItem;
+import org.noear.wood.DbContext;
+import org.noear.wood.DbTableQuery;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -178,7 +178,7 @@ public class DbApi {
 
     public static boolean cfgSet(String name, String value, String label) throws Exception {
         boolean is_ok = false;
-        if (db().table("a_config").where("`name`=?", name).exists()) {
+        if (db().table("a_config").where("`name`=?", name).selectExists()) {
             is_ok = db().table("a_config")
                     .set("value", value)
                     .build((tb) -> {
@@ -209,7 +209,7 @@ public class DbApi {
 
     public static boolean cfgSetNote(String name, String note, String label) throws Exception {
         boolean is_ok = false;
-        if (db().table("a_config").where("`name`=?", name).exists()) {
+        if (db().table("a_config").where("`name`=?", name).selectExists()) {
             is_ok = db().table("a_config")
                     .set("note", note)
                     .build((tb) -> {
@@ -293,7 +293,7 @@ public class DbApi {
             qr.set("`tag`", tag);
         }
 
-        if (db().table("a_image").where("`path`=?", path).exists()) {
+        if (db().table("a_image").where("`path`=?", path).selectExists()) {
             is_ok = qr.where("`path`=?", path)
                     .update() > 0;
 

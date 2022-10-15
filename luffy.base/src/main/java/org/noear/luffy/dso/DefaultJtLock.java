@@ -1,6 +1,6 @@
 package org.noear.luffy.dso;
 
-import org.noear.weed.cache.LocalCache;
+import org.noear.wood.cache.LocalCache;
 
 public class DefaultJtLock implements IJtLock {
     private LocalCache _cache = new LocalCache("lock",3);

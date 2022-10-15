@@ -6,7 +6,7 @@ import org.noear.solon.core.AopContext;
 import org.noear.solon.core.Plugin;
 import org.noear.luffy.task.TaskFactory;
 import org.noear.luffy.event.schedule.controller.ScheduleTask;
-import org.noear.weed.DbContext;
+import org.noear.wood.DbContext;
 
 public class XPluginImp implements Plugin {
     @Override

@@ -9,8 +9,8 @@ import org.noear.snack.ONode;
 import org.noear.solon.annotation.Controller;
 import org.noear.solon.annotation.Mapping;
 import org.noear.solon.core.handle.Context;
-import org.noear.weed.DataItem;
-import org.noear.weed.DbTableQuery;
+import org.noear.wood.DataItem;
+import org.noear.wood.DbTableQuery;
 
 import java.net.URI;
 import java.net.URLDecoder;

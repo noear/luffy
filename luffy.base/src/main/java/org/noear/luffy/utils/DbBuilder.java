@@ -3,7 +3,7 @@ package org.noear.luffy.utils;
 import com.zaxxer.hikari.HikariDataSource;
 import org.noear.solon.Solon;
 import org.noear.solon.Utils;
-import org.noear.weed.DbContext;
+import org.noear.wood.DbContext;
 
 import java.util.Map;
 

@@ -8,7 +8,7 @@ import okio.Source;
 import org.noear.snack.ONode;
 import org.noear.solon.Solon;
 import org.noear.solon.annotation.Note;
-import org.noear.weed.cache.ICacheServiceEx;
+import org.noear.wood.cache.ICacheServiceEx;
 
 import java.io.IOException;
 import java.io.InputStream;

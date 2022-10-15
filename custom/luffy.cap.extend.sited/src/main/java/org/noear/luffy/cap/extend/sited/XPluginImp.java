@@ -6,8 +6,8 @@ import org.noear.luffy.cap.extend.sited.dao.DbUtil;
 import org.noear.solon.Solon;
 import org.noear.solon.core.AopContext;
 import org.noear.solon.core.Plugin;
-import org.noear.weed.DbContext;
-import org.noear.weed.cache.ICacheServiceEx;
+import org.noear.wood.DbContext;
+import org.noear.wood.cache.ICacheServiceEx;
 
 public class XPluginImp implements Plugin {
     @Override

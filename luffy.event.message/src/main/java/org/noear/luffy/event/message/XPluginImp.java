@@ -8,8 +8,8 @@ import org.noear.luffy.dso.JtFun;
 import org.noear.luffy.task.TaskFactory;
 import org.noear.luffy.event.message.controller.MessageTask;
 import org.noear.luffy.event.message.dso.DbMsgApi;
-import org.noear.weed.DbContext;
-import org.noear.weed.cache.ICacheServiceEx;
+import org.noear.wood.DbContext;
+import org.noear.wood.cache.ICacheServiceEx;
 
 public class XPluginImp implements Plugin {
     @Override

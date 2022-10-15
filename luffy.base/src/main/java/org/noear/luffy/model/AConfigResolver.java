@@ -1,8 +1,8 @@
 package org.noear.luffy.model;
 
 import org.noear.luffy.utils.TextUtils;
-import org.noear.weed.DbContext;
-import org.noear.weed.mongo.MgContext;
+import org.noear.wood.DbContext;
+import org.noear.mongox.MgContext;
 
 import java.util.HashMap;
 import java.util.Map;

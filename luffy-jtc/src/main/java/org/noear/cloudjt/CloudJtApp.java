@@ -19,7 +19,7 @@ public class CloudJtApp {
                 Feature.WriteClassName,
                 Feature.QuoteFieldNames);
 
-//        WeedConfig.onException((cmd, err) -> {
+//        WoodConfig.onException((cmd, err) -> {
 //            err.printStackTrace();
 //        });
 

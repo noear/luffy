@@ -17,7 +17,7 @@ import org.noear.solon.Utils;
 import org.noear.solon.core.handle.Handler;
 import org.noear.solon.core.handle.HandlerPipeline;
 import org.noear.solon.core.handle.MethodType;
-import org.noear.weed.WeedConfig;
+import org.noear.wood.WoodConfig;
 
 import java.net.URL;
 
@@ -125,7 +125,7 @@ public class AppUtil {
         }
 
         //4.踪跟WEED异常
-        do_weedTrack();
+        do_woodTrack();
 
         //CallUtil.callLabel(null, "hook.start", false, null);
 
@@ -158,21 +158,21 @@ public class AppUtil {
         TaskFactory.run(TaskRunner.g);
     }
 
-    private static void do_weedTrack(){
-        WeedConfig.onException((cmd, ex) -> {
+    private static void do_woodTrack(){
+        WoodConfig.onException((cmd, ex) -> {
             if (cmd.text.indexOf("a_log") < 0 && cmd.isLog >= 0) {
                 System.out.println(cmd.text);
-                LogUtil.log("weed", "err_log",LogLevel.ERROR, "出错", cmd.text + "<br/><br/>" + ExceptionUtils.getString(ex));
+                LogUtil.log("wood", "err_log",LogLevel.ERROR, "出错", cmd.text + "<br/><br/>" + ExceptionUtils.getString(ex));
             }
         });
 
-        WeedConfig.onExecuteAft((cmd)->{
+        WoodConfig.onExecuteAft((cmd)->{
             if(cmd.isLog<0){
                 return;
             }
 
             if(cmd.timespan()>1000){
-                LogUtil.log("weed", "slow_log",LogLevel.WARN, cmd.timespan()+"ms", cmd.text);
+                LogUtil.log("wood", "slow_log",LogLevel.WARN, cmd.timespan()+"ms", cmd.text);
             }
         });
     }

@@ -2,16 +2,16 @@ package org.noear.luffy.cap.extend.sited.dao;
 
 import org.noear.luffy.cap.extend.sited.dao.custom.DdSource;
 import org.noear.luffy.cap.extend.sited.utils.TextUtils;
-import org.noear.weed.DataItem;
-import org.noear.weed.DbContext;
-import org.noear.weed.IDataItem;
+import org.noear.wood.DataItem;
+import org.noear.wood.DbContext;
+import org.noear.wood.IDataItem;
 
 public class DbSiteDApi {
 
     public static void saveSiteD(int puid, DdSource source, String path, int is_ok) throws Exception {
         DbContext db = DbUtil.db();
 
-        boolean exists = db.table("sited").where("guid=?", source.guid).exists();
+        boolean exists = db.table("sited").where("guid=?", source.guid).selectExists();
         int dtype = source.main.dtype();
         int btype = source.main.btype();
         if (btype == 0) btype = dtype;

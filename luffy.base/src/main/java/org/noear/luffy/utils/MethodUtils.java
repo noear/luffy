@@ -1,8 +1,8 @@
 package org.noear.luffy.utils;
 
 import org.noear.solon.annotation.Note;
-import org.noear.weed.DbContext;
-import org.noear.weed.cache.ICacheServiceEx;
+import org.noear.wood.DbContext;
+import org.noear.wood.cache.ICacheServiceEx;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;

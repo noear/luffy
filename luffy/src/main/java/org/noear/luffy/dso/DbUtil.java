@@ -2,8 +2,8 @@ package org.noear.luffy.dso;
 
 import org.noear.solon.core.NvMap;
 import org.noear.luffy.utils.DbBuilder;
-import org.noear.weed.DbContext;
-import org.noear.weed.cache.LocalCache;
+import org.noear.wood.DbContext;
+import org.noear.wood.cache.LocalCache;
 
 /*
  * 数据库处理工具
