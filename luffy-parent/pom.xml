@@ -21,7 +21,7 @@
         <java.version>1.8</java.version>
 
         <solon.ver>1.10.7</solon.ver>
-        <wood.ver>1.0.0</wood.ver>
+        <wood.ver>1.0.1</wood.ver>
         <snack3.ver>3.2.44</snack3.ver>
 
         <mongox.ver>1.0.0</mongox.ver>
