@@ -30,11 +30,6 @@
             <artifactId>wood</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>org.noear</groupId>
-            <artifactId>mongox</artifactId>
-        </dependency>
-
         <!-- JSON 框架 -->
         <dependency>
             <groupId>org.noear</groupId>
