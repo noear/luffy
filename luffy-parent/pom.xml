@@ -340,6 +340,7 @@
         <module>../luffy.executor.s.groovy</module>
         <module>../luffy.executor.s.lua</module>
         <module>../luffy.executor.s.graaljs</module>
+        <module>../luffy.executor.s.nashorn</module>
 
         <module>../luffy.executor.m.freemarker</module>
         <module>../luffy.executor.m.velocity</module>
