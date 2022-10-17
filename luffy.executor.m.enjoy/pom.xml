@@ -18,7 +18,7 @@
         <dependency>
             <groupId>com.jfinal</groupId>
             <artifactId>enjoy</artifactId>
-            <version>4.8</version>
+            <version>5.0.0</version>
         </dependency>
 
         <dependency>
