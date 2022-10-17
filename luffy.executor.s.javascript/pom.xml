@@ -33,12 +33,6 @@
             <artifactId>luffy.base</artifactId>
             <scope>provided</scope>
         </dependency>
-<!-- 以后可以用这个 -->
-<!--        <dependency>-->
-<!--            <groupId>org.openjdk.nashorn</groupId>-->
-<!--            <artifactId>nashorn-core</artifactId>-->
-<!--            <version>15.4</version>-->
-<!--        </dependency>-->
     </dependencies>
 
 
