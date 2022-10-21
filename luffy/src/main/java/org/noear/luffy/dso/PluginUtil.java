@@ -10,10 +10,7 @@ import org.noear.luffy.utils.Base64Utils;
 import org.noear.luffy.utils.HttpUtils;
 import org.noear.luffy.utils.TextUtils;
 import org.noear.solon.Utils;
-import org.noear.solon.core.ExtendLoader;
-import org.noear.solon.core.handle.Context;
 import org.noear.solon.core.handle.ContextEmpty;
-import org.noear.solon.core.handle.ContextUtil;
 import org.noear.wood.DataItem;
 import org.noear.wood.DataList;
 import org.noear.wood.DbContext;
@@ -227,9 +224,16 @@ public class PluginUtil {
     private static List<String> dependencyGetDo(String tag) throws Exception{
         return db().table("a_config")
                 .where("tag=? AND label=?",tag,"dep.plugin")
-                .select("value")
-                .getDataList()
-                .toArray(0);
+                .selectArray("value");
+    }
+
+    private static String doRepMap(String str) {
+        if (str != null) {
+            return str.replaceAll("org.noear.weed.ext.LinkedCaseInsensitiveMap", "java.util.LinkedHashMap")
+                    .replaceAll("org.noear.wood.ext.LinkedCaseInsensitiveMap", "java.util.LinkedHashMap");
+        } else {
+            return str;
+        }
     }
 
     private static boolean _installDo(String packageTag) throws Exception{
@@ -290,7 +294,7 @@ public class PluginUtil {
             //删掉不需要排除的配置
             db().table("a_config").where("tag=? AND is_exclude=0",tag).delete();
 
-            String pcfg = Base64Utils.decode(p_config);
+            String pcfg = doRepMap(Base64Utils.decode(p_config));
             List<Map<String, Object>> pcfg_d = ONode.deserialize(pcfg, List.class);
 
             for (Map<String, Object> m : pcfg_d) {
@@ -340,7 +344,7 @@ public class PluginUtil {
 
             db().table("a_menu").where("tag=? AND is_exclude=0", tag).delete();
 
-            String pmenu = Base64Utils.decode(p_menu);
+            String pmenu = doRepMap(Base64Utils.decode(p_menu));
             List<Map<String, Object>> pmenu_d = ONode.deserialize(pmenu, List.class);
 
             if (pmenu_d != null) {
@@ -363,7 +367,7 @@ public class PluginUtil {
 
             db().table("a_file").where("tag=? AND is_exclude=0",tag).delete();
 
-            String pfile = Base64Utils.decode(p_file);
+            String pfile = doRepMap(Base64Utils.decode(p_file));
             List<Map<String, Object>> pfile_d = ONode.deserialize(pfile, List.class);
 
             if(pfile_d != null) {
@@ -387,7 +391,7 @@ public class PluginUtil {
         if(TextUtils.isEmpty(p_img) == false){
             db().table("a_image").whereEq("tag",tag).delete();
 
-            String pimg = Base64Utils.decode(p_img);
+            String pimg = doRepMap(Base64Utils.decode(p_img));
             List<Map<String, Object>> pimg_d = ONode.deserialize(pimg, List.class);
 
             if (pimg_d != null) {
