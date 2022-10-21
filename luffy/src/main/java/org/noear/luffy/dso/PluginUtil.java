@@ -100,7 +100,7 @@ public class PluginUtil {
         try {
             return do_install(packageTag, true);
         } catch (Exception ex) {
-            throw new RuntimeException(ex);
+            throw new RuntimeException("Plugin installation failed: " +packageTag,ex);
         }
     }
 
