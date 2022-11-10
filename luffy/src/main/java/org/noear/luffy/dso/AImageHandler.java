@@ -56,8 +56,7 @@ public class AImageHandler {
         byte[] data = Base64Utils.decodeByte(file.data);
 
         context.status(200);
-        context.outputStream().write(data);
-        context.outputStream().flush();
+        context.output(data);
 
     }
 
