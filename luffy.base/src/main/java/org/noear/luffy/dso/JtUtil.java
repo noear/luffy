@@ -10,7 +10,6 @@ import org.noear.solon.core.handle.Context;
 import org.noear.luffy.executor.ExecutorFactory;
 import org.noear.luffy.model.AConfigM;
 import org.noear.luffy.utils.*;
-import org.noear.solon.core.handle.UploadedFile;
 import org.noear.wood.DbContext;
 import org.noear.okldap.entity.LdapPerson;
 
@@ -176,8 +175,8 @@ public class JtUtil {
     }
 
     @Note("创建一个XFile空对象")
-    public UploadedFile newXfile() {
-        return new UploadedFile();
+    public MediaFile newXfile() {
+        return new MediaFile();
     }
 
     @Note("创建一个URI")
@@ -573,7 +572,7 @@ public class JtUtil {
 
         tmp.put("ctx", Context.class);
 
-        tmp.put("XFile", UploadedFile.class);
+        tmp.put("XFile", MediaFile.class);
 
         tmp.put("new Datetime()", Datetime.class);
         tmp.put("new Timecount()", Timecount.class);
