@@ -14,13 +14,13 @@
     <url>https://github.com/noear/luffy</url>
 
     <properties>
-        <revision>1.4.2</revision>
+        <revision>1.4.3</revision>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
 
-        <solon.ver>1.12.0</solon.ver>
+        <solon.ver>1.12.1</solon.ver>
         <wood.ver>1.0.7</wood.ver>
         <snack3.ver>3.2.50</snack3.ver>
 
@@ -30,6 +30,9 @@
         <okhttp.ver>3.14.9</okhttp.ver>
 
         <okldap.ver>1.1.3</okldap.ver>
+
+        <h2.ver>1.4.200</h2.ver>
+        <mysql.ver>5.1.49</mysql.ver>
 
         <flexmark.version>0.34.48</flexmark.version>
     </properties>
