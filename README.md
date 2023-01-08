@@ -81,7 +81,8 @@
 * http://jtt.noear.org/.admin/?_L0n5=1CE24B1CF36B0C5B94AACE6263DBD947FFA53531
 
 #### 应用演示（基于luffy开发的应用）
-* http://teamx.noear.org/
+* https://teamx.noear.org/user/login?jump=/ucenter/
+* https://solon.noear.org/
 
 # 部署
 
