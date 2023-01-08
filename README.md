@@ -81,8 +81,14 @@
 * http://jtt.noear.org/.admin/?_L0n5=1CE24B1CF36B0C5B94AACE6263DBD947FFA53531
 
 #### 应用演示（基于luffy开发的应用）
-* https://teamx.noear.org/user/login?jump=/ucenter/
-* https://solon.noear.org/
+
+
+| 应用   | 演示地址                                                                   | 
+|-------|------------------------------------------------------------------------| 
+| NavX，轻量级内部导航工具 | [https://navx.noear.org/](https://navx.noear.org/)                     |
+| TeamX，中小团队协用工具  | [https://teamx.noear.org/ucenter/](https://teamx.noear.org/ucenter/)   |
+| Solon，更现代感的应用开发框架 | [https://solon.noear.org/](https://solon.noear.org/)                   |
+
 
 # 部署
 
