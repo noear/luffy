@@ -41,13 +41,13 @@ public class JtUtilEx extends JtUtil {
      */
     @Note("保存图片")
     public String imgSet(UploadedFile file) throws Exception {
-        return imgSet(file, file.extension);
+        return imgSet(file, file.getExtension());
     }
 
     @Note("保存图片")
     public String imgSet(UploadedFile file, String tag, String dir, int name_mod) throws Exception {
-        String extension = file.extension;
-        byte[] data_byte = IOUtils.toBytes(file.content);
+        String extension = file.getExtension();
+        byte[] data_byte = IOUtils.toBytes(file.getContent());
         String data = Base64Utils.encodeByte(data_byte);
         StringBuilder path = StringUtils.borrowBuilder();
 
@@ -70,12 +70,12 @@ public class JtUtilEx extends JtUtil {
                 path.append(dir).append("/");
             }
 
-            path.append(file.name);
+            path.append(file.getName());
         }
 
         String path2 = StringUtils.releaseBuilder(path).replace("//", "/");
 
-        DbApi.imgSet(tag, path2, file.contentType, data, "");
+        DbApi.imgSet(tag, path2, file.getContentType(), data, "");
 
         return path2;
     }
@@ -85,11 +85,11 @@ public class JtUtilEx extends JtUtil {
      */
     @Note("保存图片（后缀名可自定义）")
     public String imgSet(UploadedFile file, String extension) throws Exception {
-        byte[] data_byte = IOUtils.toBytes(file.content);
+        byte[] data_byte = IOUtils.toBytes(file.getContent());
         String data = Base64Utils.encodeByte(data_byte);
         String path = "/img/" + guid() + "." + extension;
 
-        DbApi.imgSet(null, path, file.contentType, data, "", file.name);
+        DbApi.imgSet(null, path, file.getContentType(), data, "", file.getName());
 
         return path;
     }

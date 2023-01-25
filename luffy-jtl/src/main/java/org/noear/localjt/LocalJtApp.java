@@ -76,9 +76,9 @@ public class LocalJtApp {
         //主页
 
         if (TextUtils.isEmpty(home)) {
-            home = "http://localhost:" + app.port() + "/.admin/?_L0n5=1CE24B1CF36B0C5B94AACE6263DBD947FFA53531";
+            home = "http://localhost:" + Solon.cfg().serverPort() + "/.admin/?_L0n5=1CE24B1CF36B0C5B94AACE6263DBD947FFA53531";
         } else {
-            home = "http://localhost:" + app.port() + home;
+            home = "http://localhost:" + Solon.cfg().serverPort() + home;
         }
 
         System.out.println("home::" + home);

@@ -1,7 +1,6 @@
 package org.noear.luffy.executor.m.beetl;
 
 import org.beetl.core.tag.Tag;
-import org.noear.solon.core.Aop;
 import org.noear.solon.core.AopContext;
 import org.noear.solon.core.Plugin;
 import org.noear.luffy.executor.ExecutorFactory;

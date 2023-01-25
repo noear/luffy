@@ -42,7 +42,7 @@ public class FrmInterceptor implements Handler {
     public void handle(Context ctx) throws Exception {
         String path = ctx.path();
 
-        Object tmp = Solon.global().shared().get(_key);
+        Object tmp = Solon.app().shared().get(_key);
         ctx.attrSet(_key, tmp);
 
         _cacheMap.forEach((path2,suf)->{

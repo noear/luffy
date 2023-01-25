@@ -12,15 +12,15 @@ import org.noear.wood.cache.ICacheServiceEx;
 public class XPluginImp implements Plugin {
     @Override
     public void start(AopContext context) {
-        Solon.global().sharedGet("db", (DbContext db) -> {
+        Solon.app().sharedGet("db", (DbContext db) -> {
             DbUtil.setDefDb(db);
         });
 
-        Solon.global().sharedGet("cache", (ICacheServiceEx cache) -> {
+        Solon.app().sharedGet("cache", (ICacheServiceEx cache) -> {
             DbUtil.setDefCache(cache);
         });
 
-        Solon.global().sharedAdd("eSiteD", new eSiteD());
+        Solon.app().sharedAdd("eSiteD", new eSiteD());
 
         context.beanMake(ApiController.class);
     }

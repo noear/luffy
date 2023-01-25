@@ -239,7 +239,7 @@ public class JtUtil {
         }
 
         if (key.startsWith("_")) {
-            Solon.global().sharedAdd(key, obj);
+            Solon.app().sharedAdd(key, obj);
             return true;
         } else {
             return false;
@@ -252,7 +252,7 @@ public class JtUtil {
             return false;
         }
 
-        return Solon.global().shared().containsKey(key);
+        return Solon.app().shared().containsKey(key);
     }
 
 
@@ -463,7 +463,7 @@ public class JtUtil {
     @Note("服务地址")
     public String localAddr() {
         if (_localAddr == null) {
-            _localAddr = LocalUtil.getLocalAddress(Solon.global().port());
+            _localAddr = LocalUtil.getLocalAddress(Solon.cfg().serverPort());
         }
 
         return _localAddr;
@@ -564,7 +564,7 @@ public class JtUtil {
     public List<Map<String, Object>> interfaceList() {
         Map<String, Object> tmp = new HashMap<>();
 
-        tmp.putAll(Solon.global().shared());
+        tmp.putAll(Solon.app().shared());
         tmp.put("XUtil.http(url)", HttpUtils.class);
         tmp.put("XUtil.db(cfg)", DbContext.class);
         tmp.put("XUtil.paging(ctx,pageSize)", PagingModel.class);

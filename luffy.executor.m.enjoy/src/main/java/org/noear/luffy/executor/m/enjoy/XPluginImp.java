@@ -1,9 +1,6 @@
 package org.noear.luffy.executor.m.enjoy;
 
 import com.jfinal.template.Directive;
-import org.noear.solon.Solon;;
-import org.noear.solon.SolonApp;
-import org.noear.solon.core.Aop;
 import org.noear.solon.core.AopContext;
 import org.noear.solon.core.Plugin;
 import org.noear.luffy.executor.ExecutorFactory;

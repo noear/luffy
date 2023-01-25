@@ -11,7 +11,7 @@ import org.noear.wood.DbContext;
 public class XPluginImp implements Plugin {
     @Override
     public void start(AopContext context) {
-        Solon.global().sharedGet("db", (DbContext db)->{
+        Solon.app().sharedGet("db", (DbContext db)->{
             Config.db = db;
         });
 

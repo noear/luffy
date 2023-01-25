@@ -78,8 +78,8 @@ public class AppUtil {
                 ctx.outputAsJson(rst.toJson());
 
                 //new Thread(() -> {
-                    Solon.global().router().clear();
-                    AppUtil.runAsWork(Solon.global());
+                    Solon.app().router().clear();
+                    AppUtil.runAsWork(Solon.app());
                 //}).start();
             } catch (Throwable ex) {
                 ctx.outputAsJson(new ONode()

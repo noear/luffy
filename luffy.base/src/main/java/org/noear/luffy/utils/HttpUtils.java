@@ -299,7 +299,7 @@ public class HttpUtils {
     @Note("执行请求，返回字符串")
     public String execAsBody(String mothod) throws Exception {
         if (_cache > 0) {
-            ICacheServiceEx c = (ICacheServiceEx) Solon.global().shared().get("cache");
+            ICacheServiceEx c = (ICacheServiceEx) Solon.app().shared().get("cache");
             if (c != null) {
                 String url_key = _url;
                 if(_form != null) {

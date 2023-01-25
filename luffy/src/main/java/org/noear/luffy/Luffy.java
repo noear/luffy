@@ -73,7 +73,7 @@ public class Luffy {
         });
 
         //4.1.加载自己的bean
-        Aop.context().beanScan(Luffy.class);
+        Solon.context().beanScan(Luffy.class);
 
         //5.初始化功能
         if (Utils.isEmpty(app.cfg().get("luffy.db.schema"))) {

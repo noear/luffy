@@ -17,11 +17,11 @@ public class XPluginImp implements Plugin {
         JtFun.g.set("xbus_publish","发布消息#topic,content,delay?",1, DbMsgApi::msgPublish);
         JtFun.g.set("xbus_forward","转发消息，多级主题层层递进#topic,content,topic_source,delay?",1,DbMsgApi::msgRorward);
 
-        Solon.global().sharedGet("db", (DbContext db)->{
+        Solon.app().sharedGet("db", (DbContext db)->{
             Config.db = db;
         });
 
-        Solon.global().sharedGet("cache", (ICacheServiceEx cache)->{
+        Solon.app().sharedGet("cache", (ICacheServiceEx cache)->{
             Config.cache = cache;
         });
 

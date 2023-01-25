@@ -11,6 +11,6 @@ import org.noear.solon.core.Plugin;
 public class XPluginImp implements Plugin {
     @Override
     public void start(AopContext context) {
-        Solon.global().sharedAdd("eExcel",new eExcel());
+        Solon.app().sharedAdd("eExcel",new eExcel());
     }
 }

@@ -57,11 +57,11 @@ public class GraaljsJtExecutor implements IJtExecutor {
         //_bindings.put("polyglot.js.allowHostClassLookup", (Predicate<String>) s -> true);
 
 
-        Solon.global().shared().forEach((k, v)->{
+        Solon.app().shared().forEach((k, v)->{
             sharedSet(k, v);
         });
 
-        Solon.global().onSharedAdd((k,v)->{
+        Solon.app().onSharedAdd((k,v)->{
             sharedSet(k, v);
         });
 

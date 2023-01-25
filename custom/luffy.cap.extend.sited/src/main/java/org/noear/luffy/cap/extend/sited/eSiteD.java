@@ -59,7 +59,7 @@ public class eSiteD {
 
     @Note("设置插件源码，返回guid")
     public String sourceSet(String puid, UploadedFile file, String path) throws Exception {
-        String xml = IOUtil.stream2String(file.content);
+        String xml = IOUtil.stream2String(file.getContent());
         return sourceSet(puid, path, xml, 1);
     }
 

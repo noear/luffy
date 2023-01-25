@@ -46,12 +46,12 @@ public class FreemarkerJtExecutor implements IJtExecutor {
 
 
         try {
-            _engine.setSharedVariables(Solon.global().shared());
+            _engine.setSharedVariables(Solon.app().shared());
         } catch (Exception ex) {
             ex.printStackTrace();
         }
 
-        Solon.global().onSharedAdd((k,v)->{
+        Solon.app().onSharedAdd((k,v)->{
             sharedSet(k,v);
         });
     }

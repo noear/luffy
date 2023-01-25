@@ -43,7 +43,7 @@ public class ThymeleafJtExecutor implements IJtExecutor {
         _engine.setTemplateResolver(_loader);
 
         try {
-            Solon.global().shared().forEach((k,v)->{
+            Solon.app().shared().forEach((k,v)->{
                 sharedSet(k,v);
             });
 
@@ -51,7 +51,7 @@ public class ThymeleafJtExecutor implements IJtExecutor {
             ex.printStackTrace();
         }
 
-        Solon.global().onSharedAdd((k,v)->{
+        Solon.app().onSharedAdd((k,v)->{
             sharedSet(k,v);
         });
     }

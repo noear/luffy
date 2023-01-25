@@ -62,7 +62,7 @@ public class WebViewBuilder {
         //进入管理界面
         if(LocalJtApp.home.indexOf("/.admin/") < 0) {
             MenuItem shift = new MenuItem("进入管理界面");
-            String adminUrl = "http://localhost:" + Solon.global().port() + "/.admin/?_L0n5=81057AF6D4931710A5370514A4EE2DB5D2033055";
+            String adminUrl = "http://localhost:" + Solon.cfg().serverPort() + "/.admin/?_L0n5=81057AF6D4931710A5370514A4EE2DB5D2033055";
             shift.setOnAction(e -> {
                 if(shift.getText().indexOf("管理") > 0){
                     shift.setText("进入应用界面");

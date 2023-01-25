@@ -57,7 +57,7 @@ public class BsqlJtExecutor implements IJtExecutor {
         _engine = new GroupTemplate(_loader,cfg);
 
         try {
-            Solon.global().shared().forEach((k,v)->{
+            Solon.app().shared().forEach((k,v)->{
                 sharedSet(k,v);
             });
 
@@ -65,7 +65,7 @@ public class BsqlJtExecutor implements IJtExecutor {
             ex.printStackTrace();
         }
 
-        Solon.global().onSharedAdd((k,v)->{
+        Solon.app().onSharedAdd((k,v)->{
             sharedSet(k,v);
         });
     }

@@ -90,7 +90,7 @@ public class JarUtil {
             if (TextUtils.isEmpty(xPlugin) == false) {
                 Plugin p1 = newInstance(xPlugin);
                 if (p1 != null) {
-                    Solon.global().plug(p1);
+                    Solon.app().plug(p1);
                     return false;
                 }
             }
