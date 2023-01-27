@@ -56,6 +56,7 @@ public class PluginUtil {
             //运行本地库的初始化
             if (TextUtils.isNotEmpty(path)) {
                 CallUtil.callFile(path, JtUtil.g.empMap());
+                System.out.println("plugin-init: " + path);
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -112,9 +113,9 @@ public class PluginUtil {
         }
     }
 
-    public static void uninstall(String packageTag){
+    public static boolean uninstall(String packageTag){
         if(TextUtils.isEmpty(packageTag)){
-            return;
+            return false;
         }
 
         String tag = packageTag.split("\\.")[0];
@@ -141,6 +142,7 @@ public class PluginUtil {
             //3.重启(清空所有缓存)
             JtUtilEx.g2.restart();
 
+            return true;
         }catch (Exception ex){
             throw new RuntimeException(ex);
         }
@@ -149,11 +151,13 @@ public class PluginUtil {
     /**
      * 添加插件
      * */
-    public static void add(String adds){
+    public static void add(String adds) {
         if (TextUtils.isEmpty(adds) == false) {
             String[] ss = adds.split(",");
             for (String packageTag : ss) {
-                PluginUtil.install(packageTag);
+                if (PluginUtil.install(packageTag)) {
+                    System.out.println("plugin-add: " + packageTag);
+                }
             }
         }
     }
@@ -165,7 +169,9 @@ public class PluginUtil {
         if (TextUtils.isEmpty(adds) == false) {
             String[] ss = adds.split(",");
             for (String packageTag : ss) {
-                PluginUtil.reinstall(packageTag);
+                if(PluginUtil.reinstall(packageTag)){
+                    System.out.println("plugin-udp: " + packageTag);
+                }
             }
         }
     }
@@ -177,7 +183,9 @@ public class PluginUtil {
         if (TextUtils.isEmpty(rems) == false) {
             String[] ss = rems.split(",");
             for (String packageTag : ss) {
-                PluginUtil.uninstall(packageTag);
+                if(PluginUtil.uninstall(packageTag)){
+                    System.out.println("plugin-rem: " + packageTag);
+                }
             }
         }
     }
