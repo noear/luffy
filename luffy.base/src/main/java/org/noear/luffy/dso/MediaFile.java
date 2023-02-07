@@ -1,6 +1,7 @@
 package org.noear.luffy.dso;
 
 import org.noear.solon.Utils;
+import org.noear.solon.core.handle.UploadedFile;
 
 import java.io.*;
 
@@ -30,17 +31,16 @@ public class MediaFile {
     public String extension;
 
 
-    public MediaFile(){
+    public MediaFile() {
 
     }
-
 
 
     /**
      * 将内容流迁移到..
      *
      * @param file 文件
-     * */
+     */
     public void transferTo(File file) throws IOException {
         try (FileOutputStream stream = new FileOutputStream(file)) {
             Utils.transferTo(content, stream);
@@ -51,8 +51,15 @@ public class MediaFile {
      * 将内容流迁移到..
      *
      * @param stream 输出流
-     * */
+     */
     public void transferTo(OutputStream stream) throws IOException {
         Utils.transferTo(content, stream);
+    }
+
+    /**
+     * 转为 UploadedFile 类型
+     * */
+    public UploadedFile toUploadedFile() {
+        return new UploadedFile(contentType, contentSize, content, name, extension);
     }
 }
