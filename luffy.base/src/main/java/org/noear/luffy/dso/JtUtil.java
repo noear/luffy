@@ -12,12 +12,16 @@ import org.noear.luffy.model.AConfigM;
 import org.noear.luffy.utils.*;
 import org.noear.wood.DbContext;
 import org.noear.okldap.entity.LdapPerson;
+import org.noear.wood.DbTran;
+import org.noear.wood.Trans;
+import org.noear.wood.ext.Act0Ex;
 
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.URI;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.sql.SQLException;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -28,6 +32,21 @@ public class JtUtil {
     public static final JtUtil g = new JtUtil();
 
     private final Map<String, DbContext> _db_cache = new HashMap<>();
+
+    @Note("启用事务")
+    public DbTran tran(Act0Ex<Throwable> handler) throws SQLException {
+        return Trans.tran(handler);
+    }
+
+    @Note("启用新事务")
+    public DbTran tranNew(Act0Ex<Throwable> handler) throws SQLException {
+        return Trans.tranNew(handler);
+    }
+
+    @Note("禁用事务")
+    public void tranNot(Act0Ex<Throwable> handler) throws SQLException {
+        Trans.tranNot(handler);
+    }
 
     @Note("获取Ldap用户信息")
     public LdapPerson ldap(String cfg, String userFilter, String userPassword) throws Exception {
