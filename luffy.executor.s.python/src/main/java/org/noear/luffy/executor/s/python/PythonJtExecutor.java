@@ -43,6 +43,12 @@ public class PythonJtExecutor implements IJtExecutor {
         _eng_call = (Invocable) _eng;
         _bindings = _eng.getBindings(ScriptContext.ENGINE_SCOPE);
 
+        Solon.app().sharedAdd("Context",Context.class);
+        Solon.app().sharedAdd("ONode", ONode.class);
+        Solon.app().sharedAdd("Datetime", Datetime.class);
+        Solon.app().sharedAdd("Timecount", Timecount.class);
+        Solon.app().sharedAdd("Timespan", Timespan.class);
+
         Solon.app().shared().forEach((k, v) -> {
             sharedSet(k, v);
         });
@@ -52,13 +58,6 @@ public class PythonJtExecutor implements IJtExecutor {
         });
 
         sharedSet("__JTEAPI", new __JTEAPI_CLZ());
-
-        sharedSet("Context", Context.class);
-        sharedSet("ONode", ONode.class);
-
-        sharedSet("Datetime", Datetime.class);
-        sharedSet("Timecount", Timecount.class);
-        sharedSet("Timespan", Timespan.class);
 
         try {
             StringBuilder sb = new StringBuilder();

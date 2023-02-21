@@ -1,14 +1,11 @@
 package org.noear.luffy.executor.s.ruby;
 
+import org.noear.luffy.utils.*;
 import org.noear.snack.ONode;
 import org.noear.solon.Solon;;
 import org.noear.solon.core.handle.Context;
-import org.noear.luffy.dso.JtUtil;
 import org.noear.luffy.executor.IJtExecutor;
 import org.noear.luffy.model.AFileModel;
-import org.noear.luffy.utils.EncryptUtils;
-import org.noear.luffy.utils.TextUtils;
-import org.noear.luffy.utils.ThreadData;
 
 import javax.script.*;
 import java.util.*;
@@ -46,8 +43,16 @@ public class RubyJtExecutor implements IJtExecutor {
         _eng_call = (Invocable) _eng;
         _bindings = _eng.getBindings(ScriptContext.ENGINE_SCOPE);
 
+        Solon.app().sharedAdd("Context",Context.class);
+        Solon.app().sharedAdd("ONode", ONode.class);
+        Solon.app().sharedAdd("Datetime", Datetime.class);
+        Solon.app().sharedAdd("Timecount", Timecount.class);
+        Solon.app().sharedAdd("Timespan", Timespan.class);
+
         Solon.app().shared().forEach((k, v) -> {
-            sharedSet(k, v);
+            if(v instanceof Class == false) {
+                sharedSet(k, v);
+            }
         });
 
         Solon.app().onSharedAdd((k, v) -> {
@@ -60,13 +65,19 @@ public class RubyJtExecutor implements IJtExecutor {
             StringBuilder sb = new StringBuilder();
 
             sb.append("require 'java'\n\n");
-            sb.append("java_import org.noear.solon.core.handle.Context\n");
-            sb.append("java_import org.noear.snack.ONode\n");
 
-            sb.append("java_import org.noear.luffy.utils.Datetime\n");
-            sb.append("java_import org.noear.luffy.utils.Timecount\n");
-            sb.append("java_import org.noear.luffy.utils.Timespan\n");
             sb.append("java_import org.noear.luffy.executor.s.ruby.JTEAPI_CLZ\n");
+
+
+            Solon.app().shared().forEach((k, v)->{
+                if(v instanceof Class) {
+                    Class v2 = (Class) v;
+                    sb.append("java_import ");
+                    sb.append(v2.getName());
+                    sb.append("\n");
+                }
+            });
+
 
             sb.append("\n\n");
 

@@ -3,7 +3,11 @@ package org.noear.luffy.executor.s.nashorn;
 import jdk.nashorn.api.scripting.ScriptObjectMirror;
 import org.noear.luffy.executor.IJtExecutor;
 import org.noear.luffy.model.AFileModel;
+import org.noear.luffy.utils.Datetime;
 import org.noear.luffy.utils.ThreadData;
+import org.noear.luffy.utils.Timecount;
+import org.noear.luffy.utils.Timespan;
+import org.noear.snack.ONode;
 import org.noear.solon.Solon;
 import org.noear.solon.core.handle.Context;
 
@@ -45,8 +49,16 @@ public class NashornJtExecutor implements IJtExecutor {
         _eng_call = (Invocable)_eng;
         _bindings = (ScriptObjectMirror)_eng.getBindings(ScriptContext.ENGINE_SCOPE);
 
+        Solon.app().sharedAdd("Context",Context.class);
+        Solon.app().sharedAdd("ONode", ONode.class);
+        Solon.app().sharedAdd("Datetime", Datetime.class);
+        Solon.app().sharedAdd("Timecount", Timecount.class);
+        Solon.app().sharedAdd("Timespan", Timespan.class);
+
         Solon.app().shared().forEach((k, v)->{
-            sharedSet(k, v);
+            if(v instanceof Class == false) {
+                sharedSet(k, v);
+            }
         });
 
         Solon.app().onSharedAdd((k,v)->{
@@ -69,12 +81,16 @@ public class NashornJtExecutor implements IJtExecutor {
 
             sb.append("Date.prototype.toJSON =function(){ return this.getTime()};\n");
 
-            sb.append("var Context = Java.type('org.noear.solon.core.handle.Context');\n");
-            sb.append("var ONode = Java.type('org.noear.snack.ONode');\n");
-
-            sb.append("var Datetime = Java.type('org.noear.luffy.utils.Datetime');\n");
-            sb.append("var Timecount = Java.type('org.noear.luffy.utils.Timecount');\n");
-            sb.append("var Timespan = Java.type('org.noear.luffy.utils.Timespan');\n");
+            Solon.app().shared().forEach((k, v)->{
+                if(v instanceof Class) {
+                    Class v2 = (Class) v;
+                    sb.append("const ");
+                    sb.append(k);
+                    sb.append(" = Java.type('");
+                    sb.append(v2.getName());
+                    sb.append("');\n");
+                }
+            });
 
             sb.append("function modelAndView(tml,mod){return __JTEAPI.modelAndView(tml,mod);};\n");
             sb.append("function requireX(path){" +

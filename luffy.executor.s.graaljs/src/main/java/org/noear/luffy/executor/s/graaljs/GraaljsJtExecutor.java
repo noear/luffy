@@ -1,5 +1,9 @@
 package org.noear.luffy.executor.s.graaljs;
 
+import org.noear.luffy.utils.Datetime;
+import org.noear.luffy.utils.Timecount;
+import org.noear.luffy.utils.Timespan;
+import org.noear.snack.ONode;
 import org.noear.solon.Solon;;
 import org.noear.solon.core.handle.Context;
 import org.noear.luffy.executor.IJtExecutor;
@@ -56,9 +60,16 @@ public class GraaljsJtExecutor implements IJtExecutor {
         //_bindings.put("polyglot.js.allowHostAccess", true);
         //_bindings.put("polyglot.js.allowHostClassLookup", (Predicate<String>) s -> true);
 
+        Solon.app().sharedAdd("Context",Context.class);
+        Solon.app().sharedAdd("ONode", ONode.class);
+        Solon.app().sharedAdd("Datetime", Datetime.class);
+        Solon.app().sharedAdd("Timecount", Timecount.class);
+        Solon.app().sharedAdd("Timespan", Timespan.class);
 
         Solon.app().shared().forEach((k, v)->{
-            sharedSet(k, v);
+            if(v instanceof Class == false) {
+                sharedSet(k, v);
+            }
         });
 
         Solon.app().onSharedAdd((k,v)->{
@@ -88,12 +99,18 @@ public class GraaljsJtExecutor implements IJtExecutor {
 
             sb.append("Date.prototype.toJSON =function(){ return this.getTime()};\n");
 
-            sb.append("const Context = Java.type('org.noear.solon.core.handle.Context');\n");
-            sb.append("const ONode = Java.type('org.noear.snack.ONode');\n");
 
-            sb.append("const Datetime  = Java.type('org.noear.luffy.utils.Datetime');\n");
-            sb.append("const Timecount = Java.type('org.noear.luffy.utils.Timecount');\n");
-            sb.append("const Timespan  = Java.type('org.noear.luffy.utils.Timespan');\n");
+            Solon.app().shared().forEach((k, v)->{
+                if(v instanceof Class) {
+                    Class v2 = (Class) v;
+                    sb.append("const ");
+                    sb.append(k);
+                    sb.append(" = Java.type('");
+                    sb.append(v2.getName());
+                    sb.append("');\n");
+                }
+            });
+
 
             sb.append("function modelAndView(tml,mod){return __JTEAPI.modelAndView(tml,mod);};\n");
 
