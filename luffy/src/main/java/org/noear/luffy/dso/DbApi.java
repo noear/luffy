@@ -62,14 +62,14 @@ public class DbApi {
         }
 
         return db().table("a_file").where("1=1").build((tb) -> {
-            if (TextUtils.isEmpty(tag) == false) {
-                tb.and("tag=?", tag);
-            }
+                    if (TextUtils.isEmpty(tag) == false) {
+                        tb.and("tag=?", tag);
+                    }
 
-            if (TextUtils.isEmpty(label) == false) {
-                tb.and("label=?", label);
-            }
-        })
+                    if (TextUtils.isEmpty(label) == false) {
+                        tb.and("label=?", label);
+                    }
+                })
                 .select("path, note")
                 .caching(DbUtil.cache)
                 .usingCache(isCache)
@@ -209,6 +209,11 @@ public class DbApi {
 
     public static boolean cfgSetNote(String name, String note, String label) throws Exception {
         boolean is_ok = false;
+
+        if (Utils.isNotEmpty(note)) {
+            note = note.trim();
+        }
+
         if (db().table("a_config").where("`name`=?", name).selectExists()) {
             is_ok = db().table("a_config")
                     .set("note", note)
@@ -285,12 +290,24 @@ public class DbApi {
                 .set("label", label)
                 .set("update_fulltime", "$NOW()");
 
-        if(Utils.isNotEmpty(note)) {
-            qr.set("note", note);
+        if (Utils.isNotEmpty(note)) {
+            note = note.trim();
+
+            if (note.length() > 99) {
+                qr.set("note", note.substring(note.length() - 99));
+            } else {
+                qr.set("note", note);
+            }
         }
 
         if (tag != null) {
-            qr.set("`tag`", tag);
+            tag = tag.trim();
+
+            if (tag.length() > 40) {
+                qr.set("`tag`", tag.substring(tag.length() - 40));
+            } else {
+                qr.set("`tag`", tag);
+            }
         }
 
         if (db().table("a_image").where("`path`=?", path).selectExists()) {
@@ -323,7 +340,7 @@ public class DbApi {
 
     /**
      * 将日志改为管道模式
-     * */
+     */
 
     private static final EventPipeline<DataItem> logPipeline = new EventPipeline<>((list) -> {
         logAll(list);

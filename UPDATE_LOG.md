@@ -1,3 +1,8 @@
+#### v1.6.1
+* 升级 solon 为 2.2.6
+* 升级 snack3 为 3.2.61
+* 修复 DbApi::imgSet 当 note 或 tag 超长时会出错的问题 
+
 #### v1.6.0
 * 升级 solon 为 2.1.4
 * 升级 snack3 为 3.2.55
