@@ -169,6 +169,7 @@ public class HttpUtils {
         return this;
     }
 
+
     @Note("设置BODY txt")
     public HttpUtils bodyTxt(String txt) {
         return bodyTxt(txt, null);
@@ -183,6 +184,11 @@ public class HttpUtils {
         }
 
         return this;
+    }
+
+    @Note("设置BODY json")
+    public HttpUtils bodyJson(String txt) {
+        return bodyTxt(txt, "application/json");
     }
 
     @Note("设置BODY raw")
