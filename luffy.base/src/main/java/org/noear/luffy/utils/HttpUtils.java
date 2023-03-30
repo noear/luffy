@@ -41,6 +41,10 @@ public class HttpUtils {
         return new HttpUtils(url, httpClient);
     }
 
+    public static HttpUtils http(String url, OkHttpClient client) {
+        return new HttpUtils(url, client);
+    }
+
 
     private OkHttpClient _client;
     private String _url;
@@ -58,6 +62,10 @@ public class HttpUtils {
             _client = httpClient;
         } else {
             _client = client;
+        }
+
+        if (url.contains("://") == false) {
+            throw new IllegalArgumentException("No url scheme 'http' or 'https' found: " + url);
         }
 
         _url = url;
