@@ -34,7 +34,7 @@
         <h2.ver>1.4.200</h2.ver>
         <mysql.ver>5.1.49</mysql.ver>
 
-        <flexmark.version>0.34.48</flexmark.version>
+        <flexmark.version>0.50.50</flexmark.version>
     </properties>
 
     <licenses>
