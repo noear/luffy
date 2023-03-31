@@ -14,14 +14,14 @@
     <url>https://github.com/noear/luffy</url>
 
     <properties>
-        <revision>1.6.1</revision>
+        <revision>1.6.2</revision>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
 
-        <solon.ver>2.2.7</solon.ver>
-        <wood.ver>1.0.9</wood.ver>
+        <solon.ver>2.2.8</solon.ver>
+        <wood.ver>1.1.0</wood.ver>
         <snack3.ver>3.2.62</snack3.ver>
 
         <mongox.ver>1.0.0</mongox.ver>

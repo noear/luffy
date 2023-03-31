@@ -8,7 +8,6 @@ import org.noear.solon.core.*;
 import org.noear.luffy.utils.ExceptionUtils;
 import org.noear.luffy.utils.TextUtils;
 import org.noear.wood.ext.Act0;
-import org.noear.wood.xml.XmlSqlLoader;
 
 public class Luffy {
     private static Act0 _onLoadEvent;
@@ -29,8 +28,6 @@ public class Luffy {
 
     public static SolonApp start(Class<?> source, String[] args, Act0 onLoadEvent) {
         Luffy._onLoadEvent = onLoadEvent;
-
-        XmlSqlLoader.tryLoad();
 
         //0.构建参数
         NvMap xarg = NvMap.from(args);
