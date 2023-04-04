@@ -36,6 +36,15 @@ public class JtUtilEx extends JtUtil {
         return DbApi.menuGet(label, -1);
     }
 
+
+    /**
+     * 删除图片缓存
+     * */
+    @Note("删除图片缓存")
+    public void imgDelCache(String path){
+        AImageUtil.remove(path);
+    }
+
     /**
      * 保存图片
      */
@@ -148,6 +157,7 @@ public class JtUtilEx extends JtUtil {
         return path;
     }
 
+
     /**
      * 获取图片内容
      */
@@ -156,6 +166,7 @@ public class JtUtilEx extends JtUtil {
         AImageModel img = DbApi.imgGet(path);
         return img2String(img.data);
     }
+
 
     @Note("获取图片内容(byte[])")
     public byte[] imgGetBytes(String path) throws Exception {
