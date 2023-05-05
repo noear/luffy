@@ -20,19 +20,19 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
 
-        <solon.ver>2.2.16</solon.ver>
-        <wood.ver>1.1.1</wood.ver>
-        <snack3.ver>3.2.66</snack3.ver>
+        <solon.version>2.2.16</solon.version>
+        <wood.version>1.1.1</wood.version>
+        <snack3.version>3.2.66</snack3.version>
 
-        <mongox.ver>1.0.0</mongox.ver>
-        <redisx.ver>1.4.7</redisx.ver>
+        <mongox.version>1.0.0</mongox.version>
+        <redisx.version>1.4.7</redisx.version>
 
-        <okhttp.ver>3.14.9</okhttp.ver>
+        <okhttp.version>3.14.9</okhttp.version>
 
-        <okldap.ver>1.1.3</okldap.ver>
+        <okldap.version>1.1.3</okldap.version>
 
-        <h2.ver>1.4.200</h2.ver>
-        <mysql.ver>5.1.49</mysql.ver>
+        <h2.version>1.4.200</h2.version>
+        <mysql.version>5.1.49</mysql.version>
 
         <flexmark.version>0.50.50</flexmark.version>
     </properties>
@@ -64,19 +64,19 @@
             <dependency>
                 <groupId>org.noear</groupId>
                 <artifactId>solon</artifactId>
-                <version>${solon.ver}</version>
+                <version>${solon.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>org.noear</groupId>
                 <artifactId>solon-test</artifactId>
-                <version>${solon.ver}</version>
+                <version>${solon.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>org.noear</groupId>
                 <artifactId>solon.config.yaml</artifactId>
-                <version>${solon.ver}</version>
+                <version>${solon.version}</version>
             </dependency>
 
             <dependency>
@@ -90,33 +90,33 @@
             <dependency>
                 <groupId>org.noear</groupId>
                 <artifactId>wood</artifactId>
-                <version>${wood.ver}</version>
+                <version>${wood.version}</version>
             </dependency>
 
             <!-- JSON 框架 -->
             <dependency>
                 <groupId>org.noear</groupId>
                 <artifactId>snack3</artifactId>
-                <version>${snack3.ver}</version>
+                <version>${snack3.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>org.noear</groupId>
                 <artifactId>mongox</artifactId>
-                <version>${mongox.ver}</version>
+                <version>${mongox.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>org.noear</groupId>
                 <artifactId>redisx</artifactId>
-                <version>${redisx.ver}</version>
+                <version>${redisx.version}</version>
             </dependency>
 
             <!-- Http 框架 -->
             <dependency>
                 <groupId>com.squareup.okhttp3</groupId>
                 <artifactId>okhttp</artifactId>
-                <version>${okhttp.ver}</version>
+                <version>${okhttp.version}</version>
             </dependency>
 
             <!-- 缩略图 框架 -->

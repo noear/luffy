@@ -39,25 +39,25 @@
         <dependency>
             <groupId>org.noear</groupId>
             <artifactId>solon.boot.jlhttp</artifactId>
-            <version>${solon.ver}</version>
+            <version>${solon.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.noear</groupId>
             <artifactId>solon.web.staticfiles</artifactId>
-            <version>${solon.ver}</version>
+            <version>${solon.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.noear</groupId>
             <artifactId>solon.config.yaml</artifactId>
-            <version>${solon.ver}</version>
+            <version>${solon.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.noear</groupId>
             <artifactId>solon.sessionstate.local</artifactId>
-            <version>${solon.ver}</version>
+            <version>${solon.version}</version>
         </dependency>
 
         <!-- luffy 引擎 -->
@@ -107,14 +107,14 @@
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
-            <version>${h2.ver}</version>
+            <version>${h2.version}</version>
             <scope>compile</scope>
         </dependency>
 
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>${mysql.ver}</version>
+            <version>${mysql.version}</version>
         </dependency>
 
     </dependencies>
