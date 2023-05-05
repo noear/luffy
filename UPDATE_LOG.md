@@ -2,6 +2,7 @@
 * 升级 solon 为 2.2.16
 * 升级 snack3 为 3.2.66
 * 升级 wood 为 1.1.1
+* 增加 XUtil::imgDelCache 接口
 
 
 #### v1.6.2
