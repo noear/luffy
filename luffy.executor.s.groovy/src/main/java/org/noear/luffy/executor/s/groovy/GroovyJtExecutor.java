@@ -1,5 +1,6 @@
 package org.noear.luffy.executor.s.groovy;
 
+import org.codehaus.groovy.jsr223.GroovyScriptEngineFactory;
 import org.noear.snack.ONode;
 import org.noear.solon.Solon;;
 import org.noear.solon.core.handle.Context;
@@ -39,8 +40,8 @@ public class GroovyJtExecutor implements IJtExecutor {
     private GroovyJtExecutor() {
         _loaded_names = Collections.synchronizedSet(new HashSet<>());
 
-        ScriptEngineManager scriptEngineManager = new ScriptEngineManager();
-        _eng = scriptEngineManager.getEngineByName("groovy");
+        GroovyScriptEngineFactory engineFactory = new GroovyScriptEngineFactory();
+        _eng = engineFactory.getScriptEngine();
         _eng_call = (Invocable) _eng;
         _bindings = _eng.getBindings(ScriptContext.ENGINE_SCOPE);
 
