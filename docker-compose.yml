@@ -6,7 +6,7 @@ version: '3'
 
 services:
   luffy:
-    image: noearorg/luffy-jtl:1.6.4
+    image: noearorg/luffy-jtl:1.6.5
     container_name: luffy
     environment:
       - TZ=Asia/Shanghai          #设置时区
