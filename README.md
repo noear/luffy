@@ -2,7 +2,7 @@
   Luffy
 </h1>
 <p align="center">
-轻量级的嵌入式FaaS引擎（可按需组装）
+轻量级的嵌入式FaaS引擎（可按需组装），也可用作低代码引擎
 </p>
 <p align="center">
     <a target="_blank" href="https://search.maven.org/search?q=org.noear%20luffy">
