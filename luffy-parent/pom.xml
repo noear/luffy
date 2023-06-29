@@ -20,12 +20,12 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
 
-        <solon.version>2.2.20</solon.version>
-        <wood.version>1.1.1</wood.version>
+        <solon.version>2.3.6</solon.version>
+        <wood.version>1.1.5</wood.version>
         <snack3.version>3.2.72</snack3.version>
 
         <mongox.version>1.0.0</mongox.version>
-        <redisx.version>1.4.7</redisx.version>
+        <redisx.version>1.4.8</redisx.version>
 
         <okhttp.version>3.14.9</okhttp.version>
 

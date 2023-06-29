@@ -10,6 +10,7 @@ import org.noear.luffy.dso.PluginUtil;
 import org.noear.luffy.utils.TextUtils;
 import org.noear.solon.SolonApp;
 import org.noear.solon.Utils;
+import org.noear.solon.core.util.JavaUtil;
 import org.noear.solon.web.staticfiles.StaticMappings;
 import org.noear.solon.web.staticfiles.repository.ExtendStaticRepository;
 import org.noear.wood.WoodConfig;
@@ -33,6 +34,10 @@ public class LocalJtApp {
             System.out.println(cmd.toSqlString());
             err.printStackTrace();
         });
+
+        if(JavaUtil.IS_WINDOWS) {
+            System.setProperty("java.awt.headless", "false");
+        }
 
         SolonApp app = Luffy.start(LocalJtApp.class, args, () -> {
             Solon.cfg().loadEnv("luffy.");
@@ -105,6 +110,8 @@ public class LocalJtApp {
                         // 获取系统默认浏览器打开链接
                         dp.browse(uri);
                     }
+                }else{
+                    System.err.println("[Luffy] Desktop startup is not supported");
                 }
             } catch (Throwable e) {
                 System.err.println("[Luffy] Desktop startup is not supported");
