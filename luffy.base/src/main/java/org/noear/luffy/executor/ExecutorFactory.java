@@ -1,5 +1,6 @@
 package org.noear.luffy.executor;
 
+import org.noear.solon.Utils;
 import org.noear.solon.core.handle.Context;
 import org.noear.luffy.dso.JtBridge;
 import org.noear.luffy.model.AFileModel;
@@ -116,7 +117,6 @@ public class ExecutorFactory {
         try {
             ctx.charset("utf-8");
 
-
             if (TextUtils.isEmpty(file.content_type) == false) {
                 ctx.contentType(file.content_type);
             }
@@ -132,16 +132,25 @@ public class ExecutorFactory {
 
                     ctx.contentType("application/x-javascript");
                 } else {
-                    if (TextUtils.isEmpty(file.content_type)) {
-                        /**
-                         * 如果没有预设content type；则自动检测
-                         * */
-                        if (text.startsWith("<")) {
-                            ctx.contentType("text/html");
-                        }
+                    String contentType = ctx.attr("Content-Type");
 
-                        if (text.startsWith("{")) {
-                            ctx.contentType("application/json");
+                    if (Utils.isNotEmpty(contentType)) {
+                        ctx.contentType(contentType);
+                    } else {
+                        if (TextUtils.isEmpty(file.content_type)) {
+                            /**
+                             * 如果没有预设content type；则自动检测
+                             * */
+
+
+                            if (text.startsWith("<")) {
+                                ctx.contentType("text/html");
+                            }
+
+                            if (text.startsWith("{")) {
+                                ctx.contentType("application/json");
+                            }
+
                         }
                     }
                 }
