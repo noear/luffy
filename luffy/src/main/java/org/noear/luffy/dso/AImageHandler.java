@@ -3,7 +3,9 @@ package org.noear.luffy.dso;
 import org.noear.luffy.model.AImageModel;
 import org.noear.luffy.utils.Base64Utils;
 import org.noear.solon.Solon;
+import org.noear.solon.Utils;
 import org.noear.solon.core.handle.Context;
+import org.noear.solon.core.handle.DownloadedFile;
 
 import java.net.URLEncoder;
 import java.util.Date;
@@ -35,29 +37,32 @@ public class AImageHandler {
             }
         }
 
+
+        byte[] data = Base64Utils.decodeByte(file.data);
+
         int idx = path.lastIndexOf(".");
         if (idx > 0) {
             String mime = file.content_type;
 
-            if (mime != null) {
+            if (Utils.isNotEmpty(mime)) {
                 context.headerSet(CACHE_CONTROL, "max-age=6000");
                 context.headerSet(LAST_MODIFIED, app_runtime.toString());
                 context.contentType(file.content_type);
                 context.charset("utf-8");
 
 
-                if (file.note != null) {
+                if (Utils.isNotEmpty(file.note)) {
                     String fileName = URLEncoder.encode(file.note, Solon.encoding());
                     context.headerSet("Content-Disposition", "filename=\"" + fileName + "\"");
                 }
             }
+
+            DownloadedFile downloadedFile = new DownloadedFile(mime, data, null);
+            context.outputAsFile(downloadedFile);
+        } else {
+            context.status(200);
+            context.output(data);
         }
-
-        byte[] data = Base64Utils.decodeByte(file.data);
-
-        context.status(200);
-        context.output(data);
-
     }
 
     private static final Date app_runtime = new Date();

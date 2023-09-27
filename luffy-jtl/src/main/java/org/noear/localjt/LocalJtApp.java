@@ -10,6 +10,7 @@ import org.noear.luffy.dso.PluginUtil;
 import org.noear.luffy.utils.TextUtils;
 import org.noear.solon.SolonApp;
 import org.noear.solon.Utils;
+import org.noear.solon.boot.prop.GzipProps;
 import org.noear.solon.core.util.JavaUtil;
 import org.noear.solon.web.staticfiles.StaticMappings;
 import org.noear.solon.web.staticfiles.repository.ExtendStaticRepository;
@@ -71,6 +72,7 @@ public class LocalJtApp {
 
 
             //添加扩展静态目录支持
+            GzipProps.enable(true);
             StaticMappings.add("/", new ExtendStaticRepository());
         });
 
