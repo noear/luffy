@@ -30,8 +30,8 @@
         <wood.version>1.2.2</wood.version>
         <snack3.version>3.2.80</snack3.version>
 
-        <mongox.version>1.0.0</mongox.version>
-        <redisx.version>1.4.10</redisx.version>
+        <mongox.version>1.0.3</mongox.version>
+        <redisx.version>1.6.0</redisx.version>
 
         <okhttp.version>3.14.9</okhttp.version>
 
