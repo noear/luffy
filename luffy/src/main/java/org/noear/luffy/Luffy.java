@@ -5,7 +5,6 @@ import org.noear.solon.Solon;;
 import org.noear.solon.SolonApp;
 import org.noear.solon.Utils;
 import org.noear.solon.core.*;
-import org.noear.luffy.utils.ExceptionUtils;
 import org.noear.luffy.utils.TextUtils;
 import org.noear.wood.ext.Act0;
 
@@ -51,7 +50,6 @@ public class Luffy {
 
         //4.启动服务
         SolonApp app = Solon.start(source, xarg, (x) -> {
-
             String def_exec = x.cfg().get("luffy.executor.default");
             if(TextUtils.isEmpty(def_exec) == false){
                 JtAdapter.global.defaultExecutorSet(def_exec);
@@ -64,9 +62,6 @@ public class Luffy {
 
             //不再支持
             x.sharedAdd("XBus", JtMsg.g);//为兼容旧版本
-        }).onError((err)->{
-            String txt = ExceptionUtils.getString(err);
-            LogUtil.log("XAPP",LogLevel.ERROR, txt);
         });
 
         //4.1.加载自己的bean

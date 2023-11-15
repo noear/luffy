@@ -76,10 +76,6 @@ public class LocalJtApp {
             StaticMappings.add("/", new ExtendStaticRepository());
         });
 
-        app.onError((err) -> {
-            err.printStackTrace();
-        });
-
         //主页
 
         if (TextUtils.isEmpty(home)) {

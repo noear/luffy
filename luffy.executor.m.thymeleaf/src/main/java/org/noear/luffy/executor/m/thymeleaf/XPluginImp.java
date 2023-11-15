@@ -1,6 +1,6 @@
 package org.noear.luffy.executor.m.thymeleaf;
 
-import org.noear.solon.core.AopContext;
+import org.noear.solon.core.AppContext;
 import org.noear.solon.core.Plugin;
 import org.noear.luffy.executor.ExecutorFactory;
 import org.thymeleaf.processor.element.IElementTagProcessor;
@@ -8,7 +8,7 @@ import org.thymeleaf.processor.element.IElementTagProcessor;
 public class XPluginImp implements Plugin {
 
     @Override
-    public void start(AopContext context) {
+    public void start(AppContext context) throws Throwable {
         ThymeleafJtExecutor executor = ThymeleafJtExecutor.singleton();
 
         context.beanOnloaded((ctx) -> {

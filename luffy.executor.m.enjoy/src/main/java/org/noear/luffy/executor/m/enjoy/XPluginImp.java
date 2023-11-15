@@ -1,13 +1,14 @@
 package org.noear.luffy.executor.m.enjoy;
 
 import com.jfinal.template.Directive;
-import org.noear.solon.core.AopContext;
+import org.noear.solon.core.AppContext;
 import org.noear.solon.core.Plugin;
 import org.noear.luffy.executor.ExecutorFactory;
 
 public class XPluginImp implements Plugin {
+
     @Override
-    public void start(AopContext context) {
+    public void start(AppContext context) throws Throwable {
         EnjoyJtExecutor executor = EnjoyJtExecutor.singleton();
 
         context.beanOnloaded((ctx) -> {

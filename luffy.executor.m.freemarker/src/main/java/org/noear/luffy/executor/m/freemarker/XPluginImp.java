@@ -1,14 +1,14 @@
 package org.noear.luffy.executor.m.freemarker;
 
 import freemarker.template.TemplateDirectiveModel;
-import org.noear.solon.core.AopContext;
+import org.noear.solon.core.AppContext;
 import org.noear.solon.core.Plugin;
 import org.noear.luffy.executor.ExecutorFactory;
 
 public class XPluginImp implements Plugin {
 
     @Override
-    public void start(AopContext context) {
+    public void start(AppContext context) throws Throwable {
         FreemarkerJtExecutor executor = FreemarkerJtExecutor.singleton();
 
         context.beanOnloaded((ctx) -> {

@@ -1,14 +1,14 @@
 package org.noear.luffy.executor.m.beetl;
 
 import org.beetl.core.tag.Tag;
-import org.noear.solon.core.AopContext;
+import org.noear.solon.core.AppContext;
 import org.noear.solon.core.Plugin;
 import org.noear.luffy.executor.ExecutorFactory;
 
 public class XPluginImp implements Plugin {
 
     @Override
-    public void start(AopContext context) {
+    public void start(AppContext context) throws Throwable {
         BeetlJtExecutor executor = BeetlJtExecutor.singleton();
 
         context.beanOnloaded((ctx) -> {
