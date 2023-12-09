@@ -66,7 +66,7 @@ public class RubyJtExecutor implements IJtExecutor {
 
             sb.append("require 'java'\n\n");
 
-            sb.append("java_import org.noear.luffy.executor.s.ruby.JTEAPI_CLZ\n");
+            sb.append("java_import org.noear.luffy.executor.s.ruby.__JTEAPI_CLZ\n");
 
 
             Solon.app().shared().forEach((k, v)->{
@@ -81,7 +81,7 @@ public class RubyJtExecutor implements IJtExecutor {
 
             sb.append("\n\n");
 
-            sb.append("$__JTEAPI=JTEAPI_CLZ.new\n\n");
+            sb.append("$__JTEAPI=__JTEAPI_CLZ.new\n\n");
 
             sb.append("$__global={'lib'=>{},'lib_new'=>{}}\n\n");
 
