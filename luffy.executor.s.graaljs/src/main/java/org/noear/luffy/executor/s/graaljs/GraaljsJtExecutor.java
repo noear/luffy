@@ -116,12 +116,13 @@ public class GraaljsJtExecutor implements IJtExecutor {
 
             sb.append("function requireX(path){" +
                     "  if(path.startsWith('$')){" +
-                    "       path=path.substr(1);" +
+                    "       path=__JTEAPI.getResolvedPath(path);" +
                     "       __JTEAPI.require(path);" +
-                    "       return __global.lib_new[path]()}" +
+                    "       return __global.lib_new[path]();}" +
                     "  else{" +
+                    "       path=__JTEAPI.getResolvedPath(path);" +
                     "       __JTEAPI.require(path);" +
-                    "       return __global.lib[path]}" +
+                    "       return __global.lib[path];}" +
                     "};\n");
 
             //下面两个将不再支持

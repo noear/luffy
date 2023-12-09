@@ -91,10 +91,11 @@ public class RubyJtExecutor implements IJtExecutor {
 
             sb.append("def requireX(path)\n" +
                     "    if path[0] == '$' then\n" +
-                    "        path = path[1..-1]\n" +
+                    "        path=$__JTEAPI.getResolvedPath(path)\n" +
                     "        $__JTEAPI.require(path)\n" +
                     "        return $__global['lib_new'][path].NEW1()\n" +
                     "    else\n" +
+                    "        path=$__JTEAPI.getResolvedPath(path)\n" +
                     "        $__JTEAPI.require(path)\n" +
                     "        return $__global['lib'][path]\n" +
                     "    end\n" +

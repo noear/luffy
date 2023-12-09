@@ -80,10 +80,11 @@ public class LuaJtExecutor implements IJtExecutor {
 
             sb.append("function requireX(path)\n" +
                     "    if string.sub(path,1,1) == '$' then\n"+
-                    "        path = string.sub(path,2)\n"+
+                    "        path=__JTEAPI:getResolvedPath(path)\n" +
                     "        __JTEAPI:require(path)\n" +
                     "        return __global['lib_new'][path]()\n"+
                     "    else\n"+
+                    "        path=__JTEAPI:getResolvedPath(path)\n" +
                     "        __JTEAPI:require(path)\n" +
                     "        return __global['lib'][path]\n"+
                     "    end\n"+

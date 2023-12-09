@@ -100,12 +100,13 @@ public class JavascriptJtExecutor implements IJtExecutor {
             sb.append("function modelAndView(tml,mod){return __JTEAPI.modelAndView(tml,mod);};\n");
             sb.append("function requireX(path){" +
                     "  if(path.startsWith('$')){" +
-                    "       path=path.substr(1);" +
+                    "       path=__JTEAPI.getResolvedPath(path);" +
                     "       __JTEAPI.require(path);" +
-                    "       return __global.lib_new[path]()}" +
+                    "       return __global.lib_new[path]();}" +
                     "  else{" +
+                    "       path=__JTEAPI.getResolvedPath(path);" +
                     "       __JTEAPI.require(path);" +
-                    "       return __global.lib[path]}" +
+                    "       return __global.lib[path];}" +
                     "};\n");
 
             //下面两个将不再支持 //暂时保留，以做兼容
