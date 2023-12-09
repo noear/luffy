@@ -41,6 +41,8 @@ public class __JTEAPI_CLZ {
     }
 
     public Object modelAndView(String path, Map<String, Object> model) throws Exception {
+        path = getResolvedPath(path);
+
         String path2 = path;//AFileUtil.path2(path);//不用转为*
         String name = path2.replace("/", "__");
 
