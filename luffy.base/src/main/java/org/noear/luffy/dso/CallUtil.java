@@ -5,23 +5,40 @@ import org.noear.luffy.executor.ExecutorFactory;
 import org.noear.luffy.model.AFileModel;
 import org.noear.luffy.utils.StringUtils;
 import org.noear.luffy.utils.TextUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.util.HashMap;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 
 public class CallUtil {
+    private static Logger log = LoggerFactory.getLogger(CallUtil.class);
+
+    private static String getResolvedPath(String path) {
+        if (path.startsWith("/") == false) {
+            //使用了相对路径
+            String base = null;
+            Context ctx = Context.current();
+            if (ctx != null) {
+                base = ctx.path();
+            }
+
+            if (base != null) {
+                path = Paths.get(base).resolveSibling(path).toString();
+            }
+        }
+
+        return path;
+    }
 
     private static Object callDo(String path, boolean outString) throws Exception {
         String path2 = path;//不用转换*
         String name = path2.replace("/", "__");
 
-        Map<String,Object> map  =new HashMap<>();
-        map.put("path",path2);
+        AFileModel file = JtBridge.fileGet(path2);
 
-        AFileModel file = (AFileModel) JtFun.g.call("afile_get",map);
-
-        if (file.file_id > 0 && TextUtils.isEmpty(file.content) == false) {
+        if (TextUtils.isNotEmpty(file.content)) {
             return ExecutorFactory.call(name, file, Context.current(), null, outString);
         } else {
             return "";
@@ -30,11 +47,13 @@ public class CallUtil {
 
     /**
      * 调用文件，返回对象
-     * */
-    public static Object callFile(String path, Map<String,Object> attrs) throws Exception {
+     */
+    public static Object callFile(String path, Map<String, Object> attrs) throws Exception {
         if (TextUtils.isEmpty(path)) {
             return null;
         }
+
+        path = getResolvedPath(path);
 
         if (attrs != null && Context.current() != null) {
             Context.current().attrSet(attrs);
@@ -46,7 +65,7 @@ public class CallUtil {
     /**
      * 调用勾子，返回字符串。勾子调用不能出错，以免影响主业务
      */
-    public static String callLabel(String tag, String label, boolean useCache, Map<String,Object> attrs) {
+    public static String callLabel(String tag, String label, boolean useCache, Map<String, Object> attrs) {
         if (TextUtils.isEmpty(tag) && TextUtils.isEmpty(label)) {
             return "";
         }
@@ -58,25 +77,20 @@ public class CallUtil {
         StringBuilder sb = StringUtils.borrowBuilder();
 
         try {
-            Map<String,Object> map = new HashMap<>();
-            map.put("tag",tag);
-            map.put("label",label);
-            map.put("useCache",useCache);
+            List<AFileModel> list = JtBridge.fileFind(tag, label, useCache);
 
-            List<AFileModel> list = JtFun.g.callT("afile_get_paths",map);
-
-            list.forEach((f) -> {
-                        try {
-                            Object tmp = callDo(f.path, true);
-                            if (tmp != null) {
-                                sb.append(tmp.toString()).append("\r\n");
-                            }
-                        } catch (Exception ex) {
-                            ex.printStackTrace();
-                        }
-                    });
+            for (AFileModel f : list) {
+                try {
+                    Object tmp = callDo(f.path, true);
+                    if (tmp != null) {
+                        sb.append(tmp).append("\r\n");
+                    }
+                } catch (Exception ex) {
+                    log.warn("CallLabel exec error, file={}", f.path, ex);
+                }
+            }
         } catch (Exception ex) {
-            ex.printStackTrace();
+            log.warn("CallLabel exec error!", ex);
         }
 
         return StringUtils.releaseBuilder(sb);

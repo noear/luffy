@@ -5,6 +5,7 @@ import org.noear.luffy.executor.IJtConfigAdapter;
 import org.noear.luffy.executor.IJtExecutorAdapter;
 import org.noear.luffy.model.AFileModel;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -33,6 +34,11 @@ public class JtAdapter implements IJtExecutorAdapter, IJtConfigAdapter {
         return AFileUtil.get(path);
     }
 
+    @Override
+    public List<AFileModel> fileFind(String tag, String label, boolean isCache) throws Exception {
+        return DbApi.fileGetPaths(tag, label, isCache);
+    }
+
     private static String _nodeId;
 
     @Override
@@ -57,6 +63,11 @@ public class JtAdapter implements IJtExecutorAdapter, IJtConfigAdapter {
     @Override
     public String cfgGet(String name, String def) throws Exception {
         return DbApi.cfgGet(name, def);
+    }
+
+    @Override
+    public Map cfgMap(String name) throws Exception {
+        return DbApi.cfgMap(name);
     }
 
     @Override

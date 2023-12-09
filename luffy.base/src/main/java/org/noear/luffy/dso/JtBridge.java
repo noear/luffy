@@ -5,6 +5,7 @@ import org.noear.luffy.executor.IJtExecutorAdapter;
 import org.noear.luffy.model.AFileModel;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
@@ -53,19 +54,25 @@ public class JtBridge {
     }
 
     //获取文件
-    public static AFileModel fileGet(String path) throws Exception{
+    public static AFileModel fileGet(String path) throws Exception {
         return executorAdapter().fileGet(path);
     }
 
-    public static void log(Map<String,Object> data){
+    //查找文件
+    public static List<AFileModel> fileFind(String tag, String label, boolean isCache) throws Exception {
+        return executorAdapter().fileFind(tag, label, isCache);
+    }
+
+    public static boolean log(Map<String, Object> data) {
         AFileModel file = AFileModel.current();
         executorAdapter().log(file, data);
+        return true;
     }
 
     /**
      * 获取节点I
-     * */
-    public static String nodeId(){
+     */
+    public static String nodeId() {
         return executorAdapter().nodeId();
     }
 
@@ -84,12 +91,16 @@ public class JtBridge {
         return _configAdapter;
     }
 
-    public static String cfgGet(String name) throws Exception{
+    public static String cfgGet(String name) throws Exception {
         return configAdapter().cfgGet(name, "");
     }
 
+    public static Map<String, Object> cfgMap(String name) throws Exception {
+        return configAdapter().cfgMap(name);
+    }
+
     public static boolean cfgSet(String name, String value) throws Exception {
-       return configAdapter().cfgSet(name, value);
+        return configAdapter().cfgSet(name, value);
     }
 
 

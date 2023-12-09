@@ -145,9 +145,8 @@ public class DbApi {
                 .getItem(AConfigM.class);
     }
 
-    public static Object cfgGetMap(Map<String, Object> map) throws Exception {
-        Object name = map.get("name");
-        if (name == null) {
+    public static Map<String,Object> cfgMap(String name) throws Exception {
+        if (Utils.isEmpty(name)) {
             return null;
         }
 
