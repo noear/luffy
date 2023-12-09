@@ -5,15 +5,34 @@ import org.noear.luffy.model.AFileModel;
 import org.noear.snack.ONode;
 import org.noear.solon.core.handle.Context;
 
+import java.nio.file.Paths;
 import java.util.Map;
 
 public class __JTEAPI_CLZ {
+    private static String getResolvedPath(String path) {
+        if (path.startsWith("/") == false) {
+            //使用了相对路径
+            String base = null;
+            Context ctx = Context.current();
+            if (ctx != null) {
+                base = ctx.path();
+            }
+
+            if (base != null) {
+                path = Paths.get(base).resolveSibling(path).toString();
+            }
+        }
+
+        return path;
+    }
 
     public String serialize_java(Object obj) throws Exception{
         return ONode.serialize(obj);
     }
 
     public String require(String path) throws Exception {
+        path = getResolvedPath(path);
+
         String name = path.replace("/", "__");
         String name2 = name.replace(".", "_") + "__lib";
 
