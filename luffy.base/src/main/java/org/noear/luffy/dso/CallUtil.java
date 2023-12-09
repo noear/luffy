@@ -16,6 +16,10 @@ public class CallUtil {
     private static Logger log = LoggerFactory.getLogger(CallUtil.class);
 
     private static String getResolvedPath(String path) {
+        if (path.startsWith("$")) {
+            path = path.substring(1);
+        }
+
         if (path.startsWith("/") == false) {
             //使用了相对路径
             String base = null;

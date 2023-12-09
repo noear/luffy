@@ -9,7 +9,11 @@ import java.nio.file.Paths;
 import java.util.Map;
 
 public  class __JTEAPI_CLZ {
-    private static String getResolvedPath(String path) {
+    public String getResolvedPath(String path) {
+        if (path.startsWith("$")) {
+            path = path.substring(1);
+        }
+
         if (path.startsWith("/") == false) {
             //使用了相对路径
             String base = null;

@@ -8,8 +8,12 @@ import java.nio.file.Paths;
 import java.util.Map;
 
 //ruby 导入时，不能下划线开头
-public  class JTEAPI_CLZ {
-    private static String getResolvedPath(String path) {
+public  class __JTEAPI_CLZ {
+    public String getResolvedPath(String path) {
+        if (path.startsWith("$")) {
+            path = path.substring(1);
+        }
+
         if (path.startsWith("/") == false) {
             //使用了相对路径
             String base = null;
