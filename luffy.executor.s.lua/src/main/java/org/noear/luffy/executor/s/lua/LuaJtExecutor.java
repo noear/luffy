@@ -78,6 +78,10 @@ public class LuaJtExecutor implements IJtExecutor {
                       "    return __JTEAPI:modelAndView(tml,mod)\n" +
                       "end\n\n");
 
+            sb.append("function callX(path,attrs)\n" +
+                    "    return __JTEAPI:call(path,attrs)\n" +
+                    "end\n\n");
+
             sb.append("function requireX(path)\n" +
                     "    if string.sub(path,1,1) == '$' then\n"+
                     "        path=__JTEAPI:getResolvedPath(path)\n" +

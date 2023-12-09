@@ -113,6 +113,8 @@ public class GraaljsJtExecutor implements IJtExecutor {
 
 
             sb.append("function modelAndView(tml,mod){return __JTEAPI.modelAndView(tml,mod);};\n");
+            sb.append("function callX(path,attrs){return __JTEAPI.call(path,attrs);};\n");
+
 
             sb.append("function requireX(path){" +
                     "  if(path.startsWith('$')){" +

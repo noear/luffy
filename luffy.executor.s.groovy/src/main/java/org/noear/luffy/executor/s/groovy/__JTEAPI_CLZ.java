@@ -1,5 +1,6 @@
 package org.noear.luffy.executor.s.groovy;
 
+import org.noear.luffy.dso.JtFun;
 import org.noear.solon.core.handle.Context;
 import org.noear.luffy.executor.ExecutorFactory;
 import org.noear.luffy.model.AFileModel;
@@ -39,6 +40,14 @@ public class __JTEAPI_CLZ {
         GroovyJtExecutor.singleton().preLoad(name2, file);
 
         return name2;
+    }
+
+    public Object call(String path, Object attrs) throws Exception {
+        if (attrs instanceof Map) {
+            return JtFun.g.callFile(path, (Map<String, Object>) attrs);
+        } else {
+            return JtFun.g.callFile(path);
+        }
     }
 
     public Object modelAndView(String path, Map<String, Object> model) throws Exception {

@@ -89,6 +89,10 @@ public class RubyJtExecutor implements IJtExecutor {
                     "    return $__JTEAPI.modelAndView(tml,mod)\n" +
                     "end\n\n");
 
+            sb.append("def callX(path,attrs)\n" +
+                    "    return $__JTEAPI.call(path,attrs)\n" +
+                    "end\n\n");
+
             sb.append("def requireX(path)\n" +
                     "    if path[0] == '$' then\n" +
                     "        path=$__JTEAPI.getResolvedPath(path)\n" +

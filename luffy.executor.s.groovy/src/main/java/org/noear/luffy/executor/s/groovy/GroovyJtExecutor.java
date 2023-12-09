@@ -68,6 +68,7 @@ public class GroovyJtExecutor implements IJtExecutor {
             sb.append("__global=['lib':[:],'lib_new':[:]];\n");
 
             sb.append("def modelAndView(tml,mod){return __JTEAPI.modelAndView(tml,mod);};\n");
+            sb.append("def callX(path,attrs){return __JTEAPI.call(path,attrs);};\n");
 
             sb.append("def requireX(path){" +
                     "  if(path.startsWith('$')){" +

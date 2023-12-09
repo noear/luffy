@@ -67,6 +67,8 @@ public class PythonJtExecutor implements IJtExecutor {
             sb.append("def modelAndView(tml,mod):\n" +
                     "    return __JTEAPI.modelAndView(tml,mod)\n\n");
 
+            sb.append("def callX(path,attrs):\n" +
+                    "    return __JTEAPI.call(path,attrs)\n\n");
 
             sb.append("def requireX(path):\n" +
                     "    if path.startswith('$'):\n"+
