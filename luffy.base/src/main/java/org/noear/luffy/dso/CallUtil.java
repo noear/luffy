@@ -25,7 +25,7 @@ public class CallUtil {
             String base = null;
             Context ctx = Context.current();
             if (ctx != null) {
-                base = ctx.path();
+                base = ctx.pathNew();
             }
 
             if (base != null) {

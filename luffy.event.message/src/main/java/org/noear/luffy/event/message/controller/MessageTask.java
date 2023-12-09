@@ -146,6 +146,7 @@ public class MessageTask extends JtTaskBase {
     private void do_distributeMessage(AFileModel task, StateTag tag, AMessageModel msg, AMessageDistributionModel dist, Act3<StateTag, AMessageDistributionModel, Boolean> callback) throws Exception {
         try {
             Context ctx = ContextEmpty.create();
+            ctx.pathNew(task.path);
             ContextUtil.currentSet(ctx);
 
             ctx.attrSet("topic", msg.topic);

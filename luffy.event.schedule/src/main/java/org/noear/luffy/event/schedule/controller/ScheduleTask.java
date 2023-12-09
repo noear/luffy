@@ -146,6 +146,7 @@ public class ScheduleTask extends JtTaskBase {
         DbApi.taskSetState(task, 2);
 
         Context ctx = ContextEmpty.create();
+        ctx.pathNew(task.path);
         ContextUtil.currentSet(ctx);
 
         //2.2.执行

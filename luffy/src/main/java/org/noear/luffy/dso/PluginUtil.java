@@ -10,6 +10,7 @@ import org.noear.luffy.utils.Base64Utils;
 import org.noear.luffy.utils.HttpUtils;
 import org.noear.luffy.utils.TextUtils;
 import org.noear.solon.Utils;
+import org.noear.solon.core.handle.Context;
 import org.noear.solon.core.handle.ContextEmpty;
 import org.noear.wood.DataItem;
 import org.noear.wood.DataList;
@@ -82,7 +83,9 @@ public class PluginUtil {
 
                         file.edit_mode = "javascript";
 
-                        ExecutorFactory.execOnly(file, new ContextEmpty());
+                        Context ctx = ContextEmpty.create();
+                        ctx.pathNew(file.path);
+                        ExecutorFactory.execOnly(file, ctx);
                     }
                 }
             }
