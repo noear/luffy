@@ -26,6 +26,11 @@
             <artifactId>luffy.base</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+
         <!-- ORM 框架 -->
         <dependency>
             <groupId>org.noear</groupId>

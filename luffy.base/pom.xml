@@ -22,20 +22,29 @@
         </dependency>
 
         <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
             <groupId>org.noear</groupId>
             <artifactId>solon</artifactId>
             <scope>provided</scope>
         </dependency>
+
         <dependency>
             <groupId>org.noear</groupId>
             <artifactId>solon.config.yaml</artifactId>
             <scope>provided</scope>
         </dependency>
+
         <dependency>
             <groupId>org.noear</groupId>
             <artifactId>wood</artifactId>
             <scope>provided</scope>
         </dependency>
+
         <dependency>
             <groupId>org.noear</groupId>
             <artifactId>mongox</artifactId>
@@ -47,6 +56,7 @@
             <artifactId>snack3</artifactId>
             <scope>provided</scope>
         </dependency>
+
         <dependency>
             <groupId>com.zaxxer</groupId>
             <artifactId>HikariCP</artifactId>
