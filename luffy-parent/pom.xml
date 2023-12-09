@@ -28,7 +28,7 @@
         <java.version>1.8</java.version>
 
         <wood.version>1.2.2</wood.version>
-        <snack3.version>3.2.82</snack3.version>
+        <snack3.version>3.2.84</snack3.version>
 
         <mongox.version>1.0.3</mongox.version>
         <redisx.version>1.6.2</redisx.version>
