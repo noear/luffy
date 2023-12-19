@@ -31,6 +31,8 @@ public class __JTEAPI_CLZ {
     }
 
     public String require(String path) throws Exception {
+        path = getResolvedPath(path);
+
         String name = path.replace("/", "__");
         String name2 = name.replace(".", "_") + "__lib";
 
