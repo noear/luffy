@@ -94,7 +94,7 @@
 
 #### 极速体验
 
-* 运行命令：`docker run -it --rm -p 18080:8080 noearorg/luffy-jtl:1.8.0-M1`
+* 运行命令：`docker run -it --rm -p 18080:8080 noearorg/luffy-jtl:1.8.0`
 * 然后打开：`http://localhost:18080/.admin/?_L0n5=1CE24B1CF36B0C5B94AACE6263DBD947FFA53531`
 
 #### 常规体验
