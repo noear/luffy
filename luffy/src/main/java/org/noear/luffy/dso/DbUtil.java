@@ -5,6 +5,8 @@ import org.noear.luffy.utils.DbBuilder;
 import org.noear.wood.DbContext;
 import org.noear.wood.cache.LocalCache;
 
+import java.util.Map;
+
 /*
  * 数据库处理工具
  *
@@ -23,8 +25,7 @@ public class DbUtil {
         return _db;
     }
 
-    public static void setDefDb(NvMap map) {
+    public static void setDefDb(Map<String,String> map) {
         _db = DbBuilder.getDb(map);
     }
-
 }

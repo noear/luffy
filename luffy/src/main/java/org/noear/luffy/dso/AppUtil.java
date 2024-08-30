@@ -14,12 +14,12 @@ import org.noear.luffy.utils.TextUtils;
 import org.noear.solon.Solon;
 import org.noear.solon.SolonApp;
 import org.noear.solon.Utils;
-import org.noear.solon.core.handle.Handler;
 import org.noear.solon.core.handle.HandlerPipeline;
 import org.noear.solon.core.handle.MethodType;
 import org.noear.wood.WoodConfig;
 
 import java.net.URL;
+import java.util.Map;
 
 /** 应用协助控制工具 */
 public class AppUtil {
@@ -56,13 +56,15 @@ public class AppUtil {
                 ctx.paramMap().put("node", JtUtil.g.guid());
             }
 
-            DbUtil.setDefDb(ctx.paramMap());
+            Map<String,String> paramMap = ctx.paramMap().toValueMap();
+
+            DbUtil.setDefDb(paramMap);
             try {
                 DbUtil.db().sql("SHOW TABLES").execute();
 
-                InitUtil.trySaveConfig(extend, ctx.paramMap());
+                InitUtil.trySaveConfig(extend, paramMap);
 
-                app.cfg().argx().putAll(ctx.paramMap());
+                app.cfg().argx().putAll(paramMap);
 
                 AppUtil.init(app, false);
 

@@ -11,6 +11,7 @@ import org.noear.wood.DbContext;
 import java.io.File;
 import java.io.FileWriter;
 import java.net.URL;
+import java.util.Map;
 
 /**
  * 初始化工具类（提供引擎初始化支持）
@@ -308,7 +309,7 @@ public class InitUtil {
         }
     }
 
-    public static void trySaveConfig(String extend,NvMap map) throws Exception {
+    public static void trySaveConfig(String extend, Map<String,String> map) throws Exception {
         File file = new File(extend + "_db.properties");
         file.delete();
         file.createNewFile();
