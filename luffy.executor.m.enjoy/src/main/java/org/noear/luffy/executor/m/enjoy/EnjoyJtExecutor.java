@@ -57,7 +57,7 @@ public class EnjoyJtExecutor implements IJtExecutor {
         try {
             _engine.addSharedObject(name, obj);
         } catch (Exception ex) {
-            ex.printStackTrace();
+            //ex.printStackTrace(); //不需要
         }
     }
 
