@@ -11,8 +11,8 @@ public class XPluginImp implements Plugin {
     public void start(AppContext context) throws Throwable {
         FreemarkerJtExecutor executor = FreemarkerJtExecutor.singleton();
 
-        context.beanOnloaded((ctx) -> {
-            ctx.beanForeach((k, v) -> {
+        context.lifecycle(() -> {
+            context.beanForeach((k, v) -> {
                 if (k.startsWith("view:") || k.startsWith("ftl:")) {
                     //java view widget
                     if(TemplateDirectiveModel.class.isAssignableFrom(v.clz())) {

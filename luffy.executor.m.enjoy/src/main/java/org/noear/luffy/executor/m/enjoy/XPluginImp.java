@@ -11,8 +11,8 @@ public class XPluginImp implements Plugin {
     public void start(AppContext context) throws Throwable {
         EnjoyJtExecutor executor = EnjoyJtExecutor.singleton();
 
-        context.beanOnloaded((ctx) -> {
-            ctx.beanForeach((k, v) -> {
+        context.lifecycle(() -> {
+            context.beanForeach((k, v) -> {
                 if (k.startsWith("view:")) { //java view widget
                     if(Directive.class.isAssignableFrom(v.clz())){
                         executor.tagReg(k.split(":")[1], (Class<? extends Directive>)v.clz());

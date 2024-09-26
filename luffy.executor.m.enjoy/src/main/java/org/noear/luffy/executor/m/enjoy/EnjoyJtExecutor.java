@@ -65,7 +65,7 @@ public class EnjoyJtExecutor implements IJtExecutor {
         try {
             _engine.addDirective(name, clz);
         } catch (Exception ex) {
-            EventBus.push(ex);
+            EventBus.publish(ex);
         }
     }
 

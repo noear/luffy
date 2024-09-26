@@ -3,16 +3,15 @@ package org.noear.luffy.cap.extend.poi;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.noear.solon.annotation.Note;
-import org.noear.solon.core.ValHolder;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * @author noear 2021/10/9 created
@@ -30,26 +29,26 @@ public class eExcel {
         Sheet sheet = workbook.createSheet();
 
         //init name
-        ValHolder<Row> row = new ValHolder<>();
+        AtomicReference<Row> row = new AtomicReference<>();
         int rowIndex = 0;
-        ValHolder<Integer> colIdx = new ValHolder<>(0);
+        AtomicInteger colIdx = new AtomicInteger(0);
         Map colTmp = list.get(0);
         {
-            row.value = sheet.createRow(rowIndex);
+            row.set(sheet.createRow(rowIndex));
             colTmp.forEach((name, tmp) -> {
-                row.value.createCell(colIdx.value++).setCellValue(name.toString());
+                row.get().createCell(colIdx.incrementAndGet()).setCellValue(name.toString());
             });
         }
 
         for (Map item : list) {
             rowIndex++;
-            colIdx.value = 0;
-            row.value = sheet.createRow(rowIndex);
+            colIdx.set(0);
+            row.set(sheet.createRow(rowIndex));
 
             colTmp.forEach((name, tmp) -> {
                 Object value = item.get(name);
 
-                Cell cell = row.value.createCell(colIdx.value++);
+                Cell cell = row.get().createCell(colIdx.incrementAndGet());
 
                 if (value == null) {
                     cell.setCellValue("");

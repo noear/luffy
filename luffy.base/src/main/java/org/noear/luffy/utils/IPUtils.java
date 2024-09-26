@@ -19,7 +19,7 @@ public class IPUtils {
         }
 
         if (TextUtils.isEmpty(ip) || "unknown".equalsIgnoreCase(ip)) {
-            ip = context.ip();
+            ip = context.realIp();
         }
 
         return ip;

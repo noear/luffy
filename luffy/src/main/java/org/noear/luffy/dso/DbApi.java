@@ -33,13 +33,13 @@ public class DbApi {
      */
     public static boolean fileNew(int fid, Context ctx) throws Exception {
         DbTableQuery qr = db().table("a_file")
-                .set("path", ctx.param("path", ""))
-                .set("tag", ctx.param("tag", ""))
+                .set("path", ctx.paramOrDefault("path", ""))
+                .set("tag", ctx.paramOrDefault("tag", ""))
                 .set("is_staticize", ctx.paramAsInt("is_staticize", 0))
                 .set("is_editable", ctx.paramAsInt("is_editable", 0))
-                .set("link_to", ctx.param("link_to", ""))
-                .set("edit_mode", ctx.param("edit_mode", ""))
-                .set("content_type", ctx.param("content_type", ""));
+                .set("link_to", ctx.paramOrDefault("link_to", ""))
+                .set("edit_mode", ctx.paramOrDefault("edit_mode", ""))
+                .set("content_type", ctx.paramOrDefault("content_type", ""));
 
         if (fid > 0) {
             return qr.where("file_id=?", fid)

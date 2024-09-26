@@ -11,8 +11,8 @@ public class XPluginImp implements Plugin {
     public void start(AppContext context) throws Throwable {
         VelocityJtExecutor executor = VelocityJtExecutor.singleton();
 
-        context.beanOnloaded((ctx) -> {
-            ctx.beanForeach((k, v) -> {
+        context.lifecycle(() -> {
+            context.beanForeach((k, v) -> {
                 if (k.startsWith("view:")) { //java view widget
                     if (v.raw() instanceof Directive) {
                         executor.tagReg(v.raw());

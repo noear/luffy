@@ -2,10 +2,10 @@ package org.noear.luffy.dso;
 
 import okhttp3.Response;
 import org.noear.solon.Solon;
-import org.noear.solon.Utils;
 import org.noear.solon.core.ExtendLoader;
 import org.noear.solon.core.Plugin;
 import org.noear.luffy.utils.*;
+import org.noear.solon.core.util.ClassUtil;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -102,6 +102,6 @@ public class JarUtil {
     }
 
     public static <T> T newInstance(String className) {
-        return Utils.newInstance(className);
+        return ClassUtil.tryInstance(className);
     }
 }

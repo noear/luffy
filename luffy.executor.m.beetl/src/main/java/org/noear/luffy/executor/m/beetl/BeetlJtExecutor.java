@@ -77,7 +77,7 @@ public class BeetlJtExecutor implements IJtExecutor {
         try {
             _engine.registerTag(name, tag);
         } catch (Exception ex) {
-            EventBus.push(ex);
+            EventBus.publish(ex);
         }
     }
 

@@ -9,6 +9,8 @@ import org.noear.luffy.model.AFileModel;
 import org.noear.luffy.utils.ExceptionUtils;
 import org.noear.luffy.utils.TextUtils;
 import org.noear.solon.core.handle.Handler;
+import org.noear.solon.core.route.RouterInterceptor;
+import org.noear.solon.core.route.RouterInterceptorChain;
 
 import java.util.HashMap;
 import java.util.List;
@@ -16,7 +18,7 @@ import java.util.List;
 /**
  * 文件路径拦截器的代理（数据库安全）
  * */
-public class FrmInterceptor implements Handler {
+public class FrmInterceptor implements RouterInterceptor {
     private static final String _lock = "";
     private static  FrmInterceptor _g = null;
     public static FrmInterceptor g(){
@@ -39,8 +41,8 @@ public class FrmInterceptor implements Handler {
     private static final String _key = "__luffy_standalone_model";
 
     @Override
-    public void handle(Context ctx) throws Exception {
-        String path = ctx.path();
+    public void doIntercept(Context ctx, Handler mainHandler, RouterInterceptorChain chain) throws Throwable {
+        String path = ctx.pathNew();
 
         Object tmp = Solon.app().shared().get(_key);
         ctx.attrSet(_key, tmp);
@@ -50,6 +52,8 @@ public class FrmInterceptor implements Handler {
                 exec(ctx, path2);
             }
         });
+
+        chain.doIntercept(ctx, mainHandler);
     }
 
     private void exec(Context ctx, String path2){

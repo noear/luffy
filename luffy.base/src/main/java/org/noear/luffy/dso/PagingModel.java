@@ -26,7 +26,7 @@ public class PagingModel implements Serializable {
             _pageSize = ctx.paramAsInt("_pageSize", 0);
 
             if (_pageSize < 1) {
-                _pageSize = Integer.parseInt(ctx.cookie("_pageSize", "0"));
+                _pageSize = Integer.parseInt(ctx.cookieOrDefault("_pageSize", "0"));
             }
 
             if (_pageSize > 99) {

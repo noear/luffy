@@ -13,9 +13,8 @@ import org.noear.luffy.utils.IOUtils;
 import org.noear.luffy.utils.TextUtils;
 import org.noear.solon.Solon;
 import org.noear.solon.SolonApp;
-import org.noear.solon.Utils;
 import org.noear.solon.core.handle.HandlerPipeline;
-import org.noear.solon.core.handle.MethodType;
+import org.noear.solon.core.util.ResourceUtil;
 import org.noear.wood.WoodConfig;
 
 import java.net.URL;
@@ -28,7 +27,7 @@ public class AppUtil {
      * */
     public static void init(SolonApp app, boolean initDb){
         if(initDb) {
-            DbUtil.setDefDb(app.cfg().getXmap(Config.code_db));
+            DbUtil.setDefDb(app.cfg().getMap(Config.code_db));
         }
 
         InitUtil.tryInitDb();
@@ -38,7 +37,7 @@ public class AppUtil {
 
 
     public static void runAsInit(SolonApp app, String extend) {
-        URL temp = Utils.getResource("setup.htm");
+        URL temp = ResourceUtil.getResource("setup.htm");
         String html = null;
         try {
             html = IOUtils.toString(temp.openStream(), "utf-8");
@@ -140,7 +139,7 @@ public class AppUtil {
 
     private static void do_runWeb(SolonApp app) {
         //拦截代理
-        app.before("**", MethodType.HTTP, FrmInterceptor.g());
+        app.routerInterceptor(FrmInterceptor.g());
 
         //资源代理(/img/**)
         app.get(Config.frm_root_img + "**", new ImgHandler());

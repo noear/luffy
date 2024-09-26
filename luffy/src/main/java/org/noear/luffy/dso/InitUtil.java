@@ -1,11 +1,10 @@
 package org.noear.luffy.dso;
 
 import org.noear.solon.SolonApp;
-import org.noear.solon.Utils;
-import org.noear.solon.Solon;;
 import org.noear.luffy.Config;
 import org.noear.luffy.utils.*;
 import org.noear.solon.core.NvMap;
+import org.noear.solon.core.util.ResourceUtil;
 import org.noear.wood.DbContext;
 
 import java.io.File;
@@ -283,7 +282,7 @@ public class InitUtil {
     private static String do_buildRoot() {
         //String fileName = "setup.htm";
 
-        URL temp = Utils.getResource("");
+        URL temp = ResourceUtil.getResource("");
 
         if (temp == null) {
             return null;

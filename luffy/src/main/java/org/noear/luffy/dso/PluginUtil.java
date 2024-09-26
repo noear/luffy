@@ -9,9 +9,9 @@ import org.noear.luffy.Config;
 import org.noear.luffy.utils.Base64Utils;
 import org.noear.luffy.utils.HttpUtils;
 import org.noear.luffy.utils.TextUtils;
-import org.noear.solon.Utils;
 import org.noear.solon.core.handle.Context;
 import org.noear.solon.core.handle.ContextEmpty;
+import org.noear.solon.core.util.IoUtil;
 import org.noear.wood.DataItem;
 import org.noear.wood.DataList;
 import org.noear.wood.DbContext;
@@ -72,7 +72,7 @@ public class PluginUtil {
 
                 if (initFile.exists()) {
                     try (FileInputStream ins = new FileInputStream(initFile)) {
-                        String initCode = Utils.transferToString(ins, "utf-8");
+                        String initCode = IoUtil.transferToString(ins, "utf-8");
                         System.out.println("load _init.js: " + initFile.getPath());
 
                         AFileModel file = new AFileModel();
