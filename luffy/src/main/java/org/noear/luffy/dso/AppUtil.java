@@ -148,11 +148,7 @@ public class AppUtil {
         app.http("**", AppHandler.g());
 
         //后缀代理（置于所有代理的前面）
-        HandlerPipeline hx = new HandlerPipeline()
-                .next(SufHandler.g())
-                .next(app.handlerGet());
-
-        app.handlerSet(hx);
+        app.handler().prev(SufHandler.g());
     }
 
     private static void do_runSev(SolonApp app){
