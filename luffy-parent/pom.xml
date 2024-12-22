@@ -7,7 +7,7 @@
     <parent>
         <groupId>org.noear</groupId>
         <artifactId>solon-parent</artifactId>
-        <version>3.0.1</version>
+        <version>3.0.5</version>
         <relativePath />
     </parent>
 
@@ -21,17 +21,17 @@
     <url>https://github.com/noear/luffy</url>
 
     <properties>
-        <revision>1.9.0</revision>
+        <revision>1.9.1</revision>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
 
-        <wood.version>1.3.11</wood.version>
-        <snack3.version>3.2.111</snack3.version>
+        <wood.version>1.3.16</wood.version>
+        <snack3.version>3.2.122</snack3.version>
 
-        <mongox.version>1.0.3</mongox.version>
-        <redisx.version>1.6.6</redisx.version>
+        <mongox.version>1.0.5</mongox.version>
+        <redisx.version>1.6.9</redisx.version>
 
         <okhttp.version>3.14.9</okhttp.version>
 
