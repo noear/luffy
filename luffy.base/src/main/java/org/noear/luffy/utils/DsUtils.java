@@ -1,9 +1,9 @@
 package org.noear.luffy.utils;
 
 import com.zaxxer.hikari.HikariDataSource;
-import org.noear.snack.core.exts.ClassWrap;
-import org.noear.snack.core.exts.FieldWrap;
 import org.noear.solon.core.util.ConvertUtil;
+import org.noear.solon.core.wrap.ClassWrap;
+import org.noear.solon.core.wrap.FieldWrap;
 import org.noear.wood.DbContext;
 import org.noear.wood.DbDataSource;
 
@@ -45,10 +45,10 @@ public class DsUtils {
         if (pool) {
             HikariDataSource source = new HikariDataSource();
 
-            for (FieldWrap fw : ClassWrap.get(HikariDataSource.class).fieldAllWraps()) {
-                String valStr = prop.getProperty(fw.name());
+            for (FieldWrap fw : ClassWrap.get(HikariDataSource.class).getAllFieldWraps()) {
+                String valStr = prop.getProperty(fw.getName());
                 if (TextUtils.isNotEmpty(valStr)) {
-                    Object val = ConvertUtil.to(fw.type, valStr);
+                    Object val = ConvertUtil.to(fw.getType(), valStr);
                     fw.setValue(source, val);
                 }
             }
