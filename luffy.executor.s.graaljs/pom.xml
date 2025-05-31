@@ -14,6 +14,8 @@
     <artifactId>luffy.executor.s.graaljs</artifactId>
     <packaging>jar</packaging>
 
+    <name>${project.artifactId}</name>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>

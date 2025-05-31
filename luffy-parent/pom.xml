@@ -16,9 +16,31 @@
     <version>${revision}</version>
     <packaging>pom</packaging>
 
-    <name>luffy-parent</name>
+    <name>${project.artifactId}</name>
     <description>Java project for luffy</description>
     <url>https://github.com/noear/luffy</url>
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <name>noear</name>
+            <email>noear@live.cn</email>
+            <organization>noear.org</organization>
+            <organizationUrl>http://www.noear.org</organizationUrl>
+            <url>https://github.com/noear</url>
+            <timezone>GMT+8</timezone>
+        </developer>
+    </developers>
+    <scm>
+        <connection>scm:git:git@github.com:noear/luffy.git</connection>
+        <developerConnection>scm:git:git@github.com:noear/luffy.git</developerConnection>
+        <url>https://github.com/noear/luffy</url>
+        <tag>master</tag>
+    </scm>
 
     <properties>
         <revision>1.9.3</revision>
@@ -42,27 +64,6 @@
 
         <flexmark.version>0.50.50</flexmark.version>
     </properties>
-
-    <licenses>
-        <license>
-            <name>The Apache Software License, Version 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-        </license>
-    </licenses>
-
-    <developers>
-        <developer>
-            <name>noear</name>
-            <email>noear@live.cn</email>
-            <organization>noear.org</organization>
-            <organizationUrl>http://www.noear.org</organizationUrl>
-        </developer>
-    </developers>
-    <scm>
-        <connection>scm:git:git@github.com:noear/luffy.git</connection>
-        <developerConnection>scm:git:git@github.com:noear/luffy.git</developerConnection>
-        <url>https://github.com/noear/luffy</url>
-    </scm>
 
 
     <dependencyManagement>

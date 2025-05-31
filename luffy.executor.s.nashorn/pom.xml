@@ -14,6 +14,7 @@
     <artifactId>luffy.executor.s.nashorn</artifactId>
     <packaging>jar</packaging>
 
+    <name>${project.artifactId}</name>
 
     <dependencies>
         <dependency>

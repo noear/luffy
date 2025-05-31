@@ -14,6 +14,8 @@
     <artifactId>luffy.test</artifactId>
     <packaging>jar</packaging>
 
+    <name>${project.artifactId}</name>
+
     <dependencies>
         <dependency>
             <groupId>org.noear</groupId>

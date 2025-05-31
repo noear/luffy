@@ -14,6 +14,8 @@
     <artifactId>luffy.executor.m.thymeleaf</artifactId>
     <packaging>jar</packaging>
 
+    <name>${project.artifactId}</name>
+
     <dependencies>
         <dependency>
             <groupId>org.thymeleaf</groupId>

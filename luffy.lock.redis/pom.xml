@@ -14,6 +14,7 @@
     <artifactId>luffy.lock.redis</artifactId>
     <packaging>jar</packaging>
 
+    <name>${project.artifactId}</name>
 
     <dependencies>
         <dependency>
