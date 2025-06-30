@@ -65,6 +65,7 @@ public class InitUtil {
                 "  `tag` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '分组村签',\n" +
                 "  `label` varchar(100) NOT NULL DEFAULT '' COMMENT '标记',\n" +
                 "  `path` varchar(100) NOT NULL COMMENT '文件路径',\n" +
+                "  `method` varchar(100) NULL COMMENT '请求方式',\n" +
                 "  `rank` int NOT NULL DEFAULT '0' COMMENT '排列（小的排前）',\n" +
                 "  `is_staticize` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否静态',\n" +
                 "  `is_editable` tinyint(1) NOT NULL DEFAULT '1' COMMENT '是否可编辑',\n" +

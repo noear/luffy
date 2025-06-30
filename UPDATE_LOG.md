@@ -1,3 +1,7 @@
+#### v1.9.4
+* 添加 AFileModel:method 字段
+* solon 升为 3.3.3
+
 #### v1.9.3
 * 升级 solon 为 3.3.1
 * 升级 snack3 为 3.2.133

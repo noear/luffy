@@ -40,6 +40,8 @@ public class AFileModel {
     public String note;
     /** 路径 */
     public String path;
+    /** 方式 */
+    public String method;
 
     /** 是否静态 */
     public boolean is_staticize;
