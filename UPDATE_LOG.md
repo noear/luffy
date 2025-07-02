@@ -1,3 +1,8 @@
+#### v1.9.5
+
+* 优化 js 执行器，取消对 ScriptObjectMirror 的直接引用
+* 修复 luffy.executor.s.python 启动会出错的问题（引用了错误的 ScriptObjectMirror）
+
 #### v1.9.4
 * 添加 AFileModel:method 字段
 * solon 升为 3.3.3
