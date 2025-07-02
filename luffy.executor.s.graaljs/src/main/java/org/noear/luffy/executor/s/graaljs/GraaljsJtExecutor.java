@@ -161,7 +161,7 @@ public class GraaljsJtExecutor implements IJtExecutor {
 
     @Override
     public boolean isLoaded(String name2) {
-        return _loaded_names.contains(name2);
+        return _loaded_names.contains(name2) && _bindings.containsKey(name2);
     }
 
     @Override

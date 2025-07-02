@@ -1,6 +1,5 @@
 package org.noear.luffy.executor.s.nashorn;
 
-import jdk.nashorn.api.scripting.ScriptObjectMirror;
 import org.noear.luffy.executor.IJtExecutor;
 import org.noear.luffy.model.AFileModel;
 import org.noear.luffy.utils.Datetime;
@@ -37,7 +36,7 @@ public class NashornJtExecutor implements IJtExecutor {
     private final ScriptEngine _eng;
     private final Invocable    _eng_call;
     private final Set<String>  _loaded_names;
-    private final ScriptObjectMirror _bindings;
+    private final Bindings _bindings;
 
     private NashornJtExecutor(){
         _loaded_names = Collections.synchronizedSet(new HashSet<>());
@@ -47,7 +46,7 @@ public class NashornJtExecutor implements IJtExecutor {
         ScriptEngineManager scriptEngineManager = new ScriptEngineManager();
         _eng = scriptEngineManager.getEngineByName("nashorn");
         _eng_call = (Invocable)_eng;
-        _bindings = (ScriptObjectMirror)_eng.getBindings(ScriptContext.ENGINE_SCOPE);
+        _bindings = _eng.getBindings(ScriptContext.ENGINE_SCOPE);
 
         Solon.app().sharedAdd("Context",Context.class);
         Solon.app().sharedAdd("ONode", ONode.class);
@@ -139,7 +138,7 @@ public class NashornJtExecutor implements IJtExecutor {
 
     @Override
     public boolean isLoaded(String name2) {
-        return _loaded_names.contains(name2) && _bindings.hasMember(name2);
+        return _loaded_names.contains(name2) && _bindings.containsKey(name2);
     }
 
     @Override

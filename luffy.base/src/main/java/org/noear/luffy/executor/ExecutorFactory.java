@@ -51,6 +51,16 @@ public class ExecutorFactory {
         register(engine.language(), engine, 0);
     }
 
+    /**
+     * 注册执行引擎
+     */
+    public static void register(String language, IJtExecutor engine) {
+        register(language, engine, 0);
+    }
+
+    /**
+     * 注册执行引擎
+     */
     public static void register(String language, IJtExecutor engine, int priority) {
         ExecutorEntity ent = _map.get(language);
         if (ent != null && ent.priority > priority) {
